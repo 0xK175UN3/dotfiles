@@ -1,0 +1,15 @@
+* Basic Settings
+
+* Languages support
+** Lisp
+** JavaScript
+** Coding Helpers
+
+* Misc packages
+- Reveal.js
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-reveal
+    :ensure ox-reveal)
+  (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+  (setq org-reveal-mathjax t)
+#+END_SRC

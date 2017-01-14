@@ -1,8 +1,16 @@
 * Basic Settings
+- Interface tweeks
 #+BEGIN_SRC emacs-lisp
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+- No backups and autosave
+#+BEGIN_SRC emacs-lisp
+(setq make-backup-files         nil) ; Don't want any backup files
+(setq auto-save-list-file-name  nil) ; Don't want any .saves files
+(setq auto-save-default         nil) ; Don't want any auto saving
 #+END_SRC
 * Languages support
 ** Lisp

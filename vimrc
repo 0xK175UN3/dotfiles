@@ -15,7 +15,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
-Plug 'mhinz/vim-signify'
 
 "Languages support
 Plug 'vim-ruby/vim-ruby'
@@ -25,7 +24,6 @@ Plug 'pangloss/vim-javascript'
 "Editor features
 Plug 'tpope/vim-surround'
 Plug 'kien/ctrlp.vim'
-Plug 'valloric/youcompleteme'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 

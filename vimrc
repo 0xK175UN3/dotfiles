@@ -11,10 +11,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/vim-slash'
 Plug 'junegunn/vim-easy-align'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
+Plug 'mhinz/vim-signify'
 
 "Languages support
 Plug 'vim-ruby/vim-ruby'

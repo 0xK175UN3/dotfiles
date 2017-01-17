@@ -35,12 +35,23 @@ call plug#end()
 " ====================================
 "           basic settings
 " ====================================
-
 set number
-set expandtab
-set tabstop=2
-set hlsearch
-set incsearch
+set linebreak	
+set showbreak=+++	
+set textwidth=100	
+set showmatch	
+set visualbell
+ 
+set hlsearch	
+set smartcase	
+set ignorecase
+set incsearch	
+ 
+set expandtab	
+set shiftwidth=2
+set smartindent	
+set smarttab
+set softtabstop=2	
 syntax on
 
 "Color theme settings

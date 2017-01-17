@@ -46,6 +46,8 @@ call plug#end()
 " ====================================
 "           basic settings
 " ====================================
+let mapleader      = ' '
+let maplocalleader = ' '
 set number
 set linebreak	
 set showbreak=+++	

@@ -23,6 +23,7 @@ Plug 'pangloss/vim-javascript'
 
 "Editor features
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'kien/ctrlp.vim'
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -46,8 +47,6 @@ call plug#end()
 " ====================================
 "           basic settings
 " ====================================
-let mapleader      = ' '
-let maplocalleader = ' '
 set number
 set linebreak	
 set showbreak=+++	
@@ -83,3 +82,7 @@ colo seoul256
 " mappings
 " ====================================
 map <C-n> :NERDTreeToggle<CR>
+nmap ga <Plug>(EasyAlign)
+let mapleader      = ' '
+let maplocalleader = ' '
+vnoremap <C-c> "*y

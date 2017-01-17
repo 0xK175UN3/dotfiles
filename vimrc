@@ -24,6 +24,17 @@ Plug 'pangloss/vim-javascript'
 "Editor features
 Plug 'tpope/vim-surround'
 Plug 'kien/ctrlp.vim'
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py
+  endif
+endfunction
+
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 
@@ -38,6 +49,11 @@ call plug#end()
 set number
 set linebreak	
 set showbreak=+++	
+set completeopt=menuone,preview
+set encoding=utf-8
+set nu
+set showcmd
+set visualbell
 set textwidth=100	
 set showmatch	
 set visualbell

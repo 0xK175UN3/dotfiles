@@ -6,7 +6,9 @@
 " ====================================
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
-
+" ====================================
+"                common
+" ====================================
 "Browsing
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/vim-slash'
@@ -17,11 +19,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-"Languages support
+" ===================================
+"          Languages support
+" ===================================
+"Ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+"Javascript
 Plug 'pangloss/vim-javascript'
-
 "Editor features
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'

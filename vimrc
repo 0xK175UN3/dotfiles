@@ -15,6 +15,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 "Languages support
 Plug 'vim-ruby/vim-ruby'
@@ -24,7 +25,6 @@ Plug 'pangloss/vim-javascript'
 "Editor features
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'kien/ctrlp.vim'
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
   " - name:   name of the plugin
@@ -86,3 +86,4 @@ nmap ga <Plug>(EasyAlign)
 let mapleader      = ' '
 let maplocalleader = ' '
 vnoremap <C-c> "*y
+nmap <C-p> :FZF<CR>

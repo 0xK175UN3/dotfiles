@@ -25,11 +25,16 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+Plug 'bbatsov/rubocop'
 "Javascript
 Plug 'pangloss/vim-javascript'
 "Editor features
+Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'honza/vim-snippets'
+Plug 'mattn/emmet-vim'
+
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
   " - name:   name of the plugin
@@ -41,8 +46,6 @@ function! BuildYCM(info)
 endfunction
 
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-Plug 'honza/vim-snippets'
-Plug 'mattn/emmet-vim'
 
 "Color scheme
 Plug 'junegunn/seoul256.vim'

@@ -29,6 +29,7 @@ Plug 'bbatsov/rubocop'
 "Javascript
 Plug 'pangloss/vim-javascript'
 "Editor features
+Plug 'scrooloose/syntastic'
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -56,27 +57,22 @@ call plug#end()
 "           basic settings
 " ====================================
 set number
-set linebreak	
-set showbreak=+++	
-set completeopt=menuone,preview
-set encoding=utf-8
-set nu
 set showcmd
-set visualbell
-set textwidth=100	
-set showmatch	
-set visualbell
- 
-set hlsearch	
-set smartcase	
-set ignorecase
-set incsearch	
- 
-set expandtab	
+set wildmenu
+set lazyredraw
+set showmatch
+set incsearch
+set hlsearch
+set hidden
+set tabstop=2
 set shiftwidth=2
-set smartindent	
-set smarttab
-set softtabstop=2	
+set scrolloff=5
+set nocursorline
+set autoread
+set nu
+set visualbell
+set encoding=utf-8
+set list
 syntax on
 
 "Color theme settings

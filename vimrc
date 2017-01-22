@@ -64,6 +64,7 @@ set showmatch
 set incsearch
 set hlsearch
 set hidden
+set expandtab
 set tabstop=2
 set shiftwidth=2
 set scrolloff=5

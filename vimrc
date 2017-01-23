@@ -56,6 +56,7 @@ call plug#end()
 " ====================================
 "           basic settings
 " ====================================
+language messages en_Us
 set number
 set showcmd
 set wildmenu

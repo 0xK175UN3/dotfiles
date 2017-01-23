@@ -92,3 +92,8 @@ let mapleader      = ' '
 let maplocalleader = ' '
 vnoremap <C-c> "*y
 nmap <C-p> :FZF<CR>
+"Map ctrl-movement keys to window switching
+map <C-k> <C-w><Up>
+map <C-j> <C-w><Down>
+map <C-l> <C-w><Right>
+map <C-h> <C-w><Left>

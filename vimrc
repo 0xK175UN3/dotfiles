@@ -88,12 +88,17 @@ colo seoul256
 " ====================================
 " mappings
 " ====================================
-map <C-n> :NERDTreeToggle<CR>
-nmap ga <Plug>(EasyAlign)
+" Basic mappings
 let mapleader      = ' '
 let maplocalleader = ' '
 vnoremap <C-c> "*y
 nmap <C-p> :FZF<CR>
+" NERDtree toggle
+nnoremap <F10> :NERDTreeToggle<cr>
+" Tagbar toggle
+nmap <F8> :TagbarToggle<CR>
+" Easy Align key to format
+nmap ga <Plug>(EasyAlign)
 "Map ctrl-movement keys to window switching
 map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>

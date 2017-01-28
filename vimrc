@@ -58,6 +58,7 @@ call plug#end()
 "           basic settings
 " ====================================
 language messages en_Us
+set tags=tags;
 set number
 set showcmd
 set wildmenu
@@ -100,10 +101,10 @@ nmap <F8> :TagbarToggle<CR>
 " Easy Align key to format
 nmap ga <Plug>(EasyAlign)
 "Map ctrl-movement keys to window switching
-map <C-k> <C-w><Up>
-map <C-j> <C-w><Down>
-map <C-l> <C-w><Right>
-map <C-h> <C-w><Left>
+map <C-k> <C-w><k>
+map <C-j> <C-w><j>
+map <C-l> <C-w><l>
+map <C-h> <C-w><h>
 " Movement in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a

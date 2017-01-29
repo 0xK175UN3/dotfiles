@@ -1,15 +1,20 @@
-" ====================================
-"          .vimrc of lainkun
-" ====================================
-" ====================================
-"               plugins
-" ====================================
+" ---------------------------------------------------------------------------
+"                           .vimrc of lainkun
+" ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
+"                                 plugins
+" ---------------------------------------------------------------------------
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
-" ====================================
-"                common
-" ====================================
-"Browsing
+" ---------------------------------------------------------------------------
+"                                  common
+" ---------------------------------------------------------------------------
+Plug 'junegunn/seoul256.vim'
+
+
+" ---------------------------------------------------------------------------
+"                                 browsing
+" ---------------------------------------------------------------------------
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/vim-slash'
 Plug 'junegunn/vim-easy-align'
@@ -19,24 +24,27 @@ Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" ===================================
-"          Languages support
-" ===================================
-"Ruby
+" ---------------------------------------------------------------------------
+"                             languages support
+" ---------------------------------------------------------------------------
+
+" ---------------------------------------------------------------------------
+" ruby
+" ---------------------------------------------------------------------------
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'bbatsov/rubocop'
-"Javascript
+
+
+" ---------------------------------------------------------------------------
+" javascript
+" ---------------------------------------------------------------------------
 Plug 'pangloss/vim-javascript'
-"Editor features
-Plug 'scrooloose/syntastic'
-Plug 'junegunn/goyo.vim'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'honza/vim-snippets'
-Plug 'mattn/emmet-vim'
 
 
+" ---------------------------------------------------------------------------
+" editor features
+" ---------------------------------------------------------------------------
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
   " - name:   name of the plugin
@@ -46,17 +54,19 @@ function! BuildYCM(info)
     !./install.py
   endif
 endfunction
-
+Plug 'scrooloose/syntastic'
+Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'honza/vim-snippets'
+Plug 'mattn/emmet-vim'
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-
-"Color scheme
-Plug 'junegunn/seoul256.vim'
-
 call plug#end()
 
-" ====================================
-"           basic settings
-" ====================================
+
+" ---------------------------------------------------------------------------
+" basic settings
+" ---------------------------------------------------------------------------
 language messages en_Us
 set tags=tags;
 set number
@@ -79,35 +89,74 @@ set encoding=utf-8
 set list
 syntax on
 
-"Color theme settings
+
+" ---------------------------------------------------------------------------
+" Color theme settings
 " seoul256 (dark):
 "   Range:   233 (darkest) ~ 239 (lightest)
 "   Default: 237
+" ---------------------------------------------------------------------------
 let g:seoul256_background = 234
 colo seoul256
 
-" ====================================
+
+" ---------------------------------------------------------------------------
 " mappings
-" ====================================
+" ---------------------------------------------------------------------------
 " Basic mappings
 let mapleader      = ' '
 let maplocalleader = ' '
 vnoremap <C-c> "*y
 nmap <C-p> :FZF<CR>
+
+
+" ---------------------------------------------------------------------------
 " NERDtree toggle
+" ---------------------------------------------------------------------------
 nnoremap <F10> :NERDTreeToggle<cr>
+
+
+" ----------------------------------------------------------------------------
 " Tagbar toggle
+" ----------------------------------------------------------------------------
 nmap <F8> :TagbarToggle<CR>
+
+
+" ----------------------------------------------------------------------------
 " Easy Align key to format
+" ----------------------------------------------------------------------------
 nmap ga <Plug>(EasyAlign)
-"Map ctrl-movement keys to window switching
-map <C-k> <C-w><k>
-map <C-j> <C-w><j>
-map <C-l> <C-w><l>
-map <C-h> <C-w><h>
+
+
+" ----------------------------------------------------------------------------
+" Map ctrl-movement keys to window switching
+" ----------------------------------------------------------------------------
+map <C-k> <C-w><Up>
+map <C-j> <C-w><Down>
+map <C-l> <C-w><Right>
+map <C-h> <C-w><Left>
+
+
+" ----------------------------------------------------------------------------
 " Movement in insert mode
+" ----------------------------------------------------------------------------
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 inoremap <C-^> <C-o><C-^>
+
+
+"-----------------------------------------------------------------------------
+" EasyMotion keys
+" ----------------------------------------------------------------------------
+nnoremap <leader>f :EasyMotion<cr>
+
+
+" ----------------------------------------------------------------------------
+" <tab> / <s-tab> | Circular windows navigation
+" ----------------------------------------------------------------------------
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
+
+

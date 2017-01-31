@@ -40,6 +40,10 @@ Plug 'bbatsov/rubocop'
 Plug 'pangloss/vim-javascript'
 
 
+" html
+Plug 'othree/html5.vim'
+
+
 " editor features
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -94,7 +98,7 @@ syntax on
 "   Range:   233 (darkest) ~ 239 (lightest)
 "   Default: 237
 " ---------------------------------------------------------------------------
-let g:seoul256_background = 234
+let g:seoul256_background = 236
 colo seoul256
 
 

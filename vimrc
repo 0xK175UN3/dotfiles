@@ -15,14 +15,15 @@ Plug 'junegunn/seoul256.vim'
 " ---------------------------------------------------------------------------
 "                                 browsing
 " ---------------------------------------------------------------------------
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/vim-slash'
 Plug 'junegunn/vim-easy-align'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
+Plug 'yggdroot/indentline'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 
 " ---------------------------------------------------------------------------
@@ -40,8 +41,17 @@ Plug 'bbatsov/rubocop'
 Plug 'pangloss/vim-javascript'
 
 
+" typescript
+Plug 'leafgarland/typescript-vim'
+
+
 " html
 Plug 'othree/html5.vim'
+
+
+" css/scss/less
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'groenewege/vim-less'
 
 
 " editor features

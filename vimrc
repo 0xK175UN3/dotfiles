@@ -10,6 +10,8 @@ call plug#begin('~/.vim/plugged')
 "                                  common
 " ---------------------------------------------------------------------------
 Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'jiangmiao/auto-pairs'
 
 
 " ---------------------------------------------------------------------------
@@ -85,6 +87,7 @@ set showcmd
 set wildmenu
 set lazyredraw
 set showmatch
+set backspace=indent,eol,start
 set incsearch
 set hlsearch
 set hidden

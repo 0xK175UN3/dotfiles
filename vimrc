@@ -139,13 +139,6 @@ nmap <F8> :TagbarToggle<CR>
 nmap ga <Plug>(EasyAlign)
 
 
-" Map ctrl-movement keys to window switching
-map <C-k> <C-w><Up>
-map <C-j> <C-w><Down>
-map <C-l> <C-w><Right>
-map <C-h> <C-w><Left>
-
-
 " Movement in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a

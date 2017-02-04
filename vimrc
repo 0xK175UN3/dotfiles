@@ -104,6 +104,7 @@ set list
 set nostartofline
 syntax on
 
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
 " ---------------------------------------------------------------------------
 " Color theme settings

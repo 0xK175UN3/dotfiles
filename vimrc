@@ -41,7 +41,7 @@ Plug 'bbatsov/rubocop'
 
 " javascript
 Plug 'pangloss/vim-javascript'
-
+Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 
 " typescript
 Plug 'leafgarland/typescript-vim'
@@ -155,5 +155,10 @@ nnoremap <leader>f :EasyMotion<cr>
 " <tab> / <s-tab> | Circular windows navigation
 nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
+
+
+" Tern navigation
+autocmd FileType javascript nnoremap <buffer> <silent> <C-]> :TernDef<CR>
+autocmd CompleteDone * pclose
 
 

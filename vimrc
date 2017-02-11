@@ -7,11 +7,17 @@
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
 " ---------------------------------------------------------------------------
+"                                   git
+" ---------------------------------------------------------------------------
+Plug 'tpope/vim-fugitive'
+
+" ---------------------------------------------------------------------------
 "                                  common
 " ---------------------------------------------------------------------------
 Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-emoji'
 
 
 " ---------------------------------------------------------------------------
@@ -21,10 +27,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/vim-slash'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'vim-airline/vim-airline'
 Plug 'yggdroot/indentline'
 Plug 'majutsushi/tagbar'
-Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 
 
@@ -39,9 +43,14 @@ Plug 'tpope/vim-rails'
 Plug 'bbatsov/rubocop'
 
 
-" javascript
+" javascript / node
 Plug 'pangloss/vim-javascript'
+Plug 'moll/vim-node'
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript'
+" js plug settings
+let g:javascript_plugin_jsdoc = 1
+
 
 " typescript
 Plug 'leafgarland/typescript-vim'
@@ -78,9 +87,10 @@ call plug#end()
 
 
 " ---------------------------------------------------------------------------
-" basic settings
+"                                basic settings
 " ---------------------------------------------------------------------------
 language messages en_Us
+syntax on
 set tags=./tags;/
 set number
 set showcmd
@@ -102,12 +112,13 @@ set visualbell
 set encoding=utf-8
 set list
 set nostartofline
-syntax on
+set statusline=%<[%n]\ %F\ %m%r%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%V%)\ %P
 
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
 " ---------------------------------------------------------------------------
-" Color theme settings
+"                           Color theme settings
+"
 " seoul256 (dark):
 "   Range:   233 (darkest) ~ 239 (lightest)
 "   Default: 237
@@ -117,7 +128,7 @@ colo seoul256
 
 
 " ---------------------------------------------------------------------------
-" mappings
+"                                 mappings
 " ---------------------------------------------------------------------------
 
 
@@ -162,3 +173,98 @@ autocmd FileType javascript nnoremap <buffer> <silent> <C-]> :TernDef<CR>
 autocmd CompleteDone * pclose
 
 
+" jk | Escaping!
+inoremap jk <Esc>
+xnoremap jk <Esc>
+cnoremap jk <C-c>
+
+
+" ---------------------------------------------------------------------------
+"                               emoji settings
+" ---------------------------------------------------------------------------
+silent! if emoji#available()
+  let s:ft_emoji = map({
+    \ 'c':          'baby_chick',
+    \ 'clojure':    'lollipop',
+    \ 'coffee':     'coffee',
+    \ 'cpp':        'chicken',
+    \ 'css':        'art',
+    \ 'eruby':      'ring',
+    \ 'gitcommit':  'soon',
+    \ 'haml':       'hammer',
+    \ 'help':       'angel',
+    \ 'html':       'herb',
+    \ 'java':       'older_man',
+    \ 'javascript': 'monkey',
+    \ 'make':       'seedling',
+    \ 'markdown':   'book',
+    \ 'perl':       'camel',
+    \ 'python':     'snake',
+    \ 'ruby':       'gem',
+    \ 'scala':      'barber',
+    \ 'sh':         'shell',
+    \ 'slim':       'dancer',
+    \ 'text':       'books',
+    \ 'vim':        'poop',
+    \ 'vim-plug':   'electric_plug',
+    \ 'yaml':       'yum',
+    \ 'yaml.jinja': 'yum'
+  \ }, 'emoji#for(v:val)')
+
+  function! S_filetype()
+    if empty(&filetype)
+      return emoji#for('grey_question')
+    else
+      return get(s:ft_emoji, &filetype, '['.&filetype.']')
+    endif
+  endfunction
+
+  function! S_modified()
+    if &modified
+      return emoji#for('kiss').' '
+    elseif !&modifiable
+      return emoji#for('construction').' '
+    else
+      return ''
+    endif
+  endfunction
+
+  function! S_fugitive()
+    if !exists('g:loaded_fugitive')
+      return ''
+    endif
+    let head = fugitive#head()
+    if empty(head)
+      return ''
+    else
+      return head == 'master' ? emoji#for('crown') : emoji#for('dango').'='.head
+    endif
+  endfunction
+
+  let s:braille = split('"⠉⠒⠤⣀', '\zs')
+  function! Braille()
+    let len = len(s:braille)
+    let [cur, max] = [line('.'), line('$')]
+    let pos  = min([len * (cur - 1) / max([1, max - 1]), len - 1])
+    return s:braille[pos]
+  endfunction
+
+  hi def link User1 TablineFill
+  let s:cherry = emoji#for('cherry_blossom')
+  function! MyStatusLine()
+    let mod = '%{S_modified()}'
+    let ro  = "%{&readonly ? emoji#for('lock') . ' ' : ''}"
+    let ft  = '%{S_filetype()}'
+    let fug = ' %{S_fugitive()}'
+    let sep = ' %= '
+    let pos = ' %l,%c%V '
+    let pct = ' %P '
+
+    return s:cherry.' [%n] %F %<'.mod.ro.ft.fug.sep.pos.'%{Braille()}%*'.pct.s:cherry
+  endfunction
+
+  " Note that the "%!" expression is evaluated in the context of the
+  " current window and buffer, while %{} items are evaluated in the
+  " context of the window that the statusline belongs to.
+  set statusline=%!MyStatusLine()
+endif

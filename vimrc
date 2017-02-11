@@ -36,6 +36,11 @@ Plug 'easymotion/vim-easymotion'
 "                             languages support
 " ---------------------------------------------------------------------------
 
+" python
+Plug 'hdima/python-syntax'
+Plug 'klen/python-mode'
+Plug 'nvie/vim-flake8'
+
 
 " ruby
 Plug 'vim-ruby/vim-ruby'
@@ -65,7 +70,9 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'groenewege/vim-less'
 
 
-" editor features
+" ---------------------------------------------------------------------------
+"                               editor features
+" ---------------------------------------------------------------------------
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
   " - name:   name of the plugin

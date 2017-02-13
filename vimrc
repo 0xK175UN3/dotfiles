@@ -15,7 +15,6 @@ Plug 'tpope/vim-fugitive'
 "                                  common
 " ---------------------------------------------------------------------------
 Plug 'junegunn/seoul256.vim'
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-emoji'
 
@@ -35,6 +34,15 @@ Plug 'easymotion/vim-easymotion'
 " ---------------------------------------------------------------------------
 "                             languages support
 " ---------------------------------------------------------------------------
+
+
+" clojure
+Plug 'kovisoft/paredit',    { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
+Plug 'junegunn/rainbow_parentheses.vim'
+
 
 " python
 Plug 'hdima/python-syntax'

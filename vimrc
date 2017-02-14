@@ -78,6 +78,9 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'groenewege/vim-less'
 
 
+" markdown
+Plug 'tpope/vim-markdown'
+
 " ---------------------------------------------------------------------------
 "                               editor features
 " ---------------------------------------------------------------------------

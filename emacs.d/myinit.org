@@ -59,3 +59,12 @@ Packages that makes coding comfortable
 	  (setq seoul256-background 235)
 	  (load-theme 'seoul256 t)))
 #+END_SRC
+** Evil mode
+#+BEGIN_SRC emacs-lisp
+(use-package evil
+  :ensure t
+  :init (progn
+    ;; if we don't have this evil overwrites the cursor color
+    (setq evil-default-cursor t)
+    (evil-mode 1)))
+#+END_SRC

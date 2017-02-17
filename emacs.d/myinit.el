@@ -29,4 +29,9 @@
           (setq seoul256-background 235)
           (load-theme 'seoul256 t)))
 
-
+(use-package evil
+  :ensure t
+  :init (progn
+    ;; if we don't have this evil overwrites the cursor color
+    (setq evil-default-cursor t)
+    (evil-mode 1)))

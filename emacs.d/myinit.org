@@ -1,5 +1,5 @@
-* My emacs config
-Hello there, there is my config .org file for emacs.
+#+TITLE: Lainkun's Emacs configuration
+
 * Basic settings
 ** Interface tweaks
 #+BEGIN_SRC emacs-lisp

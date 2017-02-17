@@ -11,6 +11,7 @@ Let know Emacs who am i
 ** Interface tweaks
 #+BEGIN_SRC emacs-lisp
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 (setq inhibit-startup-message t)
 #+END_SRC
 ** Navigation tweaks

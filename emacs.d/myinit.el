@@ -1,14 +1,8 @@
-#+TITLE: Lainkun's Emacs configuration
 
-* Basic settings
-** Interface tweaks
-#+BEGIN_SRC emacs-lisp
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
-#+END_SRC
-* Common packages
-#+BEGIN_SRC emacs-lisp
+
 (setq indo-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
@@ -24,6 +18,5 @@
 (use-package seoul256-theme
   :ensure t
   :init (progn
-	  (setq seoul256-background 235)
-	  (load-theme 'seoul256 t)))
-#+END_SRC
+          (setq seoul256-background 235)
+          (load-theme 'seoul256 t)))

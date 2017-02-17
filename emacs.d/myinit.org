@@ -1,18 +1,41 @@
 #+TITLE: Lainkun's Emacs configuration
+Here is my Emacs configuration
 
 * Basic settings
+Native settings that not need any packages
+** Personal info
+Let know Emacs who am i
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name "Lain")
+#+END_SRC
 ** Interface tweaks
 #+BEGIN_SRC emacs-lisp
-(setq inhibit-startup-message t)
 (tool-bar-mode -1)
-(fset 'yes-or-no-p 'y-or-n-p)
+(setq inhibit-startup-message t)
 #+END_SRC
-* Common packages
+** Navigation tweaks
 #+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
 (setq indo-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
-
+#+END_SRC
+** UTF-8
+#+BEGIN_SRC emacs-lisp
+(prefer-coding-system 'utf-8)
+#+END_SRC
+* Languages settings
+** Lisps
+*** Clojure
+*** Common Lisp
+** Ruby
+** Python
+** JavaScript
+** HTML/CSS
+** Coding Helpers
+Packages that makes coding comfortable
+- Auto-complete
+#+BEGIN_SRC emacs-lisp
 (use-package auto-complete
   :ensure t
   :init
@@ -20,7 +43,16 @@
     (ac-config-default)
     (global-auto-complete-mode t)
     ))
-
+#+END_SRC
+- Flycheck
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+#+END_SRC
+* Misc packages
+** Color Theme
+#+BEGIN_SRC emacs-lisp
 (use-package seoul256-theme
   :ensure t
   :init (progn

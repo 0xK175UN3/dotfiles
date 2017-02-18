@@ -1,7 +1,9 @@
 
 (setq user-full-name "Lain")
 
+(setq show-paren-style 'expression)
 (tool-bar-mode -1)
+(menu-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-message t)
 
@@ -9,6 +11,10 @@
 (setq indo-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
+
+(setq make-backup-files         nil) ; Don't want any backup files
+(setq auto-save-list-file-name  nil) ; Don't want any .saves files
+(setq auto-save-default         nil) ; Don't want any auto saving
 
 (prefer-coding-system 'utf-8)
 

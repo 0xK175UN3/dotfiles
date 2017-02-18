@@ -10,7 +10,9 @@ Let know Emacs who am i
 #+END_SRC
 ** Interface tweaks
 #+BEGIN_SRC emacs-lisp
+(setq show-paren-style 'expression)
 (tool-bar-mode -1)
+(menu-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-message t)
 #+END_SRC
@@ -20,6 +22,12 @@ Let know Emacs who am i
 (setq indo-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
+#+END_SRC
+** Backups and other
+#+BEGIN_SRC emacs-lisp
+(setq make-backup-files         nil) ; Don't want any backup files
+(setq auto-save-list-file-name  nil) ; Don't want any .saves files
+(setq auto-save-default         nil) ; Don't want any auto saving
 #+END_SRC
 ** UTF-8
 #+BEGIN_SRC emacs-lisp

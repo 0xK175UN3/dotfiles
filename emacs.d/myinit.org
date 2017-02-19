@@ -40,6 +40,12 @@ Let know Emacs who am i
 ** Ruby
 ** Python
 ** JavaScript
+#+BEGIN_SRC emacs-lisp
+(use-package js2-mode
+  :ensure t
+  :init
+  (add-hook 'javascript-mode-hook 'js2-mode:setup))
+#+END_SRC   
 ** HTML/CSS
 ** Coding Helpers
 Packages that makes coding comfortable

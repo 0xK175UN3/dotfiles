@@ -18,6 +18,11 @@
 
 (prefer-coding-system 'utf-8)
 
+(use-package js2-mode
+  :ensure t
+  :init
+  (add-hook 'javascript-mode-hook 'js2-mode:setup))
+
 (use-package auto-complete
   :ensure t
   :init

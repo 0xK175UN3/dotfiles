@@ -18,6 +18,12 @@
 
 (prefer-coding-system 'utf-8)
 
+(use-package jedi
+  :ensure t
+  :init
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (add-hook 'python-mode-hook 'jedi:ac-setup))
+
 (use-package js2-mode
   :ensure t
   :init

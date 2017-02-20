@@ -39,6 +39,13 @@ Let know Emacs who am i
 *** Common Lisp
 ** Ruby
 ** Python
+#+BEGIN_SRC emacs-lisp
+(use-package jedi
+  :ensure t
+  :init
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (add-hook 'python-mode-hook 'jedi:ac-setup))
+#+END_SRC
 ** JavaScript
 #+BEGIN_SRC emacs-lisp
 (use-package js2-mode

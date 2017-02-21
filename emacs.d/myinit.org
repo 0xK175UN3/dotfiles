@@ -47,13 +47,27 @@ Let know Emacs who am i
   (add-hook 'python-mode-hook 'jedi:ac-setup))
 #+END_SRC
 ** JavaScript
+- Vanila JS
 #+BEGIN_SRC emacs-lisp
 (use-package js2-mode
   :ensure t
   :init
   (add-hook 'javascript-mode-hook 'js2-mode:setup))
+#+END_SRC
+- TypeScript
+#+BEGIN_SRC emacs-lisp
+(use-package typescript-mode
+  :ensure t
+  :init
+  (add-hook 'typescript-mode-hook 'typescript-mode:setup))
 #+END_SRC   
-** HTML/CSS
+** DataBases
+#+BEGIN_EXAMPLE emacs-lisp
+(use-package sql-indent
+  :ensure t
+  :init
+  (add-hook 'sql-mode-hook 'sql-indent:setup)) 
+#+END_EXAMPLE
 ** Coding Helpers
 Packages that makes coding comfortable
 - Auto-complete

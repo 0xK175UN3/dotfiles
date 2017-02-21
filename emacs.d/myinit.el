@@ -29,6 +29,11 @@
   :init
   (add-hook 'javascript-mode-hook 'js2-mode:setup))
 
+(use-package typescript-mode
+  :ensure t
+  :init
+  (add-hook 'typescript-mode-hook 'typescript-mode:setup))
+
 (use-package auto-complete
   :ensure t
   :init

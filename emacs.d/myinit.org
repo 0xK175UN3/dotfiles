@@ -36,6 +36,12 @@ Let know Emacs who am i
 * Languages settings
 ** Lisps
 *** Clojure
+#+BEGIN_SRC emacs-lisp
+(use-package clojure-mode
+  :ensure t
+  :init
+  (add-hook 'clojure-mode-hook 'clojure-mode:setup))
+#+END_SRC
 *** Common Lisp
 ** Ruby
 ** Python

@@ -18,6 +18,11 @@
 
 (prefer-coding-system 'utf-8)
 
+(use-package clojure-mode
+  :ensure t
+  :init
+  (add-hook 'clojure-mode-hook 'clojure-mode:setup))
+
 (use-package jedi
   :ensure t
   :init

@@ -84,10 +84,18 @@ Packages that makes coding comfortable
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :init
+  (global-flycheck-mode))
+#+END_SRC
+- Linium
+#+BEGIN_SRC emacs-lisp
+(use-package hlinum
+  :ensure t
+  :init
+  (hlinum-activate)) 
 #+END_SRC
 * Misc packages
-** Color Theme
+- Color Theme
 #+BEGIN_SRC emacs-lisp
 (use-package seoul256-theme
   :ensure t
@@ -95,7 +103,7 @@ Packages that makes coding comfortable
 	  (setq seoul256-background 235)
 	  (load-theme 'seoul256 t)))
 #+END_SRC
-** Evil mode
+- Evil mode
 #+BEGIN_SRC emacs-lisp
 (use-package evil
   :ensure t

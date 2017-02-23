@@ -44,7 +44,13 @@
 
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :init
+  (global-flycheck-mode))
+
+(use-package hlinum
+  :ensure t
+  :init
+  (hlinum-activate))
 
 (use-package seoul256-theme
   :ensure t

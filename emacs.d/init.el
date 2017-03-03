@@ -1,11 +1,12 @@
 (require 'package)
 (setq package-enable-at-startup nil)
+
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("gnu" . "http://elpa.gnu.org/packages/") t)
+
 (package-initialize)
-(add-to-list 'package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
-
-
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)

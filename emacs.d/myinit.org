@@ -1,5 +1,9 @@
 * Basic Settings
-
+#+BEGIN_SRC emacs-lisp
+(setq inhibit-startup-message t)
+(tool-bar-mode -1)
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
 * Languages support
 ** Lisp
 ** JavaScript

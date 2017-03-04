@@ -9,11 +9,11 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod2
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:Envy Code R 12
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -35,18 +35,19 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+r exec dmenu_run
+# start rofi (a program launcher)
+bindsym $mod+d exec rofi -show run -lines 3 -bw 0 -hide-scrollbar -color-window "#2a2a2a" -font "Envy Code R 18"
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+j move left
+bindsym $mod+k move down
+bindsym $mod+l move up
+bindsym $mod+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -90,13 +91,18 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+#bindsym $mod+r focus child
+
+set $workspace1 "  "
+set $workspace2 "  "
+set $workspace3 "  "
+set $workspace4 "  "
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -105,16 +111,19 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+assign [class="URxvt"] $workspace1
+assign [class="Firefox"] $workspace2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -147,12 +156,24 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+d mode "resize"
+#gaps
+gaps inner 25
+gaps outer 5
+
+#basic settings
+hide_edge_borders both
+new_window none
+
+bindsym $mod+x mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# finds out, if available
+#  -c ~/.config/i3/i3blocks.conf
 bar {
-        status_command i3status
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	font pango:Envy Code R 12
 }
 
-
+exec_always feh --bg-fill /home/lainkits/Pictures/wallpaper.jpg
+exec_always urxvt
+exec_always firefox

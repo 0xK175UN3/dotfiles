@@ -16,7 +16,15 @@
 ** Lisp
 ** JavaScript
 ** Coding Helpers
-
+- Autocomplete
+#+BEGIN_SRC emacs-lisp
+(use-package auto-complete
+:ensure t
+:init
+(progn
+  (ac-config-default)
+  (global-auto-complete-mode t)))
+#+END_SRC
 * Misc packages
 - Reveal.js
 #+BEGIN_SRC emacs-lisp

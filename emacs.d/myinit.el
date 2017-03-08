@@ -16,9 +16,12 @@
 
 (use-package seoul256-theme
   :ensure t
-  :config (load-theme 'seoul256-theme t))
+  :init
+  (setq seoul256-background 235)
+  :config
+  (load-theme 'seoul256 t))
 
 (use-package ox-reveal
   :ensure ox-reveal)
-(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-(setq org-reveal-mathjax t)
+  (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+  (setq org-reveal-mathjax t)

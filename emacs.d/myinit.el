@@ -14,13 +14,6 @@
   (ac-config-default)
   (global-auto-complete-mode t)))
 
-(use-package seoul256-theme
-  :ensure t
-  :init
-  (setq seoul256-background 235)
-  :config
-  (load-theme 'seoul256 t))
-
 (use-package ox-reveal
   :ensure ox-reveal)
   (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")

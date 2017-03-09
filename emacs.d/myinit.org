@@ -27,15 +27,6 @@
   (global-auto-complete-mode t)))
 #+END_SRC
 * Misc packages
-- Seoul256 theme
-#+BEGIN_SRC emacs-lisp
-  (use-package seoul256-theme
-    :ensure t
-    :init
-    (setq seoul256-background 235)
-    :config
-    (load-theme 'seoul256 t))
-#+END_SRC
 - Reveal.js
 #+BEGIN_SRC emacs-lisp
   (use-package ox-reveal

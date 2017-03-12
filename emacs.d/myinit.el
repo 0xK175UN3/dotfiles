@@ -25,6 +25,21 @@
   :ensure t
   :mode "\\.json$")
 
+(use-package emmet-mode
+  :ensure t
+  :mode "\\.html$"
+  :init
+  (add-hook 'html-mode-hook 'emmet-mode)
+  (progn
+    (setq emmet-expand-jsx-className? t)))
+
+(use-package web-mode
+  :ensure t
+  :mode "\\.html$"
+  :init
+  (setq web-mode-enable-auto-closing t)
+  (setq web-mode-enable-auto-quoting t))
+
 (use-package jedi
   :ensure t
   :mode "\\.py$"
@@ -45,10 +60,7 @@
   (global-flycheck-mode t))
 
 (use-package magit
-  :ensure t
-  :init
-  (progn
-    (bind-key "C-x g" 'magit-status)))
+  :ensure t)
 
 (use-package git-gutter
   :ensure t
@@ -66,20 +78,31 @@
   (progn
     (setq evil-default-cursor t))
   :config
-  (evil-mode 1)
+  (evil-mode 1))
 
-  (use-package evil-leader
+(use-package evil-leader
   :ensure t
-  :config
-  (global-evil-leader-mode))
+  :init
+  (global-evil-leader-mode)
+  (progn
+    (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key
+      "g" 'magit-status )))
 
-  (use-package evil-surround
+(use-package evil-surround
   :ensure t
   :config
   (global-evil-surround-mode))
 
-  (use-package evil-indent-textobject
-  :ensure t))
+(use-package evil-escape
+  :ensure t
+  :init
+  (setq-default evil-escape-key-sequence "jk")
+  :config
+  (evil-escape-mode))
+
+(use-package evil-indent-textobject
+  :ensure t)
 
 (use-package yasnippet
   :ensure t

@@ -42,6 +42,26 @@
     :ensure t
     :mode "\\.json$")
 #+END_SRC
+** HTML/CSS
+- Emmet
+#+BEGIN_SRC emacs-lisp
+  (use-package emmet-mode
+    :ensure t
+    :mode "\\.html$"
+    :init
+    (add-hook 'html-mode-hook 'emmet-mode)
+    (progn
+      (setq emmet-expand-jsx-className? t)))
+#+END_SRC
+- Web-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package web-mode
+    :ensure t
+    :mode "\\.html$"
+    :init
+    (setq web-mode-enable-auto-closing t)
+    (setq web-mode-enable-auto-quoting t))
+#+END_SRC
 ** Python
 - Jedi
 #+BEGIN_SRC emacs-lisp
@@ -74,10 +94,7 @@
 - Magit
 #+BEGIN_SRC emacs-lisp
   (use-package magit
-    :ensure t
-    :init
-    (progn
-      (bind-key "C-x g" 'magit-status)))
+    :ensure t)
 #+END_SRC
 - Git-gutter
 #+BEGIN_SRC emacs-lisp
@@ -86,7 +103,7 @@
     :config
     (global-git-gutter-mode))
 #+END_SRC
-** Working stuff
+** Emacs for everything
 - Reveal.js
 #+BEGIN_SRC emacs-lisp
   (use-package ox-reveal
@@ -94,8 +111,8 @@
     (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
     (setq org-reveal-mathjax t)
 #+END_SRC
-** Other
-- Evil
+** Evil
+- Evil core
 #+BEGIN_SRC emacs-lisp
   (use-package evil
     :ensure t
@@ -103,21 +120,41 @@
     (progn
       (setq evil-default-cursor t))
     :config
-    (evil-mode 1)
-    
-    (use-package evil-leader
+    (evil-mode 1))
+#+END_SRC
+- Evil leader
+#+BEGIN_SRC emacs-lisp 
+  (use-package evil-leader
     :ensure t
-    :config
-    (global-evil-leader-mode))
-
-    (use-package evil-surround
+    :init
+    (global-evil-leader-mode)
+    (progn
+      (evil-leader/set-leader "<SPC>")
+      (evil-leader/set-key
+        "g" 'magit-status )))
+#+END_SRC
+- Evil surround
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-surround
     :ensure t
     :config
     (global-evil-surround-mode))
-
-    (use-package evil-indent-textobject
-    :ensure t))
 #+END_SRC
+- Evil escape
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-escape
+    :ensure t
+    :init
+    (setq-default evil-escape-key-sequence "jk")
+    :config
+    (evil-escape-mode))
+#+END_SRC
+- Evli textobjects
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-indent-textobject
+    :ensure t)
+#+END_SRC
+** Other
 - Yasnippet
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet

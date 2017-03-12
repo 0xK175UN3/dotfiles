@@ -13,6 +13,7 @@
 
 (use-package js2-mode
   :ensure t
+  :mode "\\.js$"
   :init
   (add-hook 'js-mode-hook 'j2-minor-mode))
 
@@ -26,6 +27,7 @@
 
 (use-package jedi
   :ensure t
+  :mode "\\.py$"
   :init
   (add-hook 'python-mode-hook 'jedi:setup)
   (add-hook 'python-mode-hook 'jedi:ac-setup))

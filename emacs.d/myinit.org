@@ -1,36 +1,132 @@
 * Basic Settings
 - Interface tweeks
 #+BEGIN_SRC emacs-lisp
-(setq inhibit-startup-message t)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(fset 'yes-or-no-p 'y-or-n-p)
+  (setq inhibit-startup-message t)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+- Ido stuff
+#+BEGIN_SRC emacs-lisp
+  (setq indo-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (ido-mode 1)
 #+END_SRC
 - No backups and autosave
 #+BEGIN_SRC emacs-lisp
-(setq make-backup-files         nil) ; Don't want any backup files
-(setq auto-save-list-file-name  nil) ; Don't want any .saves files
-(setq auto-save-default         nil) ; Don't want any auto saving
+  (setq make-backup-files         nil) ; Don't want any backup files
+  (setq auto-save-list-file-name  nil) ; Don't want any .saves files
+  (setq auto-save-default         nil) ; Don't want any auto saving
 #+END_SRC
 * Languages support
 ** Lisp
--
 ** JavaScript
+- Js2-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package js2-mode
+    :ensure t
+    :init
+    (add-hook 'js-mode-hook 'j2-minor-mode))
+#+END_SRC
+- Jsx-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package jsx-mode
+    :ensure t
+    :mode "\\.jsx$")
+#+END_SRC
+** JSON
+- Json-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package json-mode
+    :ensure t
+    :mode "\\.json$")
+#+END_SRC
+** Python
+- Jedi
+#+BEGIN_SRC emacs-lisp
+  (use-package jedi
+    :ensure t
+    :init
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (add-hook 'python-mode-hook 'jedi:ac-setup))
+#+END_SRC
 ** Coding Helpers
 - Autocomplete
 #+BEGIN_SRC emacs-lisp
-(use-package auto-complete
-:ensure t
-:init
-(progn
-  (ac-config-default)
-  (global-auto-complete-mode t)))
+  (use-package auto-complete
+    :ensure t
+    :init
+    (progn
+      (ac-config-default)
+      (global-auto-complete-mode t)))
+#+END_SRC
+- Flycheck
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :init
+    (global-flycheck-mode t))
 #+END_SRC
 * Misc packages
+** Git
+- Magit
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :ensure t
+    :init
+    (progn
+      (bind-key "C-x g" 'magit-status)))
+#+END_SRC
+- Git-gutter
+#+BEGIN_SRC emacs-lisp
+  (use-package git-gutter
+    :ensure t
+    :config
+    (global-git-gutter-mode))
+#+END_SRC
+** Working stuff
 - Reveal.js
 #+BEGIN_SRC emacs-lisp
   (use-package ox-reveal
     :ensure ox-reveal)
     (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
     (setq org-reveal-mathjax t)
+#+END_SRC
+** Other
+- Evil
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :ensure t
+    :init
+    (progn
+      (setq evil-default-cursor t))
+    :config
+    (evil-mode 1)
+    
+    (use-package evil-leader
+    :ensure t
+    :config
+    (global-evil-leader-mode))
+
+    (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode))
+
+    (use-package evil-indent-textobject
+    :ensure t))
+#+END_SRC
+- Yasnippet
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :init
+    (yas-global-mode 1))
+#+END_SRC
+- Which-key
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :ensure t
+    :config
+    (which-key-mode))
 #+END_SRC

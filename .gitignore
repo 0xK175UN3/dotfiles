@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+emacs.d/ac-comphist.dat
+emacs.d/elpa/
+emacs.d/ido.last
+emacs.d/elpa
+emacs.d/auto-save-list

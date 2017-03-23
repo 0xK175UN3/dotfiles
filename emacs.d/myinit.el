@@ -11,6 +11,12 @@
 (setq auto-save-list-file-name  nil) ; Don't want any .saves files
 (setq auto-save-default         nil) ; Don't want any auto saving
 
+(use-package cider
+  :ensure t
+  :mode "\\.clj$"
+  :init
+  (add-hook 'clojure-mode-hook 'cider-jack-in))
+
 (use-package js2-mode
   :ensure t
   :mode "\\.js$"
@@ -113,3 +119,8 @@
   :ensure t
   :config
   (which-key-mode))
+
+(use-package seoul256-theme
+  :ensure t
+  :init
+  (load-theme 'seoul256 t))

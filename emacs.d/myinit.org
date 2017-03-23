@@ -20,6 +20,15 @@
 #+END_SRC
 * Languages support
 ** Lisp
+*** Clojure
+- Cider
+#+BEGIN_SRC emacs-lisp
+  (use-package cider
+    :ensure t
+    :mode "\\.clj$"
+    :init
+    (add-hook 'clojure-mode-hook 'cider-jack-in))
+#+END_SRC
 ** JavaScript
 - Js2-mode
 #+BEGIN_SRC emacs-lisp
@@ -168,4 +177,11 @@
     :ensure t
     :config
     (which-key-mode))
+#+END_SRC
+- Theme
+#+BEGIN_SRC emacs-lisp
+  (use-package seoul256-theme
+    :ensure t
+    :init
+    (load-theme 'seoul256 t))
 #+END_SRC

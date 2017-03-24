@@ -98,6 +98,26 @@
     :init
     (global-flycheck-mode t))
 #+END_SRC
+- Dumb-jump
+#+BEGIN_SRC emacs-lisp
+  (use-package dumb-jump
+    :bind 
+      (("C-c o" . dumb-jump-go)
+       ("C-c p" . dumb-jump-back)
+       ("C-c x" . dumb-jump-go-prefer-external)
+       ("C-c z" . dumb-jump-go-prefer-external-other-window))
+    :ensure t
+    :init
+    (progn
+      (dumb-jump-mode)))
+#+END_SRC
+- Yasnippet
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :init
+    (yas-global-mode 1))
+#+END_SRC
 * Misc packages
 ** Git
 - Magit
@@ -164,12 +184,12 @@
     :ensure t)
 #+END_SRC
 ** Other
-- Yasnippet
+- Linum
 #+BEGIN_SRC emacs-lisp
-  (use-package yasnippet
+  (use-package linum
     :ensure t
     :init
-    (yas-global-mode 1))
+    (global-linum-mode 1))
 #+END_SRC
 - Which-key
 #+BEGIN_SRC emacs-lisp
@@ -185,3 +205,4 @@
     :init
     (load-theme 'seoul256 t))
 #+END_SRC
+

@@ -65,6 +65,22 @@
   :init
   (global-flycheck-mode t))
 
+(use-package dumb-jump
+  :bind 
+    (("C-c o" . dumb-jump-go)
+     ("C-c p" . dumb-jump-back)
+     ("C-c x" . dumb-jump-go-prefer-external)
+     ("C-c z" . dumb-jump-go-prefer-external-other-window))
+  :ensure t
+  :init
+  (progn
+    (dumb-jump-mode)))
+
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode 1))
+
 (use-package magit
   :ensure t)
 
@@ -110,10 +126,10 @@
 (use-package evil-indent-textobject
   :ensure t)
 
-(use-package yasnippet
+(use-package linum
   :ensure t
   :init
-  (yas-global-mode 1))
+  (global-linum-mode 1))
 
 (use-package which-key
   :ensure t

@@ -140,49 +140,6 @@
     (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
     (setq org-reveal-mathjax t)
 #+END_SRC
-** Evil
-- Evil core
-#+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :ensure t
-    :init
-    (progn
-      (setq evil-default-cursor t))
-    :config
-    (evil-mode 1))
-#+END_SRC
-- Evil leader
-#+BEGIN_SRC emacs-lisp 
-  (use-package evil-leader
-    :ensure t
-    :init
-    (global-evil-leader-mode)
-    (progn
-      (evil-leader/set-leader "<SPC>")
-      (evil-leader/set-key
-        "g" 'magit-status )))
-#+END_SRC
-- Evil surround
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-surround
-    :ensure t
-    :config
-    (global-evil-surround-mode))
-#+END_SRC
-- Evil escape
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-escape
-    :ensure t
-    :init
-    (setq-default evil-escape-key-sequence "jk")
-    :config
-    (evil-escape-mode))
-#+END_SRC
-- Evli textobjects
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-indent-textobject
-    :ensure t)
-#+END_SRC
 ** Other
 - Linum
 #+BEGIN_SRC emacs-lisp
@@ -200,9 +157,9 @@
 #+END_SRC
 - Theme
 #+BEGIN_SRC emacs-lisp
-  (use-package seoul256-theme
+  (use-package spacemacs-theme
     :ensure t
     :init
-    (load-theme 'seoul256 t))
+    (load-theme 'spacemacs-dark t))
 #+END_SRC
 

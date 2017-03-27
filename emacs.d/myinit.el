@@ -94,38 +94,6 @@
   (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
   (setq org-reveal-mathjax t)
 
-(use-package evil
-  :ensure t
-  :init
-  (progn
-    (setq evil-default-cursor t))
-  :config
-  (evil-mode 1))
-
-(use-package evil-leader
-  :ensure t
-  :init
-  (global-evil-leader-mode)
-  (progn
-    (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key
-      "g" 'magit-status )))
-
-(use-package evil-surround
-  :ensure t
-  :config
-  (global-evil-surround-mode))
-
-(use-package evil-escape
-  :ensure t
-  :init
-  (setq-default evil-escape-key-sequence "jk")
-  :config
-  (evil-escape-mode))
-
-(use-package evil-indent-textobject
-  :ensure t)
-
 (use-package linum
   :ensure t
   :init
@@ -136,7 +104,7 @@
   :config
   (which-key-mode))
 
-(use-package seoul256-theme
+(use-package spacemacs-theme
   :ensure t
   :init
-  (load-theme 'seoul256 t))
+  (load-theme 'spacemacs-dark t))

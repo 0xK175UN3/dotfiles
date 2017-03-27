@@ -25,7 +25,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (auto-complete use-package ox-reveal seoul256-theme))))
+    (spacemacs-theme auto-complete use-package ox-reveal))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -81,6 +81,11 @@
   :init
   (yas-global-mode 1))
 
+(use-package smartparens
+  :ensure t
+  :init
+  (smartparens-global-mode t))
+
 (use-package magit
   :ensure t)
 
@@ -93,6 +98,10 @@
   :ensure ox-reveal)
   (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
   (setq org-reveal-mathjax t)
+
+(use-package dired+
+  :ensure t
+  :config (require 'dired+))
 
 (use-package linum
   :ensure t

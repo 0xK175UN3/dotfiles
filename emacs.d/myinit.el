@@ -2,6 +2,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
+(setq column-number-mode t)
 
 (setq indo-enable-flex-matching t)
 (setq ido-everywhere t)
@@ -106,7 +107,8 @@
 (use-package linum
   :ensure t
   :init
-  (global-linum-mode 1))
+  (global-linum-mode 1)
+  (setq linum-format "%4d "))
 
 (use-package which-key
   :ensure t

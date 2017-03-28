@@ -5,6 +5,7 @@
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
   (fset 'yes-or-no-p 'y-or-n-p)
+  (setq column-number-mode t)
 #+END_SRC
 - Ido stuff
 #+BEGIN_SRC emacs-lisp
@@ -159,7 +160,8 @@
   (use-package linum
     :ensure t
     :init
-    (global-linum-mode 1))
+    (global-linum-mode 1)
+    (setq linum-format "%4d "))
 #+END_SRC
 - Which-key
 #+BEGIN_SRC emacs-lisp

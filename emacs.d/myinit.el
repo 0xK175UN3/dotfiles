@@ -1,70 +1,94 @@
-(setq inhibit-startup-message t)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(fset 'yes-or-no-p 'y-or-n-p)
-(setq column-number-mode t)
+(setq
+  inhibit-startup-screen t
+  create-lockfiles nil
+  make-backup-files nil
+  auto-save-default nil
+  column-number-mode t
+  scroll-error-top-bottom t
+  show-paren-delay 0.1
+  use-package-verbose nil
+  use-package-always-ensure t
+  package-enable-at-startup nil
+  sentence-end-double-space nil
+  split-width-threshold nil
+  split-height-threshold nil
+  ring-bell-function 'ignore
+  inhibit-startup-echo-area-message t
+  frame-title-format '((:eval buffer-file-name))
+  enable-local-variables :all
+  mouse-1-click-follows-link t
+  mouse-1-click-in-non-selected-windows t
+  select-enable-clipboard t
+  mouse-wheel-scroll-amount '(0.01)
+  column-number-mode t
+  confirm-kill-emacs (quote y-or-n-p)
+  ns-use-native-fullscreen nil
+  ns-pop-up-frames nil
+  line-move-visual t)
 
-(setq indo-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
+(setq-default
+  fill-column 70
+  indent-tabs-mode nil
+  truncate-lines t
+  require-final-newline t
+  indicate-empty-lines t
+  fringe-mode '(4 . 2))
 
-(setq make-backup-files         nil) ; Don't want any backup files
-(setq auto-save-list-file-name  nil) ; Don't want any .saves files
-(setq auto-save-default         nil) ; Don't want any auto saving
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(if window-system
+    (progn
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)
+      (add-to-list 'initial-frame-alist '(width . 150))
+      (add-to-list 'initial-frame-alist '(height . 50))
+      (add-to-list 'default-frame-alist '(width . 150))
+      (add-to-list 'default-frame-alist '(height . 50))))
 
 (use-package cider
-  :ensure t
   :mode "\\.clj$"
   :init
-  (add-hook 'clojure-mode-hook 'cider-jack-in))
+    (add-hook 'clojure-mode-hook 'cider-jack-in))
 
 (use-package js2-mode
-  :ensure t
   :mode "\\.js$"
   :init
-  (add-hook 'js-mode-hook 'j2-minor-mode))
+    (add-hook 'js-mode-hook 'j2-minor-mode))
 
 (use-package jsx-mode
-  :ensure t
   :mode "\\.jsx$")
 
 (use-package json-mode
-  :ensure t
   :mode "\\.json$")
 
 (use-package emmet-mode
-  :ensure t
   :mode "\\.html$"
   :init
-  (add-hook 'html-mode-hook 'emmet-mode)
-  (progn
-    (setq emmet-expand-jsx-className? t)))
+    (add-hook 'html-mode-hook 'emmet-mode)
+    (progn
+      (setq emmet-expand-jsx-className? t)))
 
 (use-package web-mode
-  :ensure t
   :mode "\\.html$"
   :init
-  (setq web-mode-enable-auto-closing t)
-  (setq web-mode-enable-auto-quoting t))
+    (setq web-mode-enable-auto-closing t)
+    (setq web-mode-enable-auto-quoting t))
 
 (use-package jedi
-  :ensure t
   :mode "\\.py$"
   :init
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (add-hook 'python-mode-hook 'jedi:ac-setup))
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (add-hook 'python-mode-hook 'jedi:ac-setup))
 
 (use-package auto-complete
-  :ensure t
   :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)))
+    (progn
+      (ac-config-default)
+      (global-auto-complete-mode t)))
 
 (use-package flycheck
-  :ensure t
   :init
-  (global-flycheck-mode t))
+    (global-flycheck-mode t))
 
 (use-package dumb-jump
   :bind 
@@ -72,50 +96,69 @@
      ("C-c p" . dumb-jump-back)
      ("C-c x" . dumb-jump-go-prefer-external)
      ("C-c z" . dumb-jump-go-prefer-external-other-window))
-  :ensure t
   :init
-  (progn
-    (dumb-jump-mode)))
+    (progn
+      (dumb-jump-mode)))
 
 (use-package yasnippet
-  :ensure t
   :init
-  (yas-global-mode 1))
+    (yas-global-mode 1))
 
 (use-package smartparens
-  :ensure t
   :init
-  (smartparens-global-mode t))
+    (smartparens-global-mode t))
 
-(use-package magit
-  :ensure t)
+(use-package magit)
 
 (use-package git-gutter
-  :ensure t
   :config
-  (global-git-gutter-mode))
+    (global-git-gutter-mode))
 
 (use-package ox-reveal
-  :ensure ox-reveal)
-  (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-  (setq org-reveal-mathjax t)
+  :config
+    (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+    (setq org-reveal-mathjax t))
 
 (use-package dired+
-  :ensure t
-  :config (require 'dired+))
+  :config
+    (require 'dired+))
 
 (use-package linum
-  :ensure t
   :init
-  (global-linum-mode 1)
-  (setq linum-format "%4d "))
+    (global-linum-mode 1)
+    (setq linum-format "%4d "))
 
 (use-package which-key
-  :ensure t
   :config
-  (which-key-mode))
+    (which-key-mode))
 
-(use-package spacemacs-theme
-  :ensure t
+(use-package ido
   :init
-  (load-theme 'spacemacs-dark t))
+    (progn
+      (defun ido-M-x ()
+        (interactive)
+          (call-interactively
+            (intern
+              (ido-completing-read
+                "M-x "
+                  (all-completions "" obarray 'commandp)))))
+
+  (ido-mode 1)
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-filename-at-point nil)
+  (setq ido-create-new-buffer 'always)
+  (setq ido-max-prospects 20)
+  (setq ido-auto-merge-work-directories-length -1)))
+
+(use-package ido-vertical-mode
+  :init
+    (progn
+      (ido-vertical-mode 1)
+        (defun bind-ido-keys ()
+          (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+          (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
+        (add-hook 'ido-setup-hook 'bind-ido-keys)))
+
+(use-package base16-theme
+  :init
+    (load-theme 'base16-woodland t))

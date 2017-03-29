@@ -36,7 +36,6 @@
     indent-tabs-mode nil
     truncate-lines t
     require-final-newline t
-    indicate-empty-lines t
     fringe-mode '(4 . 2))
 #+END_SRC
 - Aliases
@@ -107,6 +106,11 @@
       (setq web-mode-enable-auto-quoting t))
 #+END_SRC
 ** Python
+- Basic env
+#+BEGIN_SRC emacs-lisp
+(setq py-python-command "python3")
+(setq python-shell-interpreter "python3")
+#+END_SRC
 - Jedi
 #+BEGIN_SRC emacs-lisp
   (use-package jedi
@@ -114,6 +118,12 @@
     :init
       (add-hook 'python-mode-hook 'jedi:setup)
       (add-hook 'python-mode-hook 'jedi:ac-setup))
+#+END_SRC
+- Virtualenv
+#+BEGIN_SRC emacp-lisp
+  (use-package virtualenvwrapper
+    :config
+      (venv-initialize-interactive-shells))
 #+END_SRC
 ** Coding Helpers
 - Autocomplete

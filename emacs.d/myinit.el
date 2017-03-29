@@ -31,7 +31,6 @@
   indent-tabs-mode nil
   truncate-lines t
   require-final-newline t
-  indicate-empty-lines t
   fringe-mode '(4 . 2))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -73,6 +72,9 @@
   :init
     (setq web-mode-enable-auto-closing t)
     (setq web-mode-enable-auto-quoting t))
+
+(setq py-python-command "python3")
+(setq python-shell-interpreter "python3")
 
 (use-package jedi
   :mode "\\.py$"

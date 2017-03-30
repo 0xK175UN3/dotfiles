@@ -111,13 +111,24 @@
 (setq py-python-command "python3")
 (setq python-shell-interpreter "python3")
 #+END_SRC
+- Python
+#+BEGIN_SRC emacs-lisp
+  (use-package python
+  :commands python-mode
+  :config
+  (progn
+    (add-hook 'python-mode-hook 'flycheck-python-setup)
+    (add-hook 'python-mode-hook 'flycheck-mode)
+    (add-hook 'python-mode-hook 'jedi:setup)))
+#+END_SRC
 - Jedi
 #+BEGIN_SRC emacs-lisp
   (use-package jedi
-    :mode "\\.py$"
-    :init
-      (add-hook 'python-mode-hook 'jedi:setup)
-      (add-hook 'python-mode-hook 'jedi:ac-setup))
+  :bind
+    (:map python-mode-map
+        ("M-." . jedi:goto-definition)
+        ("M-*" . jedi:goto-definition-pop-marker)
+        ("M-?" . jedi:show-doc)))
 #+END_SRC
 - Virtualenv
 #+BEGIN_SRC emacp-lisp

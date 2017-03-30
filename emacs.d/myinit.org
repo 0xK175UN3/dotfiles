@@ -40,23 +40,29 @@
 #+END_SRC
 - Aliases
 #+BEGIN_SRC emacs-lisp
-(defalias 'yes-or-no-p 'y-or-n-p)
+  (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 - Native modes
-#+BEGIN_SRC emacs-lis
-(show-paren-mode t)
-(delete-selection-mode 1)
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode t)
+  (delete-selection-mode 1)
 #+END_SRC
 - Window config
 #+BEGIN_SRC emacs-lisp
-(if window-system
-    (progn
-      (tool-bar-mode -1)
-      (scroll-bar-mode -1)
-      (add-to-list 'initial-frame-alist '(width . 150))
-      (add-to-list 'initial-frame-alist '(height . 50))
-      (add-to-list 'default-frame-alist '(width . 150))
-      (add-to-list 'default-frame-alist '(height . 50))))
+  (when (memq window-system '(mac ns))
+    (use-package exec-path-from-shell
+      :init
+        (progn
+          (exec-path-from-shell-initialize))))
+
+  (if window-system
+      (progn
+        (tool-bar-mode -1)
+        (scroll-bar-mode -1)
+        (add-to-list 'initial-frame-alist '(width . 150))
+        (add-to-list 'initial-frame-alist '(height . 50))
+        (add-to-list 'default-frame-alist '(width . 150))
+        (add-to-list 'default-frame-alist '(height . 50))))
 #+END_SRC
 * Languages support
 ** Lisp
@@ -108,18 +114,17 @@
 ** Python
 - Basic env
 #+BEGIN_SRC emacs-lisp
-(setq py-python-command "python3")
-(setq python-shell-interpreter "python3")
+  (setq py-python-command "python3")
+  (setq python-shell-interpreter "python3")
 #+END_SRC
 - Python
 #+BEGIN_SRC emacs-lisp
   (use-package python
   :commands python-mode
   :config
-  (progn
-    (add-hook 'python-mode-hook 'flycheck-python-setup)
-    (add-hook 'python-mode-hook 'flycheck-mode)
-    (add-hook 'python-mode-hook 'jedi:setup)))
+    (progn
+      (add-hook 'python-mode-hook 'flycheck-mode)
+      (add-hook 'python-mode-hook 'jedi:setup)))
 #+END_SRC
 - Jedi
 #+BEGIN_SRC emacs-lisp
@@ -129,12 +134,6 @@
         ("M-." . jedi:goto-definition)
         ("M-*" . jedi:goto-definition-pop-marker)
         ("M-?" . jedi:show-doc)))
-#+END_SRC
-- Virtualenv
-#+BEGIN_SRC emacp-lisp
-  (use-package virtualenvwrapper
-    :config
-      (venv-initialize-interactive-shells))
 #+END_SRC
 ** Coding Helpers
 - Autocomplete
@@ -248,7 +247,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package base16-theme
     :init
-      (load-theme 'base16-woodland t))
+      (load-theme 'base16-ocean t))
 #+END_SRC
 
 

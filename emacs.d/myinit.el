@@ -27,22 +27,22 @@
   line-move-visual t)
 
 (setq-default
-<<<<<<< Updated upstream
   fill-column 70
   indent-tabs-mode nil
   truncate-lines t
   require-final-newline t
   fringe-mode '(4 . 2))
-=======
-    fill-column 70
-    indent-tabs-mode nil
-    truncate-lines t
-    require-final-newline t
-;;;;    indicate-empty-lines t
-    fringe-mode '(4 . 2))
->>>>>>> Stashed changes
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+(show-paren-mode t)
+(delete-selection-mode 1)
+
+(when (memq window-system '(mac ns))
+  (use-package exec-path-from-shell
+    :init
+      (progn
+        (exec-path-from-shell-initialize))))
 
 (if window-system
     (progn
@@ -82,18 +82,15 @@
     (setq web-mode-enable-auto-closing t)
     (setq web-mode-enable-auto-quoting t))
 
-<<<<<<< Updated upstream
 (setq py-python-command "python3")
 (setq python-shell-interpreter "python3")
-=======
+
 (use-package python
 :commands python-mode
 :config
-(progn
-  (add-hook 'python-mode-hook 'flycheck-python-setup)
-  (add-hook 'python-mode-hook 'flycheck-mode)
-  (add-hook 'python-mode-hook 'jedi:setup)))
->>>>>>> Stashed changes
+  (progn
+    (add-hook 'python-mode-hook 'flycheck-mode)
+    (add-hook 'python-mode-hook 'jedi:setup)))
 
 (use-package jedi
 :bind
@@ -183,4 +180,4 @@
 
 (use-package base16-theme
   :init
-    (load-theme 'base16-woodland t))
+    (load-theme 'base16-ocean t))

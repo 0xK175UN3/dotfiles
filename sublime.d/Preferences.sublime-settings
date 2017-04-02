@@ -1,5 +1,6 @@
 {
 	"caret_style": "wide",
+	"open_files_in_new_window": false,
 	"color_scheme": "Packages/Theme - Spacegray/base16-ocean.dark.tmTheme",
 	"draw_white_space": "all",
 	"font_size": 13.0,

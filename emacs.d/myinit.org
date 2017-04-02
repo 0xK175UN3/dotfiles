@@ -249,5 +249,3 @@
     :init
       (load-theme 'base16-ocean t))
 #+END_SRC
-
-

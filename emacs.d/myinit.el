@@ -4,6 +4,8 @@
   make-backup-files nil
   auto-save-default nil
   column-number-mode t
+  blink-cursor-mode 0
+  global-hl-line-mode t
   scroll-error-top-bottom t
   show-paren-delay 0.1
   use-package-verbose nil
@@ -177,6 +179,38 @@
           (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
           (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
         (add-hook 'ido-setup-hook 'bind-ido-keys)))
+
+(use-package evil		
+  :ensure t		
+  :init		
+    (progn		
+    (setq evil-default-cursor t))		
+  :config		
+    (evil-mode 1))		
+
+(use-package evil-leader		
+  :ensure t		
+  :init		
+    (global-evil-leader-mode)		
+  (progn		
+    (evil-leader/set-leader "<SPC>")		
+    (evil-leader/set-key		
+      "g" 'magit-status )))		
+
+(use-package evil-surround		
+  :ensure t		
+  :config		
+    (global-evil-surround-mode))		
+
+(use-package evil-escape		
+  :ensure t		
+  :init		
+    (setq-default evil-escape-key-sequence "jk")		
+  :config		
+    (evil-escape-mode))		
+
+(use-package evil-indent-textobject		
+  :ensure t)
 
 (use-package base16-theme
   :init

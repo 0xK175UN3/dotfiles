@@ -44,6 +44,8 @@
 #+END_SRC
 - Native modes
 #+BEGIN_SRC emacs-lisp
+  (blink-cursor-mode 0) 
+  (global-hl-line-mode t) 
   (show-paren-mode t)
   (delete-selection-mode 1)
 #+END_SRC
@@ -242,6 +244,40 @@
             (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
             (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
           (add-hook 'ido-setup-hook 'bind-ido-keys)))
+#+END_SRC
+- Evil mode
+#+BEGIN_SRC emacs-lisp 
+  (use-package evil		
+    :ensure t		
+    :init		
+      (progn		
+      (setq evil-default-cursor t))		
+    :config		
+      (evil-mode 1))		
+		
+  (use-package evil-leader		
+    :ensure t		
+    :init		
+      (global-evil-leader-mode)		
+    (progn		
+      (evil-leader/set-leader "<SPC>")		
+      (evil-leader/set-key		
+        "g" 'magit-status )))		
+		
+  (use-package evil-surround		
+    :ensure t		
+    :config		
+      (global-evil-surround-mode))		
+		
+  (use-package evil-escape		
+    :ensure t		
+    :init		
+      (setq-default evil-escape-key-sequence "jk")		
+    :config		
+      (evil-escape-mode))		
+		
+  (use-package evil-indent-textobject		
+    :ensure t)
 #+END_SRC
 - Theme
 #+BEGIN_SRC emacs-lisp

@@ -8,6 +8,8 @@
 	[],
 	"vintage_start_in_command_mode": true,
 	"open_files_in_new_window": false,
+	"remember_open_files": false,
+	"hot_exit": false,
 	"tab_size": 2,
 	"theme": "Spacegray.sublime-theme",
 	"translate_tabs_to_spaces": true,

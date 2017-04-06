@@ -245,6 +245,7 @@
             (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
           (add-hook 'ido-setup-hook 'bind-ido-keys)))
 #+END_SRC
+#+BEGIN_COMMENT
 - Evil mode
 #+BEGIN_SRC emacs-lisp 
   (use-package evil		
@@ -279,6 +280,7 @@
   (use-package evil-indent-textobject		
     :ensure t)
 #+END_SRC
+#+END_COMMENT
 - Theme
 #+BEGIN_SRC emacs-lisp
   (use-package base16-theme

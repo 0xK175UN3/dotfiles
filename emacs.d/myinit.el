@@ -4,8 +4,6 @@
   make-backup-files nil
   auto-save-default nil
   column-number-mode t
-  blink-cursor-mode 0
-  global-hl-line-mode t
   scroll-error-top-bottom t
   show-paren-delay 0.1
   use-package-verbose nil
@@ -37,6 +35,8 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(blink-cursor-mode 0) 
+(global-hl-line-mode t) 
 (show-paren-mode t)
 (delete-selection-mode 1)
 

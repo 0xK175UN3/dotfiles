@@ -1,0 +1,16 @@
+#+TITLE: Lainkits configurations
+My settings for system, code editors, and some fun stuff
+#+STARTUP: overview
+#+OPTIONS: toc:4 h:4
+* My config contains:
+** Dotfiles
+- tmux.conf (Tmux configuration)
+- vimrc (Vim configuration)
+- ideavimrc (Vim configuration for jetbrain products)
+- Xresources (urxvt configuration)
+- i3 config files (i3 window manager)
+- fun bash scripts
+** Emacs
+- Python
+** Sublime Text
+- Python

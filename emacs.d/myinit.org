@@ -137,6 +137,12 @@
         ("M-*" . jedi:goto-definition-pop-marker)
         ("M-?" . jedi:show-doc)))
 #+END_SRC
+- Elpy
+#+BEGIN_SRC emacs-lisp
+  (use-package elpy
+    :config
+      (elpy-enable))
+#+END_SRC
 ** Coding Helpers
 - Autocomplete
 #+BEGIN_SRC emacs-lisp

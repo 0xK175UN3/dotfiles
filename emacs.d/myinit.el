@@ -101,6 +101,10 @@
       ("M-*" . jedi:goto-definition-pop-marker)
       ("M-?" . jedi:show-doc)))
 
+(use-package elpy
+  :config
+    (elpy-enable))
+
 (use-package auto-complete
   :init
     (progn

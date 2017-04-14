@@ -15,6 +15,7 @@
 	"tab_size": 2,
 	"theme": "Spacegray.sublime-theme",
 	"translate_tabs_to_spaces": true,
+	"scroll_past_end": true,
 	"wide_caret": true,
 	"word_wrap": true
 }

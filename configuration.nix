@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
     ];
 
+  hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.enable = true;
   nixpkgs.config.allowUnfree = true;
 
@@ -44,7 +45,6 @@
     alsaUtils
     alsaTools
     idea.pycharm-community
-    i3status
     dmenu
     imagemagick
     networkmanagerapplet
@@ -54,6 +54,8 @@
     skype
     # Development
     python
+    python3
+    haskellPackages.ghc
     ruby
     zsh
     git
@@ -80,19 +82,34 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.windowManager = {
-    i3 = {
+  services = {
+    openssh = {
       enable = true;
-      package = pkgs.i3-gaps;
     };
-    default = "i3";
+    xserver = {
+      enable = true;
+      layout = "us";
+      videoDrivers = [
+        "nvidia"
+      ];
+      displayManager = {
+        lightdm = {
+          enable = true;
+        };
+      };
+      desktopManager = {
+        gnome3 = {
+          enable = true;
+        };
+      };
+     # windowManager = {
+     #   xmonad = {
+     #     enable = true;
+     #     enableContribAndExtras = true;
+     #   };
+     #   default = "xmonad";
+     # };
+    };
   };
 
 

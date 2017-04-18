@@ -44,7 +44,6 @@
     alsaLib
     alsaUtils
     alsaTools
-    idea.pycharm-community
     dmenu
     imagemagick
     networkmanagerapplet
@@ -56,7 +55,7 @@
     python
     python3
     haskellPackages.ghc
-    ruby
+    idea.pycharm-community
     zsh
     git
     gitkraken
@@ -70,8 +69,6 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

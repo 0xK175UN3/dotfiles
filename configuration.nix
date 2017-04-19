@@ -30,6 +30,7 @@
   time.timeZone = "Europe/Moskow";
 
   environment.systemPackages = with pkgs; [
+    coreutils
     sudo
     feh
     mc
@@ -54,7 +55,27 @@
     # Development
     python
     python3
+    # Haskell
     haskellPackages.ghc
+    haskellPackages.cabal-install
+    haskellPackages.alex
+    haskellPackages.async
+    haskellPackages.attoparsec
+    haskellPackages.case-insensitive
+    haskellPackages.fgl
+    haskellPackages.GLURaw
+    haskellPackages.GLUT
+    haskellPackages.happy
+    haskellPackages.hashable
+    haskellPackages.haskell-src
+    haskellPackages.hscolour
+    haskellPackages.html
+    haskellPackages.HTTP
+    haskellPackages.vector
+    haskellPackages.zlib
+    haskellPackages.parallel
+    haskellPackages.primitive
+    haskellPackages.leksah
     idea.pycharm-community
     zsh
     git

@@ -179,6 +179,20 @@
     :config
       (elpy-enable))
 #+END_SRC
+** Ruby
+** Elixir
+- Elixir mode
+#+BEGIN_SRC emacs-lisp
+  (use-package elixir-mode
+  :commands elixir-mode
+  :config
+    (progn
+      (defun auto-activate-ruby-end-mode-for-elixir-mode ()
+        (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
+          "\\(?:^\\|\\s-+\\)\\(?:do\\)")
+        (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
+        (ruby-end-mode +1))))
+#+END_SRC
 ** Coding Helpers
 - Autocomplete
 #+BEGIN_SRC emacs-lisp
@@ -287,7 +301,6 @@
             (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
           (add-hook 'ido-setup-hook 'bind-ido-keys)))
 #+END_SRC
-#+BEGIN_COMMENT
 - Evil mode
 #+BEGIN_SRC emacs-lisp 
   (use-package evil		
@@ -322,7 +335,6 @@
   (use-package evil-indent-textobject		
     :ensure t)
 #+END_SRC
-#+END_COMMENT
 - Theme
 #+BEGIN_SRC emacs-lisp
   (use-package base16-theme

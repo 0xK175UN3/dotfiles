@@ -30,6 +30,7 @@
   time.timeZone = "Europe/Moskow";
 
   environment.systemPackages = with pkgs; [
+    htop
     coreutils
     sudo
     feh
@@ -75,7 +76,6 @@
     haskellPackages.zlib
     haskellPackages.parallel
     haskellPackages.primitive
-    haskellPackages.leksah
     idea.pycharm-community
     zsh
     git

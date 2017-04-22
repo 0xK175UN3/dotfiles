@@ -136,6 +136,16 @@
   :config
     (elpy-enable))
 
+(use-package elixir-mode
+:commands elixir-mode
+:config
+  (progn
+    (defun auto-activate-ruby-end-mode-for-elixir-mode ()
+      (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
+        "\\(?:^\\|\\s-+\\)\\(?:do\\)")
+      (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
+      (ruby-end-mode +1))))
+
 (use-package auto-complete
   :init
     (progn
@@ -214,6 +224,38 @@
           (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
           (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
         (add-hook 'ido-setup-hook 'bind-ido-keys)))
+
+(use-package evil		
+  :ensure t		
+  :init		
+    (progn		
+    (setq evil-default-cursor t))		
+  :config		
+    (evil-mode 1))		
+
+(use-package evil-leader		
+  :ensure t		
+  :init		
+    (global-evil-leader-mode)		
+  (progn		
+    (evil-leader/set-leader "<SPC>")		
+    (evil-leader/set-key		
+      "g" 'magit-status )))		
+
+(use-package evil-surround		
+  :ensure t		
+  :config		
+    (global-evil-surround-mode))		
+
+(use-package evil-escape		
+  :ensure t		
+  :init		
+    (setq-default evil-escape-key-sequence "jk")		
+  :config		
+    (evil-escape-mode))		
+
+(use-package evil-indent-textobject		
+  :ensure t)
 
 (use-package base16-theme
   :init

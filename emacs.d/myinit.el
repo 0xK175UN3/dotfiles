@@ -39,6 +39,7 @@
 (global-hl-line-mode t) 
 (show-paren-mode t)
 (delete-selection-mode 1)
+(cua-mode 1)
 
 (when (memq window-system '(mac ns))
   (use-package exec-path-from-shell
@@ -54,6 +55,36 @@
       (add-to-list 'initial-frame-alist '(height . 50))
       (add-to-list 'default-frame-alist '(width . 150))
       (add-to-list 'default-frame-alist '(height . 50))))
+
+(use-package haskell-mode
+  :bind
+    (:map haskell-mode-map
+      ("F8" . haskell-navigate-imports)
+      ("C-c C-l" . haskell-process-load-or-reload)
+      ("C-c C-z" . haskell-interactive-switch)
+      ("C-c C-n C-t" . haskell-process-do-type)
+      ("C-c C-n C-i" . haskell-process-do-info)
+      ("C-c C-n C-c" . haskell-process-cabal-build)
+      ("C-c C-n c" . haskell-process-cabal)
+      ("C-c C-o" . haskell-compile))
+    (:map haskell-cabal-mode-map
+      ("C-c C-z" . haskell-interactive-switch)
+      ("C-c C-k" . haskell-interactive-mode-clear)
+      ("C-c C-c" . haskell-process-cabal-build)
+      ("C-c c" . haskell-process-cabal)
+      ("C-c C-o" . haskell-compile))
+  :config
+    (add-hook 'haskell-mode-hook #'hident-mode))
+
+(let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
+  (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
+  (add-to-list 'exec-path my-cabal-path))
+(custom-set-variables 
+  '(haslell-tags-on-save t)
+  '(haskell-process-suggest-remove-import-lines t)
+  '(haskell-process-auto-import-loaded-modules t)
+  '(haskell-process-log t)
+  '(haskell-process-type 'cabal-repl))
 
 (use-package cider
   :mode "\\.clj$"
@@ -183,6 +214,38 @@
           (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
           (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
         (add-hook 'ido-setup-hook 'bind-ido-keys)))
+
+(use-package evil		
+  :ensure t		
+  :init		
+    (progn		
+    (setq evil-default-cursor t))		
+  :config		
+    (evil-mode 1))		
+
+(use-package evil-leader		
+  :ensure t		
+  :init		
+    (global-evil-leader-mode)		
+  (progn		
+    (evil-leader/set-leader "<SPC>")		
+    (evil-leader/set-key		
+      "g" 'magit-status )))		
+
+(use-package evil-surround		
+  :ensure t		
+  :config		
+    (global-evil-surround-mode))		
+
+(use-package evil-escape		
+  :ensure t		
+  :init		
+    (setq-default evil-escape-key-sequence "jk")		
+  :config		
+    (evil-escape-mode))		
+
+(use-package evil-indent-textobject		
+  :ensure t)
 
 (use-package base16-theme
   :init

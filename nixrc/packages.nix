@@ -1,10 +1,19 @@
 {pkgs, ...}: with pkgs;
 
-environment.systemPackages = with pkgs; [
+let
+  myhunspell = (hunspellWithDicts (with hunspellDicts; [en-us en-gb-ise]));
+in { 
+  boot = {
+    kernelPackages = linuxPackages_4_10;
+    extraModulePackages = with linuxPackages_4_10; [ bcc wireguard sysdig ];
+    zfs.enableUnstable = true;
+  };
+  environment.systemPackages = [
     arc-theme
     arc-icon-theme
     stdenv
     gnumake
+    scrot
     gcc
     htop
     coreutils
@@ -55,9 +64,12 @@ environment.systemPackages = with pkgs; [
     haskellPackages.parallel
     haskellPackages.primitive
     idea.pycharm-community
+    fish
     zsh
+    oh-my-zsh
     git
     gitkraken
+    rxvt_unicode
     tmux
     vim
     neovim
@@ -94,3 +106,4 @@ environment.systemPackages = with pkgs; [
       };
     };
   };
+}

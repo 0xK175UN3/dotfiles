@@ -8,11 +8,11 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./packages.nix
     ];
 
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.enable = true;
-  nixpkgs.config.allowUnfree = true;
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -28,65 +28,6 @@
   };
 
   time.timeZone = "Europe/Moskow";
-
-  environment.systemPackages = with pkgs; [
-    htop
-    coreutils
-    sudo
-    feh
-    mc
-    wget
-    firefox
-    screenfetch
-    openssh
-    zip
-    unzip
-    pavucontrol
-    apulse
-    alsaLib
-    alsaUtils
-    alsaTools
-    dmenu
-    imagemagick
-    networkmanagerapplet
-    # Communications
-    slack
-    tdesktop
-    skype
-    # Development
-    python
-    python3
-    # Haskell
-    haskellPackages.ghc
-    haskellPackages.cabal-install
-    haskellPackages.alex
-    haskellPackages.async
-    haskellPackages.attoparsec
-    haskellPackages.case-insensitive
-    haskellPackages.fgl
-    haskellPackages.GLURaw
-    haskellPackages.GLUT
-    haskellPackages.happy
-    haskellPackages.hashable
-    haskellPackages.haskell-src
-    haskellPackages.hscolour
-    haskellPackages.html
-    haskellPackages.HTTP
-    haskellPackages.vector
-    haskellPackages.zlib
-    haskellPackages.parallel
-    haskellPackages.primitive
-    idea.pycharm-community
-    zsh
-    git
-    gitkraken
-    tmux
-    vim
-    neovim
-    emacs
-    # Games
-    steam
-  ];
 
   # List services that you want to enable:
 
@@ -135,7 +76,7 @@
   users.extraUsers.lainkits = {
     createHome = true;
     home = "/home/lainkits";
-    shell = "/run/current-system/sw/bin/zsh";
+    shell = "/run/current-system/sw/bin/fish";
     name = "lainkits";
     extraGroups = [
       "audio"
@@ -159,6 +100,8 @@
       font-awesome-ttf
     ];
   };
+
+  environment.pathsToLink = [ "/etc/gconf" ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.03";

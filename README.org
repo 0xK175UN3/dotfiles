@@ -8,9 +8,19 @@ My settings for system, code editors, and some fun stuff
 - vimrc (Vim configuration)
 - ideavimrc (Vim configuration for jetbrain products)
 - Xresources (urxvt configuration)
+- Xmonad config (not ready yet)
+- NixOS configuration
+- Xinitrc
 - i3 config files (i3 window manager)
 - fun bash scripts
 ** Emacs
+There is configuration for:
+- Haskell
 - Python
-** Sublime Text
-- Python
+
+** Todo
+- Ruby development config
+- Better shell integration
+- Better project managment
+
+

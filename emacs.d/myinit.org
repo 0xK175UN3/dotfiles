@@ -208,18 +208,6 @@
     :init
       (global-flycheck-mode t))
 #+END_SRC
-- Dumb-jump
-#+BEGIN_SRC emacs-lisp
-  (use-package dumb-jump
-    :bind 
-      (("C-c o" . dumb-jump-go)
-       ("C-c p" . dumb-jump-back)
-       ("C-c x" . dumb-jump-go-prefer-external)
-       ("C-c z" . dumb-jump-go-prefer-external-other-window))
-    :init
-      (progn
-        (dumb-jump-mode)))
-#+END_SRC
 - Yasnippet
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet

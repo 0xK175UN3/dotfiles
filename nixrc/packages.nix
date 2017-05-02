@@ -21,7 +21,6 @@ in {
     feh
     mc
     wget
-    gimp
     firefox
     chromium
     screenfetch
@@ -63,8 +62,7 @@ in {
     haskellPackages.zlib
     haskellPackages.parallel
     haskellPackages.primitive
-    idea.pycharm-community
-    fish
+    vscode
     zsh
     oh-my-zsh
     git
@@ -74,7 +72,6 @@ in {
     vim
     neovim
     emacs
-    atom
     # Games
     steam
   ];

@@ -41,3 +41,6 @@ URxvt.scrollBar: false
 URxvt.transparent: false
 URxvt.font: xft:monoid R:size=10
 URxvt.letterSpace: -6.5
+URxvt.perl-lib: ~/dotfiles/urxvt-scripts/
+URxvt.perl-ext-common: ...,keyboard-select
+URxvt.keysym.M-Escape: perl:keyboard-select:activate

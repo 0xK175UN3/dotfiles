@@ -1,3 +1,4 @@
+
 (setq
   inhibit-startup-screen t
   create-lockfiles nil
@@ -156,16 +157,6 @@
   :init
     (global-flycheck-mode t))
 
-(use-package dumb-jump
-  :bind 
-    (("C-c o" . dumb-jump-go)
-     ("C-c p" . dumb-jump-back)
-     ("C-c x" . dumb-jump-go-prefer-external)
-     ("C-c z" . dumb-jump-go-prefer-external-other-window))
-  :init
-    (progn
-      (dumb-jump-mode)))
-
 (use-package yasnippet
   :init
     (yas-global-mode 1))
@@ -225,36 +216,36 @@
           (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
         (add-hook 'ido-setup-hook 'bind-ido-keys)))
 
-(use-package evil		
-  :ensure t		
-  :init		
-    (progn		
-    (setq evil-default-cursor t))		
-  :config		
-    (evil-mode 1))		
-
-(use-package evil-leader		
-  :ensure t		
-  :init		
-    (global-evil-leader-mode)		
-  (progn		
-    (evil-leader/set-leader "<SPC>")		
-    (evil-leader/set-key		
-      "g" 'magit-status )))		
-
-(use-package evil-surround		
-  :ensure t		
-  :config		
-    (global-evil-surround-mode))		
-
-(use-package evil-escape		
-  :ensure t		
-  :init		
-    (setq-default evil-escape-key-sequence "jk")		
-  :config		
-    (evil-escape-mode))		
-
-(use-package evil-indent-textobject		
+(use-package evil             
+  :ensure t           
+  :init               
+    (progn            
+    (setq evil-default-cursor t))             
+  :config             
+    (evil-mode 1))            
+              
+(use-package evil-leader              
+  :ensure t           
+  :init               
+    (global-evil-leader-mode)         
+  (progn              
+    (evil-leader/set-leader "<SPC>")          
+    (evil-leader/set-key              
+      "g" 'magit-status )))           
+              
+(use-package evil-surround            
+  :ensure t           
+  :config             
+    (global-evil-surround-mode))              
+              
+(use-package evil-escape              
+  :ensure t           
+  :init               
+    (setq-default evil-escape-key-sequence "jk")              
+  :config             
+    (evil-escape-mode))               
+              
+(use-package evil-indent-textobject           
   :ensure t)
 
 (use-package base16-theme

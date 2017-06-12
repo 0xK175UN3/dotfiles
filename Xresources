@@ -39,4 +39,5 @@
 ! interface
 URxvt.scrollBar: false
 URxvt.transparent: false
-URxvt.font: xft:Envy Code R:size=11
+URxvt.font: xft:monoid R:size=10
+URxvt.letterSpace: -6.5

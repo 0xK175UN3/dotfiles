@@ -52,7 +52,6 @@ myConfig = def { modMask= mod1Mask
                          , manageHook = myManageHook <+> manageHook def
                          , mouseBindings = myMouseBindings
                          , borderWidth         = 5
-                         , startupHook = myStartupHook
                          }
 
 --myWorkspaces    = ["1:Web","2:term","3:mail","4:files","5:steam","6","7","8","9"]
@@ -166,16 +165,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
----spawn
---
-myStartupHook = do
-  spawnOnce "/usr/bin/stalonetray"
-  spawnOnce "nm-applet"
-  spawnOnce "volumeicon"
-  spawnOnce "dropbox"
-  spawnOnce "compton -cb"
-  spawnOnce "redshift-gtk"
-
 
 myManageHook = composeAll
     [ className =? "stalonetray"    --> doIgnore
@@ -183,7 +172,7 @@ myManageHook = composeAll
       , title =? "LIMBO"            --> doIgnore
       , title =? "FEZ"              --> doIgnore
       , title =? "NMRIH"            --> doFullFloat
-      , title =? "Portal"            --> doFullFloat
+      , title =? "Portal"           --> doFullFloat
       , className =? "firefox"      --> doFullFloat
       , className =? "mpv"          --> doFullFloat
       , manageDocks

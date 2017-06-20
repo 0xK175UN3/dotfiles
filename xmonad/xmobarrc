@@ -21,7 +21,7 @@ Config {font = "xft:SFN
 	     ]
 	     , sepChar = "%"
 	     , alignSep = "}{"
-             , template = "<fc=#0080FF>λ</fc> %UnsafeStdinReader% }{ <fc=#AEB404>:</fc><fc=#808080>%cpu%</fc> | <fc=#B40404>:</fc><fc=#808080>%memory%</fc> | <fc=#FF0000>:</fc><fc=#808080>%battery%</fc> | <fc=#268BD2>:</fc> <fc=#808080>%myvolume%</fc> | <fc=#2E9AFE> :</fc><fc=#808080>%date%</fc> |"}
+             , template = "<fc=#0080FF>λ</fc> %UnsafeStdinReader% }{ <fc=#AEB404>:</fc><fc=#808080>%cpu%</fc> | <fc=#B40404>:</fc><fc=#808080>%memory%</fc> | <fc=#268BD2>:</fc> <fc=#808080>%myvolume%</fc> | <fc=#2E9AFE> :</fc><fc=#808080>%date%</fc> |"}
 
     
 

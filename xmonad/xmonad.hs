@@ -18,6 +18,8 @@ import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Fullscreen
+import XMonad.Layout.Spacing
+import XMonad.Layout.Gaps
 import XMonad.Util.SpawnOnce
 --import System.Taffybar.XMonadLog ( dbusLog )
 
@@ -32,7 +34,7 @@ myBar = "xmobar"
 myPP = xmobarPP { ppVisible = xmobarColor "#404040" "", 
                   ppCurrent = xmobarColor "#DF7401" "",  
                   ppTitle = xmobarColor "#FFB6B0" "", 
-  --                ppHiddenNoWindows = xmobarColor "#222222" "", 
+   --               ppHiddenNoWindows = xmobarColor "#222222" "", 
    --               ppLayout = xmobarColor"#790a0a" "", 
                   ppUrgent = xmobarColor "#900000" "" . wrap "[" "]" 
                 }
@@ -51,7 +53,7 @@ myConfig = def { modMask= mod1Mask
                          , normalBorderColor = "#000000"
                          , manageHook = myManageHook <+> manageHook def
                          , mouseBindings = myMouseBindings
-                         , borderWidth         = 5
+                         , borderWidth         = 2
                          }
 
 --myWorkspaces    = ["1:Web","2:term","3:mail","4:files","5:steam","6","7","8","9"]
@@ -197,7 +199,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
-myLayoutHook = avoidStruts (
+myLayoutHook = spacing 15 $ gaps [(U,15),(D,15),(L,15),(R,15)] $ avoidStruts (
         Grid ||| tiled |||noBorders (fullscreenFull Full) ||| Mirror tiled)
         where
     -- default tiling algorithm partitions the screen into two panes
@@ -207,7 +209,7 @@ myLayoutHook = avoidStruts (
     nmaster = 1
  
     -- Default proportion of screen occupied by master pane
-    ratio   = 1/2
+    ratio   = 1/4
  
     -- Percent of screen to increment by when resizing panes
 delta = 3/100 

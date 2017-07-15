@@ -1,4 +1,4 @@
-#+TITLE: Lainkits configurations
+#+TITLE: 0xk175un3 configurations
 My settings for system, code editors, and some fun stuff
 #+STARTUP: overview
 #+OPTIONS: toc:4 h:4
@@ -7,6 +7,7 @@ My settings for system, code editors, and some fun stuff
 - tmux.conf (Tmux configuration)
 - vimrc (Vim configuration)
 - ideavimrc (Vim configuration for jetbrain products)
+- mongorc (add some functions for sorting data)
 - Xresources (urxvt configuration)
 - Xmonad config (not ready yet)
 - NixOS configuration
@@ -20,6 +21,7 @@ There is configuration for:
 
 ** Todo
 - Ruby development config
+- JavaScript / Node.js development
 - Better shell integration
 - Better project managment
 

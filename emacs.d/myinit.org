@@ -325,7 +325,7 @@
 #+END_SRC
 - Theme
 #+BEGIN_SRC emacs-lisp
-  (use-package base16-theme
+  (use-package niflheim-theme
     :init
-      (load-theme 'base16-ocean t))
+      (load-theme 'niflheim t))
 #+END_SRC

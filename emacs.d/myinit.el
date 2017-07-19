@@ -91,6 +91,10 @@
   :init
     (add-hook 'clojure-mode-hook 'cider-jack-in))
 
+(use-package indium
+  :mode "\\.js$"
+  :init)
+
 (use-package js2-mode
   :mode "\\.js$"
   :init

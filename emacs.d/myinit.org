@@ -113,6 +113,12 @@
       (add-hook 'clojure-mode-hook 'cider-jack-in))
 #+END_SRC
 ** JavaScript
+- Indium
+#+BEGIN_SRC emacs-lisp
+  (use-package indium
+    :mode "\\.js$"
+    :init)
+#+END_SRC
 - Js2-mode
 #+BEGIN_SRC emacs-lisp
   (use-package js2-mode

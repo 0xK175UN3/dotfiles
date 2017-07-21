@@ -186,6 +186,10 @@
       (elpy-enable))
 #+END_SRC
 ** Ruby
+#+BEGIN_SRC emacs-lisp
+  (use-package robe
+  :commands ruby-mode)
+#+END_SRC
 ** Elixir
 - Elixir mode
 #+BEGIN_SRC emacs-lisp

@@ -164,11 +164,11 @@
 - Python
 #+BEGIN_SRC emacs-lisp
   (use-package python
-  :commands python-mode
-  :config
-    (progn
-      (add-hook 'python-mode-hook 'flycheck-mode)
-      (add-hook 'python-mode-hook 'jedi:setup)))
+    :commands python-mode
+    :config
+      (progn
+        (add-hook 'python-mode-hook 'flycheck-mode)
+        (add-hook 'python-mode-hook 'jedi:setup)))
 #+END_SRC
 - Jedi
 #+BEGIN_SRC emacs-lisp
@@ -188,7 +188,9 @@
 ** Ruby
 #+BEGIN_SRC emacs-lisp
   (use-package robe
-  :commands ruby-mode)
+    :commands ruby-mode
+    :init
+      (add-hook 'ruby-mode-hook 'robe-mode))
 #+END_SRC
 ** Elixir
 - Elixir mode

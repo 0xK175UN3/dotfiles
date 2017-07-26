@@ -140,6 +140,8 @@
   :config
     (elpy-enable))
 
+(use-package django-mode)
+
 (use-package robe
   :init
     (add-hook 'ruby-mode-hook 'robe-mode))

@@ -157,7 +157,7 @@ nmap <C-p> :FZF<CR>
 
 
 " NERDtree toggle
-nnoremap <F10> :NERDTreeToggle<cr>
+nnoremap <F9> :NERDTreeToggle<cr>
 
 
 " Tagbar toggle

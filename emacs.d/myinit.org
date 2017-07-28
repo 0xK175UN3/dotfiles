@@ -68,6 +68,11 @@
         (add-to-list 'default-frame-alist '(height . 50))))
 #+END_SRC
 * Languages support
+** Ruby
+** Haskell
+** NodeJS
+
+** Python
 ** Coding Helpers
 - Autocomplete
 #+BEGIN_SRC emacs-lisp
@@ -114,12 +119,6 @@
     :config
       (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
       (setq org-reveal-mathjax t))
-#+END_SRC
-- Dired +
-#+BEGIN_SRC emacs-lisp
-  (use-package dired+
-    :config
-      (require 'dired+))
 #+END_SRC
 ** Other
 - Linum
@@ -197,10 +196,15 @@
 		
   (use-package evil-indent-textobject		
     :ensure t)
+
+  (use-package evil-lion
+    :ensure t
+    :config
+    (evil-lion-mode))
 #+END_SRC
 - Theme
 #+BEGIN_SRC emacs-lisp
   (use-package niflheim-theme
     :init
       (load-theme 'niflheim t))
-#+END_SRC
+#+END_SR

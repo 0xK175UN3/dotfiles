@@ -56,106 +56,6 @@
       (add-to-list 'default-frame-alist '(width . 150))
       (add-to-list 'default-frame-alist '(height . 50))))
 
-(use-package haskell-mode
-  :bind
-    (:map haskell-mode-map
-      ("F8" . haskell-navigate-imports)
-      ("C-c C-l" . haskell-process-load-or-reload)
-      ("C-c C-z" . haskell-interactive-switch)
-      ("C-c C-n C-t" . haskell-process-do-type)
-      ("C-c C-n C-i" . haskell-process-do-info)
-      ("C-c C-n C-c" . haskell-process-cabal-build)
-      ("C-c C-n c" . haskell-process-cabal)
-      ("C-c C-o" . haskell-compile))
-    (:map haskell-cabal-mode-map
-      ("C-c C-z" . haskell-interactive-switch)
-      ("C-c C-k" . haskell-interactive-mode-clear)
-      ("C-c C-c" . haskell-process-cabal-build)
-      ("C-c c" . haskell-process-cabal)
-      ("C-c C-o" . haskell-compile))
-  :config
-    (add-hook 'haskell-mode-hook #'hident-mode))
-
-(let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
-  (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
-  (add-to-list 'exec-path my-cabal-path))
-(custom-set-variables 
-  '(haslell-tags-on-save t)
-  '(haskell-process-suggest-remove-import-lines t)
-  '(haskell-process-auto-import-loaded-modules t)
-  '(haskell-process-log t)
-  '(haskell-process-type 'cabal-repl))
-
-(use-package cider
-  :mode "\\.clj$"
-  :init
-    (add-hook 'clojure-mode-hook 'cider-jack-in))
-
-(use-package indium
-  :mode "\\.js$"
-  :init)
-
-(use-package js2-mode
-  :mode "\\.js$"
-  :init
-    (add-hook 'js-mode-hook 'j2-minor-mode))
-
-(use-package jsx-mode
-  :mode "\\.jsx$")
-
-(use-package json-mode
-  :mode "\\.json$")
-
-(use-package emmet-mode
-  :mode "\\.html$"
-  :init
-    (add-hook 'html-mode-hook 'emmet-mode)
-    (progn
-      (setq emmet-expand-jsx-className? t)))
-
-(use-package web-mode
-  :mode "\\.html$"
-  :init
-    (setq web-mode-enable-auto-closing t)
-    (setq web-mode-enable-auto-quoting t))
-
-(setq py-python-command "python3")
-(setq python-shell-interpreter "python3")
-
-(use-package python
-  :commands python-mode
-  :config
-    (progn
-      (add-hook 'python-mode-hook 'flycheck-mode)
-      (add-hook 'python-mode-hook 'jedi:setup)))
-
-(use-package jedi
-:bind
-  (:map python-mode-map
-      ("M-." . jedi:goto-definition)
-      ("M-*" . jedi:goto-definition-pop-marker)
-      ("M-?" . jedi:show-doc)))
-
-(use-package elpy
-  :config
-    (elpy-enable))
-
-(use-package django-mode)
-
-(use-package robe
-  :init
-    (add-hook 'ruby-mode-hook 'robe-mode))
-
-(use-package elixir-mode
-:commands elixir-mode
-:config
-  (progn
-    (defun auto-activate-ruby-end-mode-for-elixir-mode ()
-      (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
-        "\\(?:^\\|\\s-+\\)\\(?:do\\)")
-      (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
-      (ruby-end-mode +1))))
-
 (use-package auto-complete
   :init
     (progn
@@ -184,10 +84,6 @@
   :config
     (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
     (setq org-reveal-mathjax t))
-
-(use-package dired+
-  :config
-    (require 'dired+))
 
 (use-package linum
   :init

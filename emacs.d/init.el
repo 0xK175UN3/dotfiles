@@ -1,4 +1,5 @@
 (require 'package)
+(require 'org-install)
 (setq package-enable-at-startup nil)
 
 (add-to-list 'package-archives

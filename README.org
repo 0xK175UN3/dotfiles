@@ -13,6 +13,7 @@ My settings for system, code editors, and some fun stuff
 - NixOS configuration
 - Xinitrc
 - i3 config files (i3 window manager)
+- wallpapers that i always use
 - fun bash scripts
 ** Emacs
 There is configuration for:

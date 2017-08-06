@@ -185,10 +185,13 @@
     :config
       (elpy-enable))
 #+END_SRC
+- Django mode
+#+BEGIN_SRC emacs-lisp
+  (use-package django-mode)
+#+END_SRC
 ** Ruby
 #+BEGIN_SRC emacs-lisp
   (use-package robe
-    :commands ruby-mode
     :init
       (add-hook 'ruby-mode-hook 'robe-mode))
 #+END_SRC

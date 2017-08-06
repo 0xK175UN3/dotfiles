@@ -123,11 +123,11 @@
 (setq python-shell-interpreter "python3")
 
 (use-package python
-:commands python-mode
-:config
-  (progn
-    (add-hook 'python-mode-hook 'flycheck-mode)
-    (add-hook 'python-mode-hook 'jedi:setup)))
+  :commands python-mode
+  :config
+    (progn
+      (add-hook 'python-mode-hook 'flycheck-mode)
+      (add-hook 'python-mode-hook 'jedi:setup)))
 
 (use-package jedi
 :bind
@@ -139,6 +139,10 @@
 (use-package elpy
   :config
     (elpy-enable))
+
+(use-package robe
+  :init
+    (add-hook 'ruby-mode-hook 'robe-mode))
 
 (use-package elixir-mode
 :commands elixir-mode

@@ -71,7 +71,7 @@
 ** Ruby
 ** Haskell
 ** NodeJS
-
+   
 ** Python
 ** Coding Helpers
 - Autocomplete
@@ -101,6 +101,62 @@
       (smartparens-global-mode t))
 #+END_SRC
 * Misc packages
+** Project control
+- Ido
+#+BEGIN_SRC emacs-lisp
+  (use-package ido
+    :init
+      (progn
+        (defun ido-M-x ()
+          (interactive)
+            (call-interactively
+              (intern
+                (ido-completing-read
+                  "M-x "
+                    (all-completions "" obarray 'commandp)))))
+
+    (ido-mode 1)
+    (setq ido-enable-flex-matching t)
+    (setq ido-use-filename-at-point nil)
+    (setq ido-create-new-buffer 'always)
+    (setq ido-max-prospects 20)
+    (setq ido-auto-merge-work-directories-length -1)))
+
+  (use-package ido-vertical-mode
+    :init
+      (progn
+        (ido-vertical-mode 1)
+          (defun bind-ido-keys ()
+            (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+            (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
+          (add-hook 'ido-setup-hook 'bind-ido-keys)))
+#+END_SRC
+- Neo-tree
+#+BEGIN_SRC emacs-lisp
+(use-package neotree
+  :bind (("<f12>" . neotree-projectile))
+  :config
+  (progn
+    (defun neotree-projectile ()
+      (interactive)
+      (neotree-dir (projectile-project-root)))
+
+    (defun neotree-mode-hook ()
+      (interactive)
+      (if (projectile-project-p)
+          (progn
+            (message "color is %s" (car (custom-variable-theme-value 'dired-sidebar-background))))))
+
+    (add-hook 'neotree-mode-hook 'neotree-mode-hook)
+
+    (setq
+     neo-theme 'icons
+     neo-mode-line-type 'none
+     neo-show-updir-line nil
+     neo-smart-open t
+     neo-window-width 30)))
+#+END_SRC
+  
 ** Git
 - Magit
 #+BEGIN_SRC emacs-lisp
@@ -133,35 +189,6 @@
   (use-package which-key
     :config
       (which-key-mode))
-#+END_SRC
-- Ido
-#+BEGIN_SRC emacs-lisp
-  (use-package ido
-    :init
-      (progn
-        (defun ido-M-x ()
-          (interactive)
-            (call-interactively
-              (intern
-                (ido-completing-read
-                  "M-x "
-                    (all-completions "" obarray 'commandp)))))
-
-    (ido-mode 1)
-    (setq ido-enable-flex-matching t)
-    (setq ido-use-filename-at-point nil)
-    (setq ido-create-new-buffer 'always)
-    (setq ido-max-prospects 20)
-    (setq ido-auto-merge-work-directories-length -1)))
-
-  (use-package ido-vertical-mode
-    :init
-      (progn
-        (ido-vertical-mode 1)
-          (defun bind-ido-keys ()
-            (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-            (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
-          (add-hook 'ido-setup-hook 'bind-ido-keys)))
 #+END_SRC
 - Evil mode
 #+BEGIN_SRC emacs-lisp 

@@ -117,6 +117,41 @@
     (setq projectile-completion-system 'ido) ;; alternatively, 'helm
 (setq projectile-use-git-grep t)))
 #+END_SRC
+- Helm
+#+BEGIN_SRC emacs-lisp
+(use-package helm
+  :bind (("C-." . helm-M-x)
+         ("C-x b" . helm-buffers-list)
+         ("M-y" . helm-show-kill-ring)
+         ("M-s" . helm-occur))
+  :init
+  (progn
+    (setq helm-follow-mode t)
+    (setq helm-full-frame nil)
+    ;; (setq helm-split-window-in-side-p nil)
+    (setq helm-split-window-in-side-p t)
+    (setq helm-split-window-default-side 'below)
+    (setq helm-buffer-max-length nil)
+
+    (setq helm-buffers-fuzzy-matching t)
+    (setq helm-M-x-always-save-history nil)
+
+    (setq helm-find-files-actions '
+          (("Find File" . helm-find-file-or-marked)
+           ("View file" . view-file)
+           ("Zgrep File(s)" . helm-ff-zgrep)))
+
+    (setq helm-type-file-actions
+          '(("Find File" . helm-find-file-or-marked)
+            ("View file" . view-file)
+            ("Zgrep File(s)" . helm-ff-zgrep)))
+
+    (add-to-list 'display-buffer-alist
+                 `(,(rx bos "*helm" (+ anything) "*" eos)
+                   (display-buffer-in-side-window)
+                   (side            . bottom)
+                   (window-height . 0.3)))))
+#+END_SRC
 - Ido
 #+BEGIN_SRC emacs-lisp
   (use-package ido

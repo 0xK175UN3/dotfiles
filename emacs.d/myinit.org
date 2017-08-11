@@ -234,6 +234,17 @@
       (global-linum-mode 1)
       (setq linum-format "%4d "))
 #+END_SRC
+- Whitespace
+#+BEGIN_SRC emacs-lisp
+(use-package whitespace
+  :diminish (global-whitespace-mode
+             whitespace-mode
+             whitespace-newline-mode)
+  :config
+  (progn
+    (setq whitespace-style '(trailing tabs tab-mark face))
+(global-whitespace-mode)))
+#+END_SRC
 - Which-key
 #+BEGIN_SRC emacs-lisp
   (use-package which-key

@@ -74,25 +74,46 @@
   :init
     (smartparens-global-mode t))
 
-(use-package magit)
-
-(use-package git-gutter
-  :config
-    (global-git-gutter-mode))
-
-(use-package ox-reveal
-  :config
-    (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-    (setq org-reveal-mathjax t))
-
-(use-package linum
+(use-package projectile
+  :bind
+  (:map projectile-mode-map
+        ("C-c p f" . projectile-find-file)
+        ("C-c p p" . projectile-switch-project))
   :init
-    (global-linum-mode 1)
-    (setq linum-format "%4d "))
+  (progn
+    (projectile-global-mode)
+    (setq projectile-switch-project-action 'helm-projectile-find-file)
+    (setq projectile-completion-system 'ido) ;; alternatively, 'helm
+    (setq projectile-use-git-grep t)))
 
-(use-package which-key
-  :config
-    (which-key-mode))
+(use-package helm
+  :init
+  (progn
+    (setq helm-follow-mode t)
+    (setq helm-full-frame nil)
+    ;; (setq helm-split-window-in-side-p nil)
+    (setq helm-split-window-in-side-p t)
+    (setq helm-split-window-default-side 'below)
+    (setq helm-buffer-max-length nil)
+
+    (setq helm-buffers-fuzzy-matching t)
+    (setq helm-M-x-always-save-history nil)
+
+    (setq helm-find-files-actions '
+          (("Find File" . helm-find-file-or-marked)
+           ("View file" . view-file)
+           ("Zgrep File(s)" . helm-ff-zgrep)))
+
+    (setq helm-type-file-actions
+          '(("Find File" . helm-find-file-or-marked)
+            ("View file" . view-file)
+            ("Zgrep File(s)" . helm-ff-zgrep)))
+
+    (add-to-list 'display-buffer-alist
+                 `(,(rx bos "*helm" (+ anything) "*" eos)
+                   (display-buffer-in-side-window)
+                   (side            . bottom)
+                   (window-height . 0.3)))))
 
 (use-package ido
   :init
@@ -121,36 +142,65 @@
           (define-key ido-completion-map (kbd "C-p")   'ido-prev-match))
         (add-hook 'ido-setup-hook 'bind-ido-keys)))
 
-(use-package evil		
-  :ensure t		
-  :init		
-    (progn		
-    (setq evil-default-cursor t))		
-  :config		
-    (evil-mode 1))		
+(use-package magit)
 
-(use-package evil-leader		
-  :ensure t		
-  :init		
-    (global-evil-leader-mode)		
-  (progn		
-    (evil-leader/set-leader "<SPC>")		
-    (evil-leader/set-key		
-      "g" 'magit-status )))		
+(use-package git-gutter
+  :config
+    (global-git-gutter-mode))
 
-(use-package evil-surround		
-  :ensure t		
-  :config		
-    (global-evil-surround-mode))		
+(use-package ox-reveal
+  :config
+    (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+    (setq org-reveal-mathjax t))
 
-(use-package evil-escape		
-  :ensure t		
-  :init		
-    (setq-default evil-escape-key-sequence "jk")		
-  :config		
-    (evil-escape-mode))		
+(use-package linum
+  :init
+    (global-linum-mode 1)
+    (setq linum-format "%4d "))
 
-(use-package evil-indent-textobject		
+(use-package whitespace
+  :diminish (global-whitespace-mode
+             whitespace-mode
+             whitespace-newline-mode)
+  :config
+  (progn
+    (setq whitespace-style '(trailing tabs tab-mark face))
+(global-whitespace-mode)))
+
+(use-package which-key
+  :config
+    (which-key-mode))
+
+(use-package evil
+  :ensure t
+  :init
+    (progn
+    (setq evil-default-cursor t))
+  :config
+    (evil-mode 1))
+
+(use-package evil-leader
+  :ensure t
+  :init
+    (global-evil-leader-mode
+  (progn
+    (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key
+      "g" 'magit-status ))))
+
+(use-package evil-surround
+  :ensure t
+  :config
+    (global-evil-surround-mode))
+
+(use-package evil-escape
+  :ensure t
+  :init
+    (setq-default evil-escape-key-sequence "jk")
+  :config
+    (evil-escape-mode))
+
+(use-package evil-indent-textobject
   :ensure t)
 
 (use-package evil-lion

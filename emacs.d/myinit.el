@@ -35,8 +35,8 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(blink-cursor-mode 0) 
-(global-hl-line-mode t) 
+(blink-cursor-mode 0)
+(global-hl-line-mode t)
 (show-paren-mode t)
 (delete-selection-mode 1)
 (cua-mode 1)
@@ -50,25 +50,20 @@
 (if window-system
     (progn
       (tool-bar-mode -1)
-      (scroll-bar-mode -1)
-      (add-to-list 'initial-frame-alist '(width . 150))
-      (add-to-list 'initial-frame-alist '(height . 50))
-      (add-to-list 'default-frame-alist '(width . 150))
-      (add-to-list 'default-frame-alist '(height . 50))))
+        (scroll-bar-mode -1)
+        (add-to-list 'initial-frame-alist '(width . 150))
+        (add-to-list 'initial-frame-alist '(height . 50))
+        (add-to-list 'default-frame-alist '(width . 150))
+        (add-to-list 'default-frame-alist '(height . 50))))
 
-(use-package auto-complete
+(use-package js2-mode
+  :mode "\\.js$"
   :init
-    (progn
-      (ac-config-default)
-      (global-auto-complete-mode t)))
+    (add-hook 'js-mode-hook 'js2-mode))
 
 (use-package flycheck
   :init
     (global-flycheck-mode t))
-
-(use-package yasnippet
-  :init
-    (yas-global-mode 1))
 
 (use-package smartparens
   :init

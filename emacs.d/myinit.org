@@ -2,41 +2,41 @@
 - Global tweeks
 #+BEGIN_SRC emacs-lisp
 (setq
-  inhibit-startup-screen t
-  create-lockfiles nil
-  make-backup-files nil
-  auto-save-default nil
-  column-number-mode t
-  scroll-error-top-bottom t
-  show-paren-delay 0.1
-  use-package-verbose nil
-  use-package-always-ensure t
-  package-enable-at-startup nil
-  sentence-end-double-space nil
-  split-width-threshold nil
-  split-height-threshold nil
-  ring-bell-function 'ignore
-  inhibit-startup-echo-area-message t
-  frame-title-format '((:eval buffer-file-name))
-  enable-local-variables :all
-  mouse-1-click-follows-link t
+  inhibit-startup-screen                t
+  create-lockfiles                      nil
+  make-backup-files                     nil
+  auto-save-default                     nil
+  column-number-mode                    t
+  scroll-error-top-bottom               t
+  show-paren-delay                      0.1
+  use-package-verbose                   nil
+  use-package-always-ensure             t
+  package-enable-at-startup             nil
+  sentence-end-double-space             nil
+  split-width-threshold                 nil
+  split-height-threshold                nil
+  ring-bell-function                    'ignore
+  inhibit-startup-echo-area-message     t
+  frame-title-format                    '((:eval buffer-file-name))
+  enable-local-variables                :all
+  mouse-1-click-follows-link            t
   mouse-1-click-in-non-selected-windows t
-  select-enable-clipboard t
-  mouse-wheel-scroll-amount '(0.01)
-  column-number-mode t
-  confirm-kill-emacs (quote y-or-n-p)
-  ns-use-native-fullscreen nil
-  ns-pop-up-frames nil
-  line-move-visual t)
+  select-enable-clipboard               t
+  mouse-wheel-scroll-amount             '(0.01)
+  column-number-mode                    t
+  confirm-kill-emacs                    (quote y-or-n-p)
+  ns-use-native-fullscreen              nil
+  ns-pop-up-frames                      nil
+  line-move-visual                      t)
 #+END_SRC
 - Buffer local variables
 #+BEGIN_SRC emacs-lisp
 (setq-default
-  fill-column 70
-  indent-tabs-mode nil
-  truncate-lines t
+  fill-column           70
+  indent-tabs-mode      nil
+  truncate-lines        t
   require-final-newline t
-  fringe-mode '(4 . 2))
+  fringe-mode           '(4 . 2))
 #+END_SRC
 - Aliases
 #+BEGIN_SRC emacs-lisp
@@ -68,7 +68,15 @@
         (add-to-list 'default-frame-alist '(height . 50))))
 #+END_SRC
 * Languages support
+** Haskell
 ** Common Lisp
+- Slime
+#+BEGIN_SRC emacs-lisp
+(use-package slime
+  :mode "\\.lisp%"
+  :init
+    (add-hook 'lisp-mode-hook 'slime-mode))
+#+END_SRC
 ** C++
 ** NodeJS
 - Js2-mode
@@ -76,12 +84,34 @@
 (use-package js2-mode
   :mode "\\.js$"
   :init
-    (add-hook 'js-mode-hook 'js2-minor-mode))
+    (add-hook 'js-mode-hook  'js2-minor-mode t)
+    (add-hook 'js2-mode-hook 'js2-imenu-extras-code t)
+  :bind (
+    :map js2-mode-map
+      ("M-. " . nil)))
+#+END_SRC
+- Js2-refactor
+#+BEGIN_SRC emacs-lisp
+(use-package js2-refactor
+  :init
+    (add-hook 'js2-mode-hook 'js2-refactor-mode t))
+#+END_SRC
+- Js2-xref
+#+BEGIN_SRC emacs-lisp
+(use-package xref-js2
+  :init
+   (add-hook 'js2-mode-hook (lambda ()
+   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
 #+END_SRC
 ** Ruby
-** Haskell
 ** Python
 ** Coding Helpers
+- Company
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :init
+    (add-hook 'after-init-hook 'global-company-mode))
+#+END_SRC
 - Smartparens
 #+BEGIN_SRC emacs-lisp
 (use-package smartparens
@@ -200,7 +230,7 @@
   :config
   (progn
     (setq whitespace-style '(trailing tabs tab-mark face))
-(global-whitespace-mode)))
+    (global-whitespace-mode)))
 #+END_SRC
 - Which-key
 #+BEGIN_SRC emacs-lisp
@@ -211,7 +241,6 @@
 - Evil mode
 #+BEGIN_SRC emacs-lisp
 (use-package evil
-  :ensure t
   :init
     (progn
     (setq evil-default-cursor t))
@@ -219,7 +248,6 @@
     (evil-mode 1))
 
 (use-package evil-leader
-  :ensure t
   :init
     (global-evil-leader-mode
   (progn
@@ -228,28 +256,25 @@
       "g" 'magit-status ))))
 
 (use-package evil-surround
-  :ensure t
   :config
     (global-evil-surround-mode))
 
 (use-package evil-escape
-  :ensure t
   :init
     (setq-default evil-escape-key-sequence "jk")
   :config
     (evil-escape-mode))
 
-(use-package evil-indent-textobject
-  :ensure t)
+(use-package evil-indent-textobject)
 
 (use-package evil-lion
-  :ensure t
-  :bind (:map evil-normal-state-map
-    ("g l " . evil-lion-left)
-    ("g L " . evil-lion-right)
+  :bind (
+    :map evil-normal-state-map
+      ("g l " . evil-lion-left)
+      ("g L " . evil-lion-right)
     :map evil-visual-state-map
-    ("g l " . evil-lion-left)
-    ("g L " . evil-lion-right))
+      ("g l " . evil-lion-left)
+      ("g L " . evil-lion-right))
   :config
     (evil-lion-mode))
 #+END_SRC

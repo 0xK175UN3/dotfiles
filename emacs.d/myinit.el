@@ -191,6 +191,13 @@
   :config
     (evil-mode 1))
 
+(use-package evil-repeat
+  :bind (
+    :map evil-normal-state-map
+      ("M-. " . nil)
+    :map evil-visual-state-map
+      ("M-. " . nil)))
+
 (use-package evil-leader
   :init
     (global-evil-leader-mode
@@ -210,7 +217,6 @@
     (evil-escape-mode))
 
 (use-package evil-indent-textobject)
-
 (use-package evil-lion
   :bind (
     :map evil-normal-state-map

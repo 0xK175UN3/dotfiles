@@ -153,6 +153,17 @@
 (use-package evil-indent-textobject		
   :ensure t)
 
+(use-package evil-lion
+  :ensure t
+  :bind (:map evil-normal-state-map
+    ("g l " . evil-lion-left)
+    ("g L " . evil-lion-right)
+    :map evil-visual-state-map
+    ("g l " . evil-lion-left)
+    ("g L " . evil-lion-right))
+  :config
+    (evil-lion-mode))
+
 (use-package niflheim-theme
   :init
     (load-theme 'niflheim t))

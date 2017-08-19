@@ -82,6 +82,16 @@
 (use-package company
   :init
     (add-hook 'after-init-hook 'global-company-mode))
+(use-package company-tern
+  :init
+    (add-to-list 'company-backends 'company-tern)
+    (add-hook 'js2-mode-hook (lambda ()
+                             (tern-mode t)
+                             (company-mode t)))
+  :bind (
+    :map tern-mode-keymap
+      ("M-. " . nil)
+      ("M-, " . nil)))
 
 (use-package smartparens
   :init

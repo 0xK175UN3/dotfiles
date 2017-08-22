@@ -1,11 +1,10 @@
 (require 'package)
-(require 'org-install)
 (setq package-enable-at-startup nil)
 
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives
-	     '("gnu" . "http://elpa.gnu.org/packages/") t)
+             '("gnu" . "http://elpa.gnu.org/packages/") t)
 
 (package-initialize)
 
@@ -32,7 +31,7 @@
  '(haslell-tags-on-save t)
  '(package-selected-packages
    (quote
-    (neotree base16-theme smartparens web-beautify dired+ spacemacs-theme auto-complete use-package ox-reveal))))
+    (smartparens use-package ox-reveal))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

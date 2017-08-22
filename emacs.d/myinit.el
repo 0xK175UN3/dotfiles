@@ -59,11 +59,7 @@
 (use-package js2-mode
   :mode "\\.js$"
   :init
-    (add-hook 'js-mode-hook 'js2-mode))
-
-(use-package flycheck
-  :init
-    (global-flycheck-mode t))
+    (add-hook 'js-mode-hook 'js2-minor-mode))
 
 (use-package smartparens
   :init

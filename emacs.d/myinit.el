@@ -1,3 +1,4 @@
+
 (setq
   inhibit-startup-screen                t
   create-lockfiles                      nil
@@ -55,6 +56,11 @@
         (add-to-list 'initial-frame-alist '(height . 50))
         (add-to-list 'default-frame-alist '(width . 150))
         (add-to-list 'default-frame-alist '(height . 50))))
+
+(use-package ruby-mode
+  :mode "\\.rb$"
+  :init
+    (add-hook 'ruby-mode-hook 'ruby-mode t))
 
 (use-package slime
   :mode "\\.lisp%"

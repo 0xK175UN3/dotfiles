@@ -303,7 +303,7 @@
 #+END_SRC
 - Theme
 #+BEGIN_SRC emacs-lisp
-(use-package niflheim-theme
+(use-package zerodark-theme
   :init
-    (load-theme 'niflheim t))
+    (load-theme 'zerodark t))
 #+END_SRC

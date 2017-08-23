@@ -29,7 +29,9 @@
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-process-type (quote cabal-repl))
  '(haslell-tags-on-save t)
- '(package-selected-packages (quote (smartparens use-package ox-reveal))))
+ '(package-selected-packages
+   (quote
+    (zerodark-theme niflheim-theme smartparens use-package ox-reveal))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

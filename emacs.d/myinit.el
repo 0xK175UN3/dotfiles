@@ -1,4 +1,3 @@
-
 (setq
   inhibit-startup-screen                t
   create-lockfiles                      nil
@@ -57,15 +56,14 @@
         (add-to-list 'default-frame-alist '(width . 150))
         (add-to-list 'default-frame-alist '(height . 50))))
 
-(use-package ruby-mode
-  :mode "\\.rb$"
-  :init
-    (add-hook 'ruby-mode-hook 'ruby-mode t))
-
 (use-package slime
   :mode "\\.lisp%"
   :init
     (add-hook 'lisp-mode-hook 'slime-mode))
+
+(use-package robe
+  :init
+    (add-hook 'ruby-mode-hook 'robe-mode t))
 
 (use-package js2-mode
   :mode "\\.js$"
@@ -96,8 +94,8 @@
                              (company-mode t)))
   :bind (
     :map tern-mode-keymap
-      ("M-. " . nil)
-      ("M-, " . nil)))
+      ("M-." . nil)
+      ("M-," . nil)))
 
 (use-package smartparens
   :init
@@ -244,6 +242,6 @@
   :config
     (evil-lion-mode))
 
-(use-package niflheim-theme
+(use-package zerodark-theme
   :init
-    (load-theme 'niflheim t))
+    (load-theme 'zerodark t))

@@ -68,15 +68,6 @@
         (add-to-list 'default-frame-alist '(height . 50))))
 #+END_SRC
 * Languages support
-** Ruby
-- Ruby mode
-#+BEGIN_SRC emacs-lisp
-(use-package ruby-mode
-  :mode "\\.rb$"
-  :init
-    (add-hook 'ruby-mode-hook 'ruby-mode t))
-#+END_SRC
-** Haskell
 ** Common Lisp
 - Slime
 #+BEGIN_SRC emacs-lisp
@@ -85,7 +76,14 @@
   :init
     (add-hook 'lisp-mode-hook 'slime-mode))
 #+END_SRC
-** C++
+** Ruby
+- Robe
+#+BEGIN_SRC emacs-lisp
+(use-package robe
+  :init
+    (add-hook 'ruby-mode-hook 'robe-mode t))
+#+END_SRC
+** Haskell
 ** NodeJS
 - Js2-mode
 #+BEGIN_SRC emacs-lisp
@@ -111,6 +109,7 @@
    (add-hook 'js2-mode-hook (lambda ()
    (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
 #+END_SRC
+** C++
 ** Python
 ** Coding Helpers
 - Company
@@ -126,8 +125,8 @@
                              (company-mode t)))
   :bind (
     :map tern-mode-keymap
-      ("M-. " . nil)
-      ("M-, " . nil)))
+      ("M-." . nil)
+      ("M-," . nil)))
 #+END_SRC
 - Smartparens
 #+BEGIN_SRC emacs-lisp

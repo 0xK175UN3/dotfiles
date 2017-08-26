@@ -24,11 +24,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(delete-selection-mode nil)
- '(haskell-process-auto-import-loaded-modules t)
- '(haskell-process-log t)
- '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-type (quote cabal-repl))
- '(haslell-tags-on-save t)
  '(package-selected-packages
    (quote
     (robe zerodark-theme niflheim-theme smartparens use-package ox-reveal))))

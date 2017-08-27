@@ -48,6 +48,7 @@
 (global-hl-line-mode t)
 (show-paren-mode t)
 (delete-selection-mode 1)
+(set-default-font "Monaco 15")
 (cua-mode 1)
 #+END_SRC
 - Window config

@@ -349,7 +349,7 @@ module.exports = {
     'jsx-quotes': [1, 'prefer-double'],
 
     // suggest spacing after colon but not before in key: value pairs
-    'key-spacing': [1, { 'beforeColon': false, 'afterColon': true, 'mode': 'minimum' }],
+    'key-spacing': [1, { 'beforeColon': false, 'afterColon': true, 'mode': 'minimum', "align": "colon" }],
 
     // suggest spacing before and after keywords such as if, else, etc.
     'keyword-spacing': [1, { 'before': true, 'after': true }],

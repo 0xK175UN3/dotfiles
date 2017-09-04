@@ -110,6 +110,12 @@
    (add-hook 'js2-mode-hook (lambda ()
    (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
 #+END_SRC
+- Indium
+#+BEGIN_SRC emacs-lisp
+(use-package indium
+  :init
+    (add-hook 'js2-mode-hook 'indium-interactive-mode-hook))
+#+END_SRC
 ** C++
 ** Python
 ** Coding Helpers
@@ -229,6 +235,7 @@
   :config
     (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
     (setq org-reveal-mathjax t))
+(use-package htmlize)
 #+END_SRC
 ** Other
 - Linum

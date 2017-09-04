@@ -1,4 +1,3 @@
-
 (setq
   inhibit-startup-screen                t
   create-lockfiles                      nil
@@ -40,6 +39,7 @@
 (global-hl-line-mode t)
 (show-paren-mode t)
 (delete-selection-mode 1)
+(set-default-font "Monaco 15")
 (cua-mode 1)
 
 (when (memq window-system '(mac ns))
@@ -83,6 +83,10 @@
   :init
    (add-hook 'js2-mode-hook (lambda ()
    (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
+
+(use-package indium
+  :init
+    (add-hook 'js2-mode-hook 'indium-interactive-mode-hook))
 
 (use-package company
   :init

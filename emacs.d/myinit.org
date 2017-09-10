@@ -75,7 +75,10 @@
 (use-package slime
   :mode "\\.lisp%"
   :init
-    (add-hook 'lisp-mode-hook 'slime-mode))
+    (add-hook 'lisp-mode-hook 'slime-mode)
+    (progn
+      (setq inferior-lisp-program "/usr/local/Cellar/sbcl/1.3.21/bin/sbcl")
+      (setq slime-contribs '(slime-fancy))))
 #+END_SRC
 ** Ruby
 - Robe

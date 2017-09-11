@@ -60,7 +60,10 @@
 (use-package slime
   :mode "\\.lisp%"
   :init
-    (add-hook 'lisp-mode-hook 'slime-mode))
+    (add-hook 'lisp-mode-hook 'slime-mode)
+    (progn
+      (setq inferior-lisp-program "/usr/local/Cellar/sbcl/1.3.21/bin/sbcl")
+      (setq slime-contribs '(slime-fancy))))
 
 (use-package robe
   :init
@@ -184,6 +187,7 @@
   :config
     (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
     (setq org-reveal-mathjax t))
+(use-package htmlize)
 
 (use-package linum
   :init

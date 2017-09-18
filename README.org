@@ -6,6 +6,7 @@ My settings for system, code editors, and some fun stuff
 ** Dotfiles
 - tmux.conf (Tmux configuration)
 - vimrc (Vim configuration)
+- nvimrc (Nvim configuration)
 - ideavimrc (Vim configuration for jetbrain products)
 - mongorc (add some functions for sorting data)
 - Xresources (urxvt configuration)
@@ -17,14 +18,11 @@ My settings for system, code editors, and some fun stuff
 - fun bash scripts
 ** Emacs
 There is configuration for:
-- Common Lisp
 - Ruby
+- Common Lisp
 - JavaScript
 ** Todo
-- JavaScript / Node.js development
-- Emacs for Python development
 - Emacs for Ruby development
-- Emacs for Haskell development
 - Shell integration
 - Project managment
 

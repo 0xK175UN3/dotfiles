@@ -39,7 +39,40 @@
 (global-hl-line-mode t)
 (show-paren-mode t)
 (delete-selection-mode 1)
-(set-default-font "Monaco 15")
+(set-face-attribute 'default nil
+                    :family "Fira Code"
+                    :height 150
+                    :weight 'thin
+                    :width 'normal)
+(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+               (36 . ".\\(?:>\\)")
+               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+               (48 . ".\\(?:x[a-zA-Z]\\)")
+               (58 . ".\\(?:::\\|[:=]\\)")
+               (59 . ".\\(?:;;\\|;\\)")
+               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+               (91 . ".\\(?:]\\)")
+               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+               (94 . ".\\(?:=\\)")
+               (119 . ".\\(?:ww\\)")
+               (123 . ".\\(?:-\\)")
+               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+               )
+             ))
+  (dolist (char-regexp alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
 (cua-mode 1)
 
 (when (memq window-system '(mac ns))
@@ -57,6 +90,10 @@
         (add-to-list 'default-frame-alist '(width . 150))
         (add-to-list 'default-frame-alist '(height . 50))))
 
+(use-package robe
+  :init
+    (add-hook 'ruby-mode-hook 'robe-mode t))
+
 (use-package slime
   :mode "\\.lisp%"
   :init
@@ -64,10 +101,6 @@
     (progn
       (setq inferior-lisp-program "/usr/local/Cellar/sbcl/1.3.21/bin/sbcl")
       (setq slime-contribs '(slime-fancy))))
-
-(use-package robe
-  :init
-    (add-hook 'ruby-mode-hook 'robe-mode t))
 
 (use-package js2-mode
   :mode "\\.js$"

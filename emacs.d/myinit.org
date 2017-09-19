@@ -284,13 +284,13 @@
 - Whitespace
 #+BEGIN_SRC emacs-lisp
 (use-package whitespace
-  :diminish (global-whitespace-mode
-             whitespace-mode
-             whitespace-newline-mode)
+  :init
+  (dolist (hook '(prog-mode-hook text-mode-hook))
+    (add-hook hook #'whitespace-mode))
+  (add-hook 'before-save-hook #'whitespace-cleanup)
   :config
-  (progn
-    (setq whitespace-style '(trailing tabs tab-mark face))
-    (global-whitespace-mode)))
+  (setq whitespace-line-column 80) ;; limit line length
+  (setq whitespace-style '(face tabs empty trailing lines-tail)))
 #+END_SRC
 - Which-key
 #+BEGIN_SRC emacs-lisp

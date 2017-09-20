@@ -109,6 +109,12 @@
   :init
     (add-hook 'ruby-mode-hook 'robe-mode t))
 #+END_SRC
+- Inf-ruby
+#+BEGIN_SRC emacs-lisp
+(use-package inf-ruby
+  :config
+  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
+#+END_SRC
 ** Common Lisp
 - Slime
 #+BEGIN_SRC emacs-lisp

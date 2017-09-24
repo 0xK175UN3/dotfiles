@@ -17,7 +17,9 @@ My settings for system, code editors, and some fun stuff
 - fun bash scripts
 ** Emacs
 There is configuration for:
-- Nothing :)
+- Common Lisp
+- Ruby
+- JavaScript
 ** Todo
 - JavaScript / Node.js development
 - Emacs for Python development

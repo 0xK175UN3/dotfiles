@@ -84,15 +84,6 @@ Plug 'tpope/vim-markdown'
 " ---------------------------------------------------------------------------
 "                               editor features
 " ---------------------------------------------------------------------------
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py
-  endif
-endfunction
 Plug 'scrooloose/syntastic'
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-surround'
@@ -100,7 +91,6 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 call plug#end()
 
 

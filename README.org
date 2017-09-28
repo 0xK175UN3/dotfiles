@@ -18,12 +18,10 @@ My settings for system, code editors, and some fun stuff
 - fun bash scripts
 ** Emacs
 There is configuration for:
-- Ruby
-- Common Lisp
-- JavaScript
-** Todo
-- Emacs for Ruby development
-- Shell integration
-- Project managment
-
-
+*** Ruby
+TODO:
+ - better indentation
+ - rails projects navigation
+ - code formatter
+ - code quality checker
+ - better autocomplition

@@ -6,6 +6,9 @@
   column-number-mode                    t
   scroll-error-top-bottom               t
   show-paren-delay                      0.1
+  tabs-width                            2
+  js-indent-level                       2
+  ruby-indent-level                     2
   use-package-verbose                   nil
   use-package-always-ensure             t
   package-enable-at-startup             nil
@@ -39,6 +42,7 @@
 (global-hl-line-mode t)
 (show-paren-mode t)
 (delete-selection-mode 1)
+(cua-mode 1)
 (set-face-attribute 'default nil
                     :family "Fira Code"
                     :height 150
@@ -73,7 +77,6 @@
   (dolist (char-regexp alist)
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
-(cua-mode 1)
 
 (when (memq window-system '(mac ns))
   (use-package exec-path-from-shell
@@ -93,6 +96,10 @@
 (use-package robe
   :init
     (add-hook 'ruby-mode-hook 'robe-mode t))
+
+(use-package inf-ruby
+  :config
+  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 
 (use-package slime
   :mode "\\.lisp%"
@@ -221,6 +228,7 @@
     (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
     (setq org-reveal-mathjax t))
 (use-package htmlize)
+(use-package markdown-mode)
 
 (use-package linum
   :init
@@ -228,13 +236,13 @@
     (setq linum-format "%4d "))
 
 (use-package whitespace
-  :diminish (global-whitespace-mode
-             whitespace-mode
-             whitespace-newline-mode)
+  :init
+  (dolist (hook '(prog-mode-hook text-mode-hook))
+    (add-hook hook #'whitespace-mode))
+  (add-hook 'before-save-hook #'whitespace-cleanup)
   :config
-  (progn
-    (setq whitespace-style '(trailing tabs tab-mark face))
-    (global-whitespace-mode)))
+  (setq whitespace-line-column 80) ;; limit line length
+  (setq whitespace-style '(face tabs empty trailing lines-tail)))
 
 (use-package which-key
   :config

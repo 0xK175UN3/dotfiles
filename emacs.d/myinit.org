@@ -118,6 +118,12 @@
   :config
   (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 #+END_SRC
+- Projectile-rails
+#+BEGIN_SRC emacs-lisp
+(use-package projectile-rails
+  :config
+  (projectile-rails-global-mode t))
+#+END_SRC
 ** Common Lisp
 - Slime
 #+BEGIN_SRC emacs-lisp

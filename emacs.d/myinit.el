@@ -101,6 +101,10 @@
   :config
   (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 
+(use-package projectile-rails
+  :config
+  (projectile-rails-global-mode t))
+
 (use-package slime
   :mode "\\.lisp%"
   :init
@@ -230,6 +234,10 @@
 (use-package htmlize)
 (use-package markdown-mode)
 
+(use-package org
+  :config
+    (setq org-log-done t))
+
 (use-package linum
   :init
     (global-linum-mode 1)
@@ -268,7 +276,9 @@
   (progn
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
-      "g" 'magit-status ))))
+      "g" 'magit-status )
+    (evil-leader/set-key
+      "o a" 'org-agenda))))
 
 (use-package evil-surround
   :config

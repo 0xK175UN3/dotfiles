@@ -286,6 +286,12 @@
 (use-package htmlize)
 (use-package markdown-mode)
 #+END_SRC
+- Org mode
+#+BEGIN_SRC emacs-lisp
+(use-package org
+  :config
+    (setq org-log-done t))
+#+END_SRC
 ** Other
 - Linum
 #+BEGIN_SRC emacs-lisp
@@ -333,7 +339,9 @@
   (progn
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
-      "g" 'magit-status ))))
+      "g" 'magit-status )
+    (evil-leader/set-key
+      "o a" 'org-agenda))))
 
 (use-package evil-surround
   :config

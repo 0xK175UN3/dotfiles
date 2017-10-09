@@ -124,6 +124,12 @@
   :config
   (projectile-rails-global-mode t))
 #+END_SRC
+- Ruby-end
+#+BEGIN_SRC emacs-lisp
+(use-package ruby-end
+  :config
+  (add-hook 'ruby-mode-hook #'ruby-end-mode))
+#+END_SRC
 ** Common Lisp
 - Slime
 #+BEGIN_SRC emacs-lisp

@@ -130,6 +130,12 @@
   :config
   (add-hook 'ruby-mode-hook #'ruby-end-mode))
 #+END_SRC
+- Flymake-ruby
+#+BEGIN_SRC emacs-lisp
+(use-package flymake-ruby
+  :cofig
+  (add-hook 'ruby-mode-hook 'flymake-ruby-load))
+#+END_SRC
 ** Common Lisp
 - Slime
 #+BEGIN_SRC emacs-lisp

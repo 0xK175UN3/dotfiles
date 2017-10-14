@@ -105,6 +105,14 @@
   :config
   (projectile-rails-global-mode t))
 
+(use-package ruby-end
+  :config
+  (add-hook 'ruby-mode-hook #'ruby-end-mode))
+
+(use-package flymake-ruby
+  :config
+  (add-hook 'ruby-mode-hook 'flymake-ruby-load))
+
 (use-package slime
   :mode "\\.lisp%"
   :init
@@ -275,11 +283,35 @@
     (global-evil-leader-mode
   (progn
     (evil-leader/set-leader "<SPC>")
+
     (evil-leader/set-key
       "g" 'magit-status )
-    (evil-leader/set-key
-      "o a" 'org-agenda))))
 
+    (evil-leader/set-key
+      "o a" 'org-agenda)
+
+    (evil-leader/set-key
+      "f f" 'projectile-find-file)
+    (evil-leader/set-key
+      "f w" 'projectile-find-file-other-window)
+    (evil-leader/set-key
+      "p r" 'projectile-replace)
+
+    (evil-leader/set-key
+      "q q" 'delete-window)
+
+    (evil-leader/set-key-for-mode 'ruby-mode
+      "g d" 'robe-jump)
+
+    (evil-leader/set-key-for-mode 'ruby-mode
+      "f m" 'projectile-rails-find-model)
+    (evil-leader/set-key-for-mode 'ruby-mode
+      "f M" 'projectile-rails-find-current-model)
+    (evil-leader/set-key-for-mode 'ruby-mode
+      "r ! s" 'projectile-rails-server)
+    (evil-leader/set-key-for-mode 'ruby-mode
+      "r ! g" 'projectile-rails-generate)
+)))
 (use-package evil-surround
   :config
     (global-evil-surround-mode))

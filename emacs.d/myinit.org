@@ -329,6 +329,10 @@
   :config
     (which-key-mode))
 #+END_SRC
+- Iedit
+#+BEGIN_SRC emacs-lisp
+(use-package iedit)
+#+END_SRC
 - Evil mode
 #+BEGIN_SRC emacs-lisp
 (use-package evil
@@ -356,6 +360,9 @@
 
     (evil-leader/set-key
       "o a" 'org-agenda)
+
+    (evil-leader/set-key
+      "e" 'iedit-mode)
 
     (evil-leader/set-key
       "f f" 'projectile-find-file)

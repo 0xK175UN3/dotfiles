@@ -264,6 +264,8 @@
   :config
     (which-key-mode))
 
+(use-package iedit)
+
 (use-package evil
   :init
     (progn
@@ -308,10 +310,17 @@
     (evil-leader/set-key-for-mode 'ruby-mode
       "f M" 'projectile-rails-find-current-model)
     (evil-leader/set-key-for-mode 'ruby-mode
+      "f c" 'projectile-rails-find-controller)
+    (evil-leader/set-key-for-mode 'ruby-mode
+      "f C" 'projectile-rails-find-current-controller)
+    (evil-leader/set-key-for-mode 'ruby-mode
+      "f v" 'projectile-rails-find-view)
+    (evil-leader/set-key-for-mode 'ruby-mode
+      "f V" 'projectile-rails-find-current-view)
+    (evil-leader/set-key-for-mode 'ruby-mode
       "r ! s" 'projectile-rails-server)
     (evil-leader/set-key-for-mode 'ruby-mode
-      "r ! g" 'projectile-rails-generate)
-)))
+      "r ! g" 'projectile-rails-generate))))
 (use-package evil-surround
   :config
     (global-evil-surround-mode))

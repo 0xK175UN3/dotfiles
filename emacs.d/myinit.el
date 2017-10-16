@@ -162,14 +162,9 @@
     (smartparens-global-mode t))
 
 (use-package projectile
-  :bind
-  (:map projectile-mode-map
-        ("C-c p f" . projectile-find-file)
-        ("C-c p p" . projectile-switch-project))
   :init
   (progn
     (projectile-global-mode)
-    (setq projectile-switch-project-action 'helm-projectile-find-file)
     (setq projectile-completion-system 'ido) ;; alternatively, 'helm
     (setq projectile-use-git-grep t)))
 
@@ -291,6 +286,9 @@
 
     (evil-leader/set-key
       "o a" 'org-agenda)
+
+    (evil-leader/set-key
+      "e" 'iedit-mode)
 
     (evil-leader/set-key
       "f f" 'projectile-find-file)

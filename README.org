@@ -24,21 +24,24 @@ TODO:
  - code quality checker
  - better autocomplition
 *** Keybindings
-| keybinding  | function name                            | desription                                                                |
-| ---------   | ---                                      | ---------                                                                 |
-| <SPC> e     | iedit-mode                               | (Edit) Multiply query refactoring                                         |
-| <SPC> o a   | org-agenda                               | (Org Agenda) Open org agenda buffer                                       |
-| <SPC> o p   | projectile-switch-project                | (Open Project) Open list of projects                                      |
-| <SPC> f f   | projectile-find-file                     | (Find File) Find file in current project                                  |
-| <SPC> f w   | projectile-find-file-other-window        | (File Window) Find file and open in other window                          |
-| <SPC> p r   | projectile-replace                       | (Project Replace) Replacing by query in project                           |
-| <SPC> q q   | delete-window                            | (Quit Quit) Close active emacs window                                     |
-| <SPC> g d   | robe-jump                                | (Go to Definition) Go to method definition                                |
-| <SPC> f m   | projectile-rails-find-model              | (Find Model) Find model in current rails project                          |
-| <SPC> f M   | projectile-rails-find-current-model      | (Find Model) Find model connected with current resource                   |
-| <SPC> f c   | projectile-rails-find-controller         | (Find Controller) Find controller in current rails project                |
-| <SPC> f C   | projectile-rails-find-current-controller | (Find current Controller) Find controller connected with current resource |
-| <SPC> f v   | projectile-rails-find-view               | (Find View) Find view in current rails project                            |
-| <SPC> f V   | projectile-rails-find-current-view       | (Find current View) Find view connected with current resource             |
-| <SPC> r ! s | projectile-rails-server                  | (Rails Server) Run Rails server command                                   |
-| <SPC> r ! g | projectile-rails-generate                | (Rails Generate) Run Rails generate command                               |
+I use Evil mode so every combo starts from "leader" key.
+Leader key is <SPC>.
+<SPS> + any combo below:
+| Keybinding | Function name                            | Desription                                                                |
+|            |                                          |                                                                  |
+| e          | iedit-mode                               | (Edit) Multiply query refactoring                                         |
+| o a        | org-agenda                               | (Org Agenda) Open org agenda buffer                                       |
+| o p        | projectile-switch-project                | (Open Project) Open list of projects                                      |
+| f f        | projectile-find-file                     | (Find File) Find file in current project                                  |
+| f w        | projectile-find-file-other-window        | (File Window) Find file and open in other window                          |
+| p r        | projectile-replace                       | (Project Replace) Replacing by query in project                           |
+| q q        | delete-window                            | (Quit Quit) Close active emacs window                                     |
+| g d        | robe-jump                                | (Go to Definition) Go to method definition                                |
+| f m        | projectile-rails-find-model              | (Find Model) Find model in current rails project                          |
+| f M        | projectile-rails-find-current-model      | (Find Model) Find model connected with current resource                   |
+| f c        | projectile-rails-find-controller         | (Find Controller) Find controller in current rails project                |
+| f C        | projectile-rails-find-current-controller | (Find current Controller) Find controller connected with current resource |
+| f v        | projectile-rails-find-view               | (Find View) Find view in current rails project                            |
+| f V        | projectile-rails-find-current-view       | (Find current View) Find view connected with current resource             |
+| r ! s      | projectile-rails-server                  | (Rails Server) Run Rails server command                                   |
+| r ! g      | projectile-rails-generate                | (Rails Generate) Run Rails generate command                               |

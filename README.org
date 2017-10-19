@@ -27,8 +27,9 @@ TODO:
 I use Evil mode so every combo starts from "leader" key.
 Leader key is <SPC>.
 <SPS> + any combo below:
+#+BIND: org-export-html-table-tag "<table align=\"center\" border=\"2\" cellspacing=\"0\" cellpadding=\"6\" rules=\"groups\" frame=\"hsides\">"
 | Keybinding | Function name                            | Desription                                                                |
-|            |                                          |                                                                  |
+|------------+------------------------------------------+---------------------------------------------------------------------------|
 | e          | iedit-mode                               | (Edit) Multiply query refactoring                                         |
 | o a        | org-agenda                               | (Org Agenda) Open org agenda buffer                                       |
 | o p        | projectile-switch-project                | (Open Project) Open list of projects                                      |

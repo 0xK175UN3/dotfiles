@@ -145,7 +145,8 @@
 
 (use-package company
   :init
-    (add-hook 'after-init-hook 'global-company-mode))
+    (add-hook 'after-init-hook 'global-company-mode)
+    (add-to-list 'company-backends 'company-robe))
 (use-package company-tern
   :init
     (add-to-list 'company-backends 'company-tern)
@@ -160,6 +161,10 @@
 (use-package smartparens
   :init
     (smartparens-global-mode t))
+
+(use-package web-mode
+  :init
+    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode)))
 
 (use-package projectile
   :init
@@ -291,6 +296,9 @@
       "e" 'iedit-mode)
 
     (evil-leader/set-key
+      "o p" 'projectile-switch-project)
+
+    (evil-leader/set-key
       "f f" 'projectile-find-file)
     (evil-leader/set-key
       "f w" 'projectile-find-file-other-window)
@@ -344,3 +352,7 @@
 (use-package zerodark-theme
   :init
     (load-theme 'zerodark t))
+
+(use-package powerline
+  :config
+    (powerline-center-evil-theme))

@@ -26,7 +26,7 @@
  '(delete-selection-mode nil)
  '(package-selected-packages
    (quote
-    (web-mode company-robe projectile-rails htmlize indium robe zerodark-theme smartparens use-package ox-reveal))))
+    (moe-theme spaceline-config powerline web-mode company-robe projectile-rails htmlize indium robe zerodark-theme smartparens use-package ox-reveal))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

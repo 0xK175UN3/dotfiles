@@ -1,3 +1,4 @@
+
 (setq
   inhibit-startup-screen                t
   create-lockfiles                      nil

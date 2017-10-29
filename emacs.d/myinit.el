@@ -260,6 +260,10 @@
   (setq whitespace-line-column 80) ;; limit line length
   (setq whitespace-style '(face tabs empty trailing lines-tail)))
 
+(use-package indent-guide
+  :config
+  (indent-guide-global-mode))
+
 (use-package which-key
   :config
     (which-key-mode))
@@ -304,6 +308,8 @@
       "f w" 'projectile-find-file-other-window)
     (evil-leader/set-key
       "p r" 'projectile-replace)
+    (evil-leader/set-key
+      "p S" 'projectile-save-project-buffers)
 
     (evil-leader/set-key
       "q q" 'delete-window)
@@ -349,10 +355,18 @@
   :config
     (evil-lion-mode))
 
-(use-package zerodark-theme
+(use-package seoul256-theme)
+(use-package monokai-theme
   :init
-    (load-theme 'zerodark t))
+    (load-theme 'monokai t))
 
 (use-package powerline
-  :config
-    (powerline-center-evil-theme))
+      :config
+    (setq powerline-display-buffer-size nil)
+    (setq powerline-display-mule-info nil)
+    (setq powerline-display-hud nil)
+    (when (display-graphic-p)
+      (powerline-default-theme)
+      (remove-hook 'focus-out-hook 'powerline-unset-selected-window)))
+
+(use-package all-the-icons)

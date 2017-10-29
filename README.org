@@ -1,24 +1,10 @@
 #+TITLE: 0xk175un3 configurations
-My settings for system, code editors, and some fun stuff
+My settings for system, emacs editor, and some fun stuff
 #+STARTUP: overview
 #+OPTIONS: toc:4 h:4
-* My config contains:
-** Dotfiles
-- tmux.conf (Tmux configuration)
-- vimrc (Vim configuration)
-- nvimrc (Nvim configuration)
-- ideavimrc (Vim configuration for jetbrain products)
-- mongorc (add some functions for sorting data)
-- Xresources (urxvt configuration)
-- Xmonad config (not ready yet)
-- NixOS configuration
-- Xinitrc
-- i3 config files (i3 window manager)
-- wallpapers that i always use
-- fun bash scripts
-** Emacs
+* Emacs
 There is configuration for:
-*** Ruby
+***  Ruby 
 TODO:
  - code formatter
  - code quality checker

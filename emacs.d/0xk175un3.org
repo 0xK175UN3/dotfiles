@@ -198,10 +198,23 @@
   :interpreter "go"
   :mode "\\.go$"
   :config
+    (setq gofmt-command "goimports")
     (add-hook 'before-save-hook #'gofmt-before-save)
     (setq go-packages-function 'go-packages-go-list)
   :init
     (add-hook 'go-mode-hook 'flycheck-mode))
+#+END_SRC
+- Go-metalinter
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck-gometalinter
+  :ensure t
+  :config
+    (progn
+      (setq flycheck-gometalinter-disable-all t)
+      (setq flycheck-gometalinter-enable-linters '("errcheck"))
+      (setq flycheck-gometalinter-enable-linters '("golint"))
+      (setq flycheck-gometalinter-enable-linters '("vet"))
+      (flycheck-gometalinter-setup)))
 #+END_SRC
 - Go-path
 #+BEGIN_SRC emacs-lisp
@@ -347,7 +360,7 @@
   :diminish global-whitespace-mode
   :config
   (progn
-    (setq whitespace-style '(trailing tabs tab-mark face))
+    (setq whitespace-style '(trailing face))
     (global-whitespace-mode)))
 #+END_SRC
 ** Project managment and version control
@@ -370,6 +383,7 @@
 (use-package projectile
   :ensure t
   :diminish projectile-mode
+  :bind-keymap (("C-c p" . projectile-command-map))
   :init
     (progn
       (projectile-mode)
@@ -395,10 +409,10 @@
 *** GUI
 - Theme
 #+BEGIN_SRC emacs-lisp
-(use-package railscasts-reloaded-theme
+(use-package eclipse-theme
   :ensure t
   :init
-    (load-theme 'railscasts-reloaded t))
+    (load-theme 'eclipse t))
 #+END_SRC
 #+BEGIN_COMMENT
 #+BEGIN_SRC emacs-lisp
@@ -422,9 +436,10 @@
       (setq seoul256-background 234)
       (load-theme 'seoul256 t)))
 
-(use-package eclipse-theme
+(use-package railscasts-reloaded-theme
+  :ensure t
   :init
-    (load-theme 'eclipse t))
+    (load-theme 'railscasts-reloaded t))
 #+END_SRC
 #+END_COMMENT
 - Powerline

@@ -167,10 +167,21 @@
   :interpreter "go"
   :mode "\\.go$"
   :config
+    (setq gofmt-command "goimports")
     (add-hook 'before-save-hook #'gofmt-before-save)
     (setq go-packages-function 'go-packages-go-list)
   :init
     (add-hook 'go-mode-hook 'flycheck-mode))
+
+(use-package flycheck-gometalinter
+  :ensure t
+  :config
+    (progn
+      (setq flycheck-gometalinter-disable-all t)
+      (setq flycheck-gometalinter-enable-linters '("errcheck"))
+      (setq flycheck-gometalinter-enable-linters '("golint"))
+      (setq flycheck-gometalinter-enable-linters '("vet"))
+      (flycheck-gometalinter-setup)))
 
 (use-package go-gopath
   :ensure t)
@@ -275,7 +286,7 @@
   :diminish global-whitespace-mode
   :config
   (progn
-    (setq whitespace-style '(trailing tabs tab-mark face))
+    (setq whitespace-style '(trailing face))
     (global-whitespace-mode)))
 
 (use-package magit
@@ -291,6 +302,7 @@
 (use-package projectile
   :ensure t
   :diminish projectile-mode
+  :bind-keymap (("C-c p" . projectile-command-map))
   :init
     (progn
       (projectile-mode)
@@ -308,7 +320,7 @@
     (global-linum-mode 1)
 (setq linum-format "%4d "))
 
-(use-package railscasts-reloaded-theme
+(use-package eclipse-theme
   :ensure t
   :init
-    (load-theme 'railscasts-reloaded t))
+    (load-theme 'eclipse t))

@@ -6,8 +6,6 @@
 (add-to-list 'package-archives
              '("gnu" . "https://elpa.gnu.org/packages/") t)
 
-(package-initialize)
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -19,8 +17,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (railscasts-reloaded-theme zenburn-theme rspec-mode ssass-mode hindent yaml-mode which-key web-mode use-package slim-mode ruby-end rubocop rbenv projectile-rails markdown-mode magit intero indent-guide git-gutter expand-region exec-path-from-shell doom-themes diminish counsel coffee-mode anzu ag ace-window))))
+   '(flycheck-gometalinter eclipse-theme railscasts-reloaded-theme zenburn-theme rspec-mode ssass-mode hindent yaml-mode which-key web-mode use-package slim-mode ruby-end rubocop rbenv projectile-rails markdown-mode magit intero indent-guide git-gutter expand-region exec-path-from-shell doom-themes diminish counsel coffee-mode anzu ag ace-window)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

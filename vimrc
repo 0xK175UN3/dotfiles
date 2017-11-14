@@ -24,7 +24,17 @@ Plug 'junegunn/seoul256.vim'                           " My favorite color schem
 let g:seoul256_background = 236                        " ... dark one
 Plug 'vim-airline/vim-airline'                         " Status bar at the bottom of the screen
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme='lucios'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#empty_message = ''
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_sep = '|'
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_theme = 'lucius'
 
 " ===== Editing =====
 Plug 'tpope/vim-surround'                              " Better support for working with things that 'surround' text such as quotes and parens

@@ -1,9 +1,11 @@
 
 (setq
+  split-width-threshold nil
   inhibit-startup-screen t
   create-lockfiles nil
   make-backup-files nil
   auto-save-default nil
+  line-number-mode t
   column-number-mode t
   scroll-error-top-bottom t
   show-paren-delay 0.1
@@ -43,10 +45,32 @@
 (cua-mode 1)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
+(scroll-bar-mode 0)
 (set-face-attribute 'default nil
                     :family "Fira Code"
                     :height 170
                     :width 'normal)
+
+(use-package company
+  :init
+    (progn
+      (add-hook 'after-init-hook 'global-company-mode)))
+
+(use-package ruby-end
+  :init
+    (add-hook 'ruby-mode-hook 'ruby-end-mode t))
+
+(use-package inf-ruby
+  :init
+    (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
+
+(use-package slime
+  :mode "\\.lisp%"
+  :init
+    (add-hook 'lisp-mode-hook 'slime-mode)
+    (progn
+      (setq inferior-lisp-program "/usr/local/Cellar/sbcl/1.4.1/bin/sbcl")
+      (setq slime-contribs '(slime-fancy))))
 
 (use-package counsel)
 
@@ -62,7 +86,7 @@
   :bind (("\C-s" . swiper)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
-         ("C-c C-f" . counsel-find-file)
+         ("C-c C-f" . counsel-find-file))
   :config
     (progn
       (ivy-mode 1)
@@ -71,3 +95,50 @@
 
 (use-package avy
   :bind (("C-;" . avy-goto-char)))
+
+(use-package ace-window
+  :bind (("M-o" . ace-window)
+         ("M-p" . ace-delete-window))
+  :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+
+(use-package which-key
+  :init
+    (which-key-mode))
+
+(use-package magit
+  :bind (("C-x g" . magit-status)))
+
+(use-package git-gutter
+  :config
+    (global-git-gutter-mode))
+
+(use-package projectile
+  :init
+    (progn
+      (projectile-global-mode)
+      (setq projectile-completion-system 'ivy)))
+
+(use-package projectile-rails
+  :config
+    (projectile-rails-global-mode t))
+
+(use-package indent-guide
+  :init
+  (indent-guide-global-mode))
+
+(use-package seoul256-theme
+  :init
+    (progn
+      (setq seoul256-background 234)
+      (load-theme 'seoul256 t)))
+
+(use-package powerline
+  :config
+    (setq powerline-display-buffer-size nil)
+    (setq powerline-display-mule-info nil)
+    (setq powerline-display-hud nil)
+    (when (display-graphic-p)
+    (powerline-default-theme)
+    (remove-hook 'focus-out-hook 'powerline-unset-selected-window)))
+
+(use-package all-the-icons)

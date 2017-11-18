@@ -1,10 +1,12 @@
 * Basic settings
 #+BEGIN_SRC emacs-lisp
 (setq
+  split-width-threshold nil
   inhibit-startup-screen t
   create-lockfiles nil
   make-backup-files nil
   auto-save-default nil
+  line-number-mode t
   column-number-mode t
   scroll-error-top-bottom t
   show-paren-delay 0.1
@@ -44,12 +46,51 @@
 (cua-mode 1)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
+(scroll-bar-mode 0)
 (set-face-attribute 'default nil
                     :family "Fira Code"
                     :height 170
                     :width 'normal)
 #+END_SRC
 * Languages
+** Global
+- [[][Company]]
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :init
+    (progn
+      (add-hook 'after-init-hook 'global-company-mode)))
+#+END_SRC
+** Ruby <3
+- [[https://github.com/dgutov/robe][Robe]]
+#+BEGIN_SRC
+(use-package robe
+  :init
+    (add-hook 'ruby-mode-hook 'robe-mode t))
+#+END_SRC
+- [[https://github.com/rejeep/ruby-end.el][Ruby-End]]
+#+BEGIN_SRC emacs-lisp
+(use-package ruby-end
+  :init
+    (add-hook 'ruby-mode-hook 'ruby-end-mode t))
+#+END_SRC
+- [[https://github.com/nonsequitur/inf-ruby][Inf-Ruby]]
+#+BEGIN_SRC emacs-lisp
+(use-package inf-ruby
+  :init
+    (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
+#+END_SRC
+** Common Lisp
+- Slime
+#+BEGIN_SRC emacs-lisp
+(use-package slime
+  :mode "\\.lisp%"
+  :init
+    (add-hook 'lisp-mode-hook 'slime-mode)
+    (progn
+      (setq inferior-lisp-program "/usr/local/Cellar/sbcl/1.4.1/bin/sbcl")
+      (setq slime-contribs '(slime-fancy))))
+#+END_SRC
 * Other
 ** Soe
 - [[https://github.com/abo-abo/swiper][Swiper / Ivy / Counsel]]
@@ -68,7 +109,7 @@
   :bind (("\C-s" . swiper)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
-         ("C-c C-f" . counsel-find-file)
+         ("C-c C-f" . counsel-find-file))
   :config
     (progn
       (ivy-mode 1)
@@ -79,4 +120,69 @@
 #+BEGIN_SRC emacs-lisp
 (use-package avy
   :bind (("C-;" . avy-goto-char)))
+#+END_SRC
+- [[https://github.com/abo-abo/ace-window][Ace-window]]
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :bind (("M-o" . ace-window)
+         ("M-p" . ace-delete-window))
+  :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+#+End_SRC
+- [[][Which-mode]]
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :init
+    (which-key-mode))
+#+END_SRC
+** Project managment and version controll
+- [[https://github.com/magit/magit][Magit]]
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :bind (("C-x g" . magit-status)))
+#+END_SRC
+- [[https://github.com/syohex/emacs-git-gutter][Git-Gutter]]
+#+BEGIN_SRC emacs-lisp
+(use-package git-gutter
+  :config
+    (global-git-gutter-mode))
+#+END_SRC
+- [[https://github.com/bbatsov/projectile][Projectile]]
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :init
+    (progn
+      (projectile-global-mode)
+      (setq projectile-completion-system 'ivy)))
+#+END_SRC
+- [[https://github.com/asok/projectile-rails][Projectile-Rails]]
+#+BEGIN_SRC emacs-lisp
+(use-package projectile-rails
+  :config
+    (projectile-rails-global-mode t))
+#+END_SRC
+** Visual Goodies
+- [[https://github.com/zk-phi/indent-guide][Indent-Guide]]
+#+BEGIN_SRC emacs-lisp
+(use-package indent-guide
+  :init
+  (indent-guide-global-mode))
+#+END_SRC
+*** GUI
+#+BEGIN_SRC emacs-lisp
+(use-package seoul256-theme
+  :init
+    (progn
+      (setq seoul256-background 234)
+      (load-theme 'seoul256 t)))
+
+(use-package powerline
+  :config
+    (setq powerline-display-buffer-size nil)
+    (setq powerline-display-mule-info nil)
+    (setq powerline-display-hud nil)
+    (when (display-graphic-p)
+    (powerline-default-theme)
+    (remove-hook 'focus-out-hook 'powerline-unset-selected-window)))
+
+(use-package all-the-icons)
 #+END_SRC

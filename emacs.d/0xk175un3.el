@@ -126,11 +126,9 @@
   :init
   (indent-guide-global-mode))
 
-(use-package seoul256-theme
+(use-package zerodark-theme
   :init
-    (progn
-      (setq seoul256-background 234)
-      (load-theme 'seoul256 t)))
+    (load-theme 'zerodark t))
 
 (use-package powerline
   :config

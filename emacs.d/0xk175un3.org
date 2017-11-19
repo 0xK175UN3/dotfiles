@@ -134,6 +134,43 @@
   :init
     (which-key-mode))
 #+END_SRC
+
+#+BEGIN_COMMENT
+- [[][Evil-mode]]
+#+BEGIN_SRC emacs-lisp
+(use-package evil		
+  :ensure t		
+  :init		
+    (progn		
+    (setq evil-default-cursor t))		
+  :config		
+    (evil-mode 1))		
+
+(use-package evil-leader		
+  :ensure t		
+  :init		
+    (global-evil-leader-mode)		
+  (progn		
+    (evil-leader/set-leader "<SPC>")		
+    (evil-leader/set-key		
+      "g" 'magit-status )))		
+
+(use-package evil-surround		
+  :ensure t		
+  :config		
+    (global-evil-surround-mode))		
+
+(use-package evil-escape		
+  :ensure t		
+  :init		
+    (setq-default evil-escape-key-sequence "jk")		
+  :config		
+    (evil-escape-mode))		
+
+(use-package evil-indent-textobject		
+  :ensure t)
+#+END_SRC
+#+END_COMMENT
 ** Project managment and version controll
 - [[https://github.com/magit/magit][Magit]]
 #+BEGIN_SRC emacs-lisp
@@ -168,13 +205,24 @@
   (indent-guide-global-mode))
 #+END_SRC
 *** GUI
+- Theme
+#+BEGIN_SRC emacs-lisp
+(use-package zerodark-theme
+  :init
+    (load-theme 'zerodark t))
+#+END_SRC
+
+#+BEGIN_COMMENT
 #+BEGIN_SRC emacs-lisp
 (use-package seoul256-theme
   :init
     (progn
       (setq seoul256-background 234)
       (load-theme 'seoul256 t)))
-
+#+END_SRC
+#+END_COMMENT
+- Powerline
+#+BEGIN_SRC emacs-lisp
 (use-package powerline
   :config
     (setq powerline-display-buffer-size nil)

@@ -6,7 +6,7 @@ silent! if plug#begin('~/.vim/plugged')
 
 let g:plug_url_format = 'git@github.com:%s.git'
 
-" ===== Langnuage support =====
+" Langnuage support =====
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }            " Ruby <3
 Plug 'tpope/vim-bundler', { 'for': 'ruby' }            "
 Plug 'tpope/vim-rails', { 'for': 'ruby' }              "
@@ -16,8 +16,10 @@ Plug 'tpope/vim-haml'                                  " Haml - A better HTML
 Plug 'honza/dockerfile.vim'                            "
 Plug 'pangloss/vim-javascript'                         "
 Plug 'vim-syntastic/syntastic'
+Plug 'neovimhaskell/haskell-vim'                       " Basic Haskell support
+Plug 'eagletmt/neco-ghc'                               " Powerfull GHC autocompleting
 
-                                                       " Colors and UI awesome things
+" Colors and UI awesome things
 set guifont=Droid\ Sans\ Mono\ 15                      " Set a different font
 Plug 'junegunn/seoul256.vim'                           " My favorite color scheme
 let g:seoul256_background = 236                        " ... dark one
@@ -35,7 +37,7 @@ let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_theme = 'lucius'
 
-" ===== Editing =====
+" Editing =====
 Plug 'tpope/vim-surround'                              " Better support for working with things that 'surround' text such as quotes and parens
 Plug 'tpope/vim-commentary'                            " Easily comment/uncomment code
 Plug 'tpope/vim-endwise', { 'for': 'ruby' }            " Automatically inserts `end` for you. Convenient, works well

@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = FiraCode 13
+font = Monospace 13
 scrollback_lines = 10000
 search_wrap = true
 #icon_name = terminal
@@ -32,8 +32,8 @@ filter_unmatched_urls = true
 #modify_other_keys = false
 
 [colors]
-#cursor = #dcdccc
-#cursor_foreground = #dcdccc
+#cursor = #d9d9d9
+#cursor_foreground = #d9d9d9
 foreground = #d9d9d9
 foreground_bold = #d9d9d9
 background = #2a2a2a

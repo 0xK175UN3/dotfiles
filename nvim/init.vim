@@ -17,6 +17,10 @@ Plug 'honza/dockerfile.vim'                            "
 Plug 'pangloss/vim-javascript'                         "
 Plug 'vim-syntastic/syntastic'
 Plug 'neovimhaskell/haskell-vim'                       " Basic Haskell support
+let g:haskell_classic_highlighting = 1
+let g:haskell_indent_if = 4
+let g:haskell_indent_case = 4
+let g:haskell_indent_in = 0
 Plug 'eagletmt/neco-ghc'                               " Powerfull GHC autocompleting
 
 " Colors and UI awesome things
@@ -43,6 +47,7 @@ Plug 'tpope/vim-commentary'                            " Easily comment/uncommen
 Plug 'tpope/vim-endwise', { 'for': 'ruby' }            " Automatically inserts `end` for you. Convenient, works well
 Plug 'junegunn/vim-easy-align'                         "
 Plug 'Shougo/deoplete.nvim'                            " Autocomplete
+let g:deoplete#enable_at_startup = 1
 
 " ===== Git =====
 Plug 'tpope/vim-fugitive'                              " Git integration... I should learn this better

@@ -49,7 +49,7 @@
 (scroll-bar-mode 0)
 (set-face-attribute 'default nil
                     :family "Fira Code"
-                    :height 170
+                    :height 140
                     :width 'normal)
 #+END_SRC
 * Languages
@@ -60,6 +60,16 @@
   :init
     (progn
       (add-hook 'after-init-hook 'global-company-mode)))
+#+END_SRC
+- [[][Web-Mode]]
+#+BEGIN_SRC emacs-lisp
+(use-package web-mode
+  :config
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode)))
+     
+(setq web-mode-enable-auto-closing t)
+(setq web-mode-enable-auto-quoting t)
 #+END_SRC
 ** Ruby <3
 - [[https://github.com/dgutov/robe][Robe]]
@@ -80,6 +90,13 @@
   :init
     (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 #+END_SRC
+- [[https://github.com/asok/projectile-rails][Projectile-Rails]]
+#+BEGIN_SRC emacs-lisp
+(use-package projectile-rails
+  :config
+    (projectile-rails-global-mode t))
+#+END_SRC
+
 ** Common Lisp
 - Slime
 #+BEGIN_SRC emacs-lisp
@@ -190,12 +207,6 @@
     (progn
       (projectile-global-mode)
       (setq projectile-completion-system 'ivy)))
-#+END_SRC
-- [[https://github.com/asok/projectile-rails][Projectile-Rails]]
-#+BEGIN_SRC emacs-lisp
-(use-package projectile-rails
-  :config
-    (projectile-rails-global-mode t))
 #+END_SRC
 ** Visual Goodies
 - [[https://github.com/zk-phi/indent-guide][Indent-Guide]]

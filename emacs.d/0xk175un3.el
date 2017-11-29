@@ -48,13 +48,21 @@
 (scroll-bar-mode 0)
 (set-face-attribute 'default nil
                     :family "Fira Code"
-                    :height 170
+                    :height 140
                     :width 'normal)
 
 (use-package company
   :init
     (progn
       (add-hook 'after-init-hook 'global-company-mode)))
+
+(use-package web-mode
+  :config
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode)))
+     
+(setq web-mode-enable-auto-closing t)
+(setq web-mode-enable-auto-quoting t)
 
 (use-package ruby-end
   :init
@@ -63,6 +71,10 @@
 (use-package inf-ruby
   :init
     (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
+
+(use-package projectile-rails
+  :config
+    (projectile-rails-global-mode t))
 
 (use-package slime
   :mode "\\.lisp%"
@@ -117,10 +129,6 @@
     (progn
       (projectile-global-mode)
       (setq projectile-completion-system 'ivy)))
-
-(use-package projectile-rails
-  :config
-    (projectile-rails-global-mode t))
 
 (use-package indent-guide
   :init

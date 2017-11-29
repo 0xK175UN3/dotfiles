@@ -6,10 +6,10 @@ silent! if plug#begin('~/.vim/plugged')
 
 let g:plug_url_format = 'git@github.com:%s.git'
 
-" Langnuage support =====
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }            " Ruby <3
-Plug 'tpope/vim-bundler', { 'for': 'ruby' }            "
-Plug 'tpope/vim-rails', { 'for': 'ruby' }              "
+" ===== Langnuage support =====
+Plug 'vim-ruby/vim-ruby'                               " Ruby <3
+Plug 'tpope/vim-bundler'                               "
+Plug 'tpope/vim-rails'                                 "
 Plug 'kchmck/vim-coffee-script'                        " CoffeeScript - still better than JavaScript
 Plug 'tpope/vim-markdown'                              " Markdown - A plain text format for barely structured documents
 Plug 'tpope/vim-haml'                                  " Haml - A better HTML
@@ -23,7 +23,7 @@ let g:haskell_indent_case = 4
 let g:haskell_indent_in = 0
 Plug 'eagletmt/neco-ghc'                               " Powerfull GHC autocompleting
 
-" Colors and UI awesome things
+" ===== Colors and UI awesome things =====
 set guifont=Droid\ Sans\ Mono\ 15                      " Set a different font
 Plug 'junegunn/seoul256.vim'                           " My favorite color scheme
 let g:seoul256_background = 236                        " ... dark one
@@ -41,13 +41,16 @@ let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_theme = 'lucius'
 
-" Editing =====
+" ===== Editing =====
 Plug 'tpope/vim-surround'                              " Better support for working with things that 'surround' text such as quotes and parens
 Plug 'tpope/vim-commentary'                            " Easily comment/uncomment code
-Plug 'tpope/vim-endwise', { 'for': 'ruby' }            " Automatically inserts `end` for you. Convenient, works well
+Plug 'tpope/vim-endwise'                               " Automatically inserts `end` for you. Convenient, works well
 Plug 'junegunn/vim-easy-align'                         "
 Plug 'Shougo/deoplete.nvim'                            " Autocomplete
 let g:deoplete#enable_at_startup = 1
+Plug 'alvan/vim-closetag'
+Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+autocmd! User indentLine doautocmd indentLine Syntax
 
 " ===== Git =====
 Plug 'tpope/vim-fugitive'                              " Git integration... I should learn this better

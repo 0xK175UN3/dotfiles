@@ -215,6 +215,13 @@
   :init
   (indent-guide-global-mode))
 #+END_SRC
+- [[][Linum]]
+#+BEGIN_SRC emacs-lisp
+(use-package linum
+  :init
+    (global-linum-mode 1)
+(setq linum-format "%4d "))
+#+END_SRC
 *** GUI
 - Theme
 #+BEGIN_SRC emacs-lisp

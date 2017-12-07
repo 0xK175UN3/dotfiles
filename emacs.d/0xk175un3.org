@@ -108,6 +108,18 @@
       (setq inferior-lisp-program "/usr/local/Cellar/sbcl/1.4.1/bin/sbcl")
       (setq slime-contribs '(slime-fancy))))
 #+END_SRC
+** Markdown
+- [[https://github.com/jrblevin/markdown-mode][Markdown-mode]]
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :mode "\\.md%")
+#+END_SRC
+** Yaml
+- [[https://github.com/yoshiki/yaml-mode][Yaml-mode]]
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode
+  :mode "\\.yml%")
+#+END_SRC
 * Other
 ** Soe
 - [[https://github.com/abo-abo/swiper][Swiper / Ivy / Counsel]]
@@ -151,7 +163,12 @@
   :init
     (which-key-mode))
 #+END_SRC
-
+- [[][Dired+]
+#+BEGIN_SRC emacs-lisp
+(use-package dired+
+  :config
+    (require 'dired+))
+#+END_SRC
 #+BEGIN_COMMENT
 - [[][Evil-mode]]
 #+BEGIN_SRC emacs-lisp

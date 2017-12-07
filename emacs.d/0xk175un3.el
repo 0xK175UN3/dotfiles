@@ -84,6 +84,12 @@
       (setq inferior-lisp-program "/usr/local/Cellar/sbcl/1.4.1/bin/sbcl")
       (setq slime-contribs '(slime-fancy))))
 
+(use-package markdown-mode
+  :mode "\\.md%")
+
+(use-package yaml-mode
+  :mode "\\.yml%")
+
 (use-package counsel)
 
 (use-package ivy
@@ -117,6 +123,10 @@
   :init
     (which-key-mode))
 
+(use-package dired+
+  :config
+    (require 'dired+))
+
 (use-package magit
   :bind (("C-x g" . magit-status)))
 
@@ -133,6 +143,11 @@
 (use-package indent-guide
   :init
   (indent-guide-global-mode))
+
+(use-package linum
+  :init
+    (global-linum-mode 1)
+(setq linum-format "%4d "))
 
 (use-package zerodark-theme
   :init

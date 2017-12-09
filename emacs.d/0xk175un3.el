@@ -127,6 +127,15 @@
   :config
     (require 'dired+))
 
+(use-package whitespace
+  :diminish (global-whitespace-mode
+             whitespace-mode
+             whitespace-newline-mode)
+  :config
+  (progn
+    (setq whitespace-style '(trailing tabs tab-mark face))
+    (global-whitespace-mode)))
+
 (use-package magit
   :bind (("C-x g" . magit-status)))
 

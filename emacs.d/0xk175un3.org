@@ -52,6 +52,8 @@
                     :height 140
                     :width 'normal)
 #+END_SRC
+** Custom hooks
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 * Languages
 ** Global
 - [[][Company]]
@@ -67,7 +69,7 @@
   :config
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode)))
-     
+
 (setq web-mode-enable-auto-closing t)
 (setq web-mode-enable-auto-quoting t)
 #+END_SRC
@@ -169,39 +171,50 @@
   :config
     (require 'dired+))
 #+END_SRC
+- [[https://www.emacswiki.org/emacs/WhiteSpace][Whitespace]]
+#+BEGIN_SRC emacs-lisp
+(use-package whitespace
+  :diminish (global-whitespace-mode
+             whitespace-mode
+             whitespace-newline-mode)
+  :config
+  (progn
+    (setq whitespace-style '(trailing tabs tab-mark face))
+    (global-whitespace-mode)))
+#+END_SRC
 #+BEGIN_COMMENT
 - [[][Evil-mode]]
 #+BEGIN_SRC emacs-lisp
-(use-package evil		
-  :ensure t		
-  :init		
-    (progn		
-    (setq evil-default-cursor t))		
-  :config		
-    (evil-mode 1))		
+(use-package evil
+  :ensure t
+  :init
+    (progn
+    (setq evil-default-cursor t))
+  :config
+    (evil-mode 1))
 
-(use-package evil-leader		
-  :ensure t		
-  :init		
-    (global-evil-leader-mode)		
-  (progn		
-    (evil-leader/set-leader "<SPC>")		
-    (evil-leader/set-key		
-      "g" 'magit-status )))		
+(use-package evil-leader
+  :ensure t
+  :init
+    (global-evil-leader-mode)
+  (progn
+    (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key
+      "g" 'magit-status )))
 
-(use-package evil-surround		
-  :ensure t		
-  :config		
-    (global-evil-surround-mode))		
+(use-package evil-surround
+  :ensure t
+  :config
+    (global-evil-surround-mode))
 
-(use-package evil-escape		
-  :ensure t		
-  :init		
-    (setq-default evil-escape-key-sequence "jk")		
-  :config		
-    (evil-escape-mode))		
+(use-package evil-escape
+  :ensure t
+  :init
+    (setq-default evil-escape-key-sequence "jk")
+  :config
+    (evil-escape-mode))
 
-(use-package evil-indent-textobject		
+(use-package evil-indent-textobject
   :ensure t)
 #+END_SRC
 #+END_COMMENT

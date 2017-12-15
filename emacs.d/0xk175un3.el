@@ -59,10 +59,14 @@
 (use-package web-mode
   :config
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode)))
-     
-(setq web-mode-enable-auto-closing t)
-(setq web-mode-enable-auto-quoting t)
+    (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode))
+  :init
+    (progn
+      (setq web-mode-enable-auto-closing t)
+      (setq web-mode-enable-auto-quoting t)
+      (setq web-mode-markup-indent-offset 2)
+      (setq web-mode-css-indent-offset 2)
+      (setq web-mode-code-indent-offset 2)))
 
 (use-package ruby-end
   :init
@@ -118,6 +122,10 @@
   :bind (("M-o" . ace-window)
          ("M-p" . ace-delete-window))
   :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+
+(use-package expand-region
+  :commands er/expand-region
+  :bind ("C-c i" . er/expand-region))
 
 (use-package which-key
   :init

@@ -52,8 +52,6 @@
                     :height 140
                     :width 'normal)
 #+END_SRC
-** Custom hooks
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 * Languages
 ** Global
 - [[][Company]]
@@ -68,10 +66,14 @@
 (use-package web-mode
   :config
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode)))
-
-(setq web-mode-enable-auto-closing t)
-(setq web-mode-enable-auto-quoting t)
+    (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode))
+  :init
+    (progn
+      (setq web-mode-enable-auto-closing t)
+      (setq web-mode-enable-auto-quoting t)
+      (setq web-mode-markup-indent-offset 2)
+      (setq web-mode-css-indent-offset 2)
+      (setq web-mode-code-indent-offset 2)))
 #+END_SRC
 ** Ruby <3
 - [[https://github.com/dgutov/robe][Robe]]
@@ -159,6 +161,12 @@
          ("M-p" . ace-delete-window))
   :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 #+End_SRC
+- [[https://github.com/magnars/expand-region.el][Expand-region]]
+#+BEGIN_SRC emacs-lisp
+(use-package expand-region
+  :commands er/expand-region
+  :bind ("C-c i" . er/expand-region))
+#+END_SRC
 - [[][Which-mode]]
 #+BEGIN_SRC emacs-lisp
 (use-package which-key

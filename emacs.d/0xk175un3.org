@@ -57,6 +57,11 @@
 - [[][Company]]
 #+BEGIN_SRC emacs-lisp
 (use-package company
+  :diminish
+  :bind (("M-n" . nil)
+         ("M-p" . nil)
+         ("C-n" . company-select-next)
+         ("C-p" . company-select-previous))
   :init
     (progn
       (add-hook 'after-init-hook 'global-company-mode)))
@@ -64,6 +69,7 @@
 - [[][Web-Mode]]
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
+  :diminish
   :config
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode))
@@ -85,22 +91,24 @@
 - [[https://github.com/rejeep/ruby-end.el][Ruby-End]]
 #+BEGIN_SRC emacs-lisp
 (use-package ruby-end
+  :diminish
   :init
     (add-hook 'ruby-mode-hook 'ruby-end-mode t))
 #+END_SRC
 - [[https://github.com/nonsequitur/inf-ruby][Inf-Ruby]]
 #+BEGIN_SRC emacs-lisp
 (use-package inf-ruby
+  :diminish
   :init
     (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 #+END_SRC
 - [[https://github.com/asok/projectile-rails][Projectile-Rails]]
 #+BEGIN_SRC emacs-lisp
 (use-package projectile-rails
+  :diminish
   :config
     (projectile-rails-global-mode t))
 #+END_SRC
-
 ** Common Lisp
 - Slime
 #+BEGIN_SRC emacs-lisp
@@ -128,10 +136,11 @@
 ** Soe
 - [[https://github.com/abo-abo/swiper][Swiper / Ivy / Counsel]]
 #+BEGIN_SRC emacs-lisp
-(use-package counsel)
+(use-package counsel
+  :diminish)
 
 (use-package ivy
-  :diminish (ivy-mode)
+  :diminish
   :bind (("C-x b" . ivy-switch-buffer))
   :config
     (setq ivy-use-virtual-buffers t)
@@ -139,6 +148,7 @@
     (setq ivy-display-style 'fancy))
 
 (use-package swiper
+  :diminish
   :bind (("\C-s" . swiper)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
@@ -152,11 +162,13 @@
 - [[https://github.com/abo-abo/avy][Avy]]
 #+BEGIN_SRC emacs-lisp
 (use-package avy
+  :diminish
   :bind (("C-;" . avy-goto-char)))
 #+END_SRC
 - [[https://github.com/abo-abo/ace-window][Ace-window]]
 #+BEGIN_SRC emacs-lisp
 (use-package ace-window
+  :diminish
   :bind (("M-o" . ace-window)
          ("M-p" . ace-delete-window))
   :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
@@ -164,6 +176,7 @@
 - [[https://github.com/magnars/expand-region.el][Expand-region]]
 #+BEGIN_SRC emacs-lisp
 (use-package expand-region
+  :diminish
   :commands er/expand-region
   :bind ("C-c i" . er/expand-region))
 #+END_SRC
@@ -179,12 +192,15 @@
   :config
     (require 'dired+))
 #+END_SRC
+- [[https://github.com/myrjola/diminish.el][Diminish]]
+#+BEGIN_SRC emacs-lisp
+(use-package diminish
+  :ensure t)
+#+END_SRC
 - [[https://www.emacswiki.org/emacs/WhiteSpace][Whitespace]]
 #+BEGIN_SRC emacs-lisp
 (use-package whitespace
-  :diminish (global-whitespace-mode
-             whitespace-mode
-             whitespace-newline-mode)
+  :diminish
   :config
   (progn
     (setq whitespace-style '(trailing tabs tab-mark face))
@@ -235,12 +251,14 @@
 - [[https://github.com/syohex/emacs-git-gutter][Git-Gutter]]
 #+BEGIN_SRC emacs-lisp
 (use-package git-gutter
+  :diminish
   :config
     (global-git-gutter-mode))
 #+END_SRC
 - [[https://github.com/bbatsov/projectile][Projectile]]
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
+  :diminish
   :init
     (progn
       (projectile-global-mode)

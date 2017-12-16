@@ -52,11 +52,13 @@
                     :width 'normal)
 
 (use-package company
+  :diminish
   :init
     (progn
       (add-hook 'after-init-hook 'global-company-mode)))
 
 (use-package web-mode
+  :diminish
   :config
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode))
@@ -69,14 +71,17 @@
       (setq web-mode-code-indent-offset 2)))
 
 (use-package ruby-end
+  :diminish
   :init
     (add-hook 'ruby-mode-hook 'ruby-end-mode t))
 
 (use-package inf-ruby
+  :diminish
   :init
     (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 
 (use-package projectile-rails
+  :diminish
   :config
     (projectile-rails-global-mode t))
 
@@ -94,10 +99,11 @@
 (use-package yaml-mode
   :mode "\\.yml%")
 
-(use-package counsel)
+(use-package counsel
+  :diminish)
 
 (use-package ivy
-  :diminish (ivy-mode)
+  :diminish
   :bind (("C-x b" . ivy-switch-buffer))
   :config
     (setq ivy-use-virtual-buffers t)
@@ -105,6 +111,7 @@
     (setq ivy-display-style 'fancy))
 
 (use-package swiper
+  :diminish
   :bind (("\C-s" . swiper)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
@@ -116,14 +123,17 @@
       (setq ivy-display-style 'fancy)))
 
 (use-package avy
+  :diminish
   :bind (("C-;" . avy-goto-char)))
 
 (use-package ace-window
+  :diminish
   :bind (("M-o" . ace-window)
          ("M-p" . ace-delete-window))
   :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 (use-package expand-region
+  :diminish
   :commands er/expand-region
   :bind ("C-c i" . er/expand-region))
 
@@ -135,10 +145,11 @@
   :config
     (require 'dired+))
 
+(use-package diminish
+  :ensure t)
+
 (use-package whitespace
-  :diminish (global-whitespace-mode
-             whitespace-mode
-             whitespace-newline-mode)
+  :diminish
   :config
   (progn
     (setq whitespace-style '(trailing tabs tab-mark face))
@@ -148,10 +159,12 @@
   :bind (("C-x g" . magit-status)))
 
 (use-package git-gutter
+  :diminish
   :config
     (global-git-gutter-mode))
 
 (use-package projectile
+  :diminish
   :init
     (progn
       (projectile-global-mode)

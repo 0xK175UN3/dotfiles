@@ -74,6 +74,8 @@
       (setq web-mode-css-indent-offset 2)
       (setq web-mode-code-indent-offset 2)))
 
+(use-package rbenv)
+
 (use-package ruby-end
   :diminish
   :init
@@ -190,7 +192,7 @@
 (use-package powerline
     :ensure t
     :config
-    (defvar mode-line-height 30 "Make it bigger!")
+    (defvar mode-line-height 30 "A little bit taller, a little bit baller.")
 
     (defvar mode-line-bar          (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 3 "#909fab" nil)))
     (defvar mode-line-eldoc-bar    (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 3 "#B3EF00" nil)))

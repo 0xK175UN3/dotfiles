@@ -1,0 +1,2 @@
+* Emacs and other dotfiles
+[[./pictures/assets/emacs.png]]

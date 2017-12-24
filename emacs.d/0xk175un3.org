@@ -246,6 +246,16 @@
   :ensure t)
 #+END_SRC
 #+END_COMMENT
+** Emacs for everything
+- [[https://github.com/yjwen/org-reveal/tree/001567cc12d50ba07612edd1718b86a12e8c2547][Org-Reveal]]
+#+BEGIN_SRC emacs-lisp
+(use-package ox-reveal)
+
+(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+(setq org-reveal-mathjax t)
+
+(use-package htmlize)
+#+END_SRC
 ** Project managment and version controll
 - [[https://github.com/magit/magit][Magit]]
 #+BEGIN_SRC emacs-lisp

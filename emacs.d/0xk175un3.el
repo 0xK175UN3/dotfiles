@@ -1,4 +1,3 @@
-
 (setq
   split-width-threshold nil
   inhibit-startup-screen t
@@ -160,6 +159,16 @@
   (progn
     (setq whitespace-style '(trailing tabs tab-mark face))
     (global-whitespace-mode)))
+
+(use-package ox-reveal)
+
+(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+(setq org-reveal-mathjax t)
+
+(use-package htmlize)
+
+(use-package pandoc-mode
+  :ensure t)
 
 (use-package magit
   :bind (("C-x g" . magit-status)))

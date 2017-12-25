@@ -247,7 +247,7 @@
 #+END_SRC
 #+END_COMMENT
 ** Emacs for everything
-- [[https://github.com/yjwen/org-reveal/tree/001567cc12d50ba07612edd1718b86a12e8c2547][Org-Reveal]]
+- [[https://github.com/yjwen/org-reveal][Org-Reveal]]
 #+BEGIN_SRC emacs-lisp
 (use-package ox-reveal)
 

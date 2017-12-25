@@ -162,13 +162,10 @@
 
 (use-package ox-reveal)
 
-(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.6.0/")
 (setq org-reveal-mathjax t)
 
 (use-package htmlize)
-
-(use-package pandoc-mode
-  :ensure t)
 
 (use-package magit
   :bind (("C-x g" . magit-status)))
@@ -183,6 +180,7 @@
   :init
     (progn
       (projectile-global-mode)
+      (setq projectile-enable-caching t)
       (setq projectile-completion-system 'ivy)))
 
 (use-package indent-guide

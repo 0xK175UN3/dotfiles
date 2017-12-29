@@ -53,7 +53,7 @@
 #+END_SRC
 * Languages
 ** Global
-- [[][Company]]
+- [[https://github.com/company-mode/company-mode/tree/master][Company]]
 #+BEGIN_SRC emacs-lisp
 (use-package company
   :diminish
@@ -64,9 +64,11 @@
           ("C-p" . company-select-previous))
   :init
     (progn
-      (add-hook 'after-init-hook 'global-company-mode)))
+      (eval-after-load 'company
+        '(push 'company-robe company-backends))
+        (add-hook 'after-init-hook 'global-company-mode)))
 #+END_SRC
-- [[][Web-Mode]]
+- [[https://github.com/fxbois/web-mode/tree/master][Web-Mode]]
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
   :diminish
@@ -81,13 +83,25 @@
       (setq web-mode-css-indent-offset 2)
       (setq web-mode-code-indent-offset 2)))
 #+END_SRC
-** Ruby <3
-- [[][Rbenv]]
+- [[https://github.com/syohex/emacs-anzu/tree/master][Anzu]]
 #+BEGIN_SRC emacs-lisp
-(use-package rbenv)
+(use-package anzu
+  :diminish
+  :config
+    (global-anzu-mode)
+  :bind (
+    ("M-%" . anzu-query-replace)
+    ("C-M-%" . anzu-query-replace-regexp)))
+#+END_SRC
+** Ruby <3
+- [[https://github.com/senny/rbenv.el/tree/master][Rbenv]]
+#+BEGIN_SRC emacs-lisp
+(use-package rbenv
+  :init
+    (global-rbenv-mode))
 #+END_SRC
 - [[https://github.com/dgutov/robe][Robe]]
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
 (use-package robe
   :init
     (add-hook 'ruby-mode-hook 'robe-mode t))
@@ -256,7 +270,7 @@
 
 (use-package htmlize)
 #+END_SRC
-** Project managment and version controll
+** Project managment and version control
 - [[https://github.com/magit/magit][Magit]]
 #+BEGIN_SRC emacs-lisp
 (use-package magit

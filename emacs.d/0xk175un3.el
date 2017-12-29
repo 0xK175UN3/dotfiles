@@ -58,7 +58,9 @@
           ("C-p" . company-select-previous))
   :init
     (progn
-      (add-hook 'after-init-hook 'global-company-mode)))
+      (eval-after-load 'company
+        '(push 'company-robe company-backends))
+        (add-hook 'after-init-hook 'global-company-mode)))
 
 (use-package web-mode
   :diminish
@@ -73,7 +75,21 @@
       (setq web-mode-css-indent-offset 2)
       (setq web-mode-code-indent-offset 2)))
 
-(use-package rbenv)
+(use-package anzu
+  :diminish
+  :config
+    (global-anzu-mode)
+  :bind (
+    ("M-%" . anzu-query-replace)
+    ("C-M-%" . anzu-query-replace-regexp)))
+
+(use-package rbenv
+  :init
+    (global-rbenv-mode))
+
+(use-package robe
+  :init
+    (add-hook 'ruby-mode-hook 'robe-mode t))
 
 (use-package ruby-end
   :diminish
@@ -180,7 +196,6 @@
   :init
     (progn
       (projectile-global-mode)
-      (setq projectile-enable-caching t)
       (setq projectile-completion-system 'ivy)))
 
 (use-package indent-guide

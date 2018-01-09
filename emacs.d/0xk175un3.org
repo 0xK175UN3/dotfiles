@@ -127,6 +127,24 @@
   :config
     (projectile-rails-global-mode t))
 #+END_SRC
+
+** Clojure
+- [[https://github.com/clojure-emacs/clojure-mode/tree/master][Clojure-mode]]
+#+BEGIN_SRC emacs-lisp
+(use-package clojure-mode
+  :ensure t
+  :mode "\\.clj%")
+#+END_SRC
+- [[https://github.com/clojure-emacs/cider/tree/master][Cider]]
+#+BEGIN_SRC emacs-lisp
+(use-package cider
+  :ensure t
+  :init
+    (add-hook 'clojure-mode-hook 'cider-mode)
+    (progn
+      (setq exec-path 
+        (append exec-path '("/usr/local/Cellar/leiningen/2.8.1/bin")))))
+#+END_SRC
 ** Common Lisp
 - Slime
 #+BEGIN_SRC emacs-lisp

@@ -106,6 +106,18 @@
   :config
     (projectile-rails-global-mode t))
 
+(use-package clojure-mode
+  :ensure t
+  :mode "\\.clj%")
+
+(use-package cider
+  :ensure t
+  :init
+    (add-hook 'clojure-mode-hook 'cider-mode)
+    (progn
+      (setq exec-path 
+        (append exec-path '("/usr/local/Cellar/leiningen/2.8.1/bin")))))
+
 (use-package slime
   :mode "\\.lisp%"
   :init

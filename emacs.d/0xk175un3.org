@@ -140,10 +140,7 @@
 (use-package cider
   :ensure t
   :init
-    (add-hook 'clojure-mode-hook 'cider-mode)
-    (progn
-      (setq exec-path 
-        (append exec-path '("/usr/local/Cellar/leiningen/2.8.1/bin")))))
+    (add-hook 'clojure-mode-hook 'cider-mode))
 #+END_SRC
 ** Common Lisp
 - Slime
@@ -153,7 +150,6 @@
   :init
     (add-hook 'lisp-mode-hook 'slime-mode)
     (progn
-      (setq inferior-lisp-program "/usr/local/Cellar/sbcl/1.4.1/bin/sbcl")
       (setq slime-contribs '(slime-fancy))))
 #+END_SRC
 ** Markdown

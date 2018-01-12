@@ -6,6 +6,9 @@
 (add-to-list 'package-archives
              '("gnu" . "https://elpa.gnu.org/packages/") t)
 
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 (package-initialize)
 
 (unless (package-installed-p 'use-package)

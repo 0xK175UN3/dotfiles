@@ -115,8 +115,8 @@
   :init
     (add-hook 'clojure-mode-hook 'cider-mode)
     (progn
-      (setq exec-path 
-        (append exec-path '("/usr/local/Cellar/leiningen/2.8.1/bin")))))
+      (setq exec-path
+        (append exec-path '("/usr/local/bin/lein")))))
 
 (use-package slime
   :mode "\\.lisp%"

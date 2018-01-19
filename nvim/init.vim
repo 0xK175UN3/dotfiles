@@ -2,32 +2,52 @@
 "                                         Configure Plugins
 " ==========================================================================================================
 
-silent! if plug#begin('~/.vim/plugged')
+silent! if plug#begin('~/.config/nvim/plugged')
 
 let g:plug_url_format = 'git@github.com:%s.git'
 
 " ===== Langnuage support =====
-Plug 'vim-ruby/vim-ruby'                               " Ruby <3
-Plug 'tpope/vim-bundler'                               "
-Plug 'tpope/vim-rails'                                 "
-Plug 'kchmck/vim-coffee-script'                        " CoffeeScript - still better than JavaScript
-Plug 'tpope/vim-markdown'                              " Markdown - A plain text format for barely structured documents
-Plug 'tpope/vim-haml'                                  " Haml - A better HTML
-Plug 'honza/dockerfile.vim'                            "
-Plug 'pangloss/vim-javascript'                         "
+Plug 'tpope/vim-markdown'
+Plug 'honza/dockerfile.vim'
 Plug 'vim-syntastic/syntastic'
-Plug 'neovimhaskell/haskell-vim'                       " Basic Haskell support
+
+" Ruby
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+
+" HTML, CSS etc
+Plug 'groenewege/vim-less'
+Plug 'digitaltoad/vim-jade'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-haml'
+
+" Haskell
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
+Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
 let g:haskell_classic_highlighting = 1
 let g:haskell_indent_if = 4
 let g:haskell_indent_case = 4
 let g:haskell_indent_in = 0
-Plug 'eagletmt/neco-ghc'                               " Powerfull GHC autocompleting
+
+" Javascript
+Plug 'elzr/vim-json'
+Plug 'moll/vim-node', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'kchmck/vim-coffee-script'
 
 " ===== Colors and UI awesome things =====
-set guifont=Droid\ Sans\ Mono\ 15                      " Set a different font
-Plug 'junegunn/seoul256.vim'                           " My favorite color scheme
-let g:seoul256_background = 236                        " ... dark one
-Plug 'vim-airline/vim-airline'                         " Status bar at the bottom of the screen
+set guifont=Droid\ Sans\ Mono\ 15
+Plug 'flazz/vim-colorschemes'
+Plug 'rakr/vim-one'
+colorscheme one-dark
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = ''
@@ -39,7 +59,7 @@ let g:airline#extensions#tabline#left_sep = '|'
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_theme = 'lucius'
+let g:airline_theme = 'one-dark'
 
 " ===== Editing =====
 Plug 'tpope/vim-surround'                              " Better support for working with things that 'surround' text such as quotes and parens
@@ -163,5 +183,3 @@ nnoremap <C-l> <C-w>l
 " ===== EasyAlign keybindings =====
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
-let g:xmpfilter_cmd = "seeing_is_believing"

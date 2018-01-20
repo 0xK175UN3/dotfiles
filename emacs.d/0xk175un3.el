@@ -113,17 +113,13 @@
 (use-package cider
   :ensure t
   :init
-    (add-hook 'clojure-mode-hook 'cider-mode)
-    (progn
-      (setq exec-path
-        (append exec-path '("/usr/local/bin/lein")))))
+    (add-hook 'clojure-mode-hook 'cider-mode))
 
 (use-package slime
   :mode "\\.lisp%"
   :init
     (add-hook 'lisp-mode-hook 'slime-mode)
     (progn
-      (setq inferior-lisp-program "/usr/local/Cellar/sbcl/1.4.1/bin/sbcl")
       (setq slime-contribs '(slime-fancy))))
 
 (use-package markdown-mode
@@ -218,10 +214,6 @@
   :init
     (global-linum-mode 1)
 (setq linum-format "%4d "))
-
-(use-package zerodark-theme
-  :init
-    (load-theme 'zerodark t))
 
 (use-package powerline
     :ensure t

@@ -322,21 +322,24 @@
 #+END_SRC
 *** GUI
 - Theme
+#+BEGIN_COMMENT
 #+BEGIN_SRC emacs-lisp
 (use-package zerodark-theme
   :init
     (load-theme 'zerodark t))
 #+END_SRC
-
-#+BEGIN_COMMENT
 #+BEGIN_SRC emacs-lisp
 (use-package seoul256-theme
   :init
     (progn
       (setq seoul256-background 234)
       (load-theme 'seoul256 t)))
-#+END_SRC
 #+END_COMMENT
+#+BEGIN_SRC emacs-lisp
+(use-package eclipse-theme
+  :init
+    (load-theme 'eclipse t))
+#+END_SRC
 - Powerline
 #+BEGIN_SRC emacs-lisp
 (use-package powerline

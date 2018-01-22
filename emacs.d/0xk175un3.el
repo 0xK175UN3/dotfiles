@@ -115,6 +115,21 @@
   :init
     (add-hook 'clojure-mode-hook 'cider-mode))
 
+(use-package rust-mode
+  :ensure t
+  :mode "//.rs%")
+
+(use-package racer
+  :ensure t
+  :config
+    (setq racer-rust-src-path "/Users/0xk175un3/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src")
+  :init
+    (add-hook 'rust-mode-hood 'racer-mode)
+    (add-hook 'racer-mode-hook #'eldoc-mode)
+    (add-hook 'racer-mode-hook #'company-mode)
+  :bind (:map rust-mode-map
+          ([?\t] . company-indent-or-complete-common)))
+
 (use-package slime
   :mode "\\.lisp%"
   :init

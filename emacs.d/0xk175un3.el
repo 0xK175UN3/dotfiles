@@ -56,11 +56,12 @@
           ("M-p" . nil)
           ("C-n" . company-select-next)
           ("C-p" . company-select-previous))
+  :config
+    (global-company-mode)
   :init
-    (progn
-      (eval-after-load 'company
-        '(push 'company-robe company-backends))
-        (add-hook 'after-init-hook 'global-company-mode)))
+    (eval-after-load "company"
+      '(progn
+         (add-to-list 'company-backends 'company-robe))))
 
 (use-package web-mode
   :diminish
@@ -82,6 +83,23 @@
   :bind (
     ("M-%" . anzu-query-replace)
     ("C-M-%" . anzu-query-replace-regexp)))
+
+(use-package slime
+  :mode "\\.lisp%"
+  :init
+    (add-hook 'lisp-mode-hook 'slime-mode)
+    (progn
+      (setq inferior-lisp-program "/usr/local/bin/sbcl")
+      (setq slime-contribs '(slime-fancy))))
+
+(use-package clojure-mode
+  :ensure t
+  :mode "\\.clj%")
+
+(use-package cider
+  :ensure t
+  :init
+    (add-hook 'clojure-mode-hook 'cider-mode))
 
 (use-package rbenv
   :init
@@ -106,15 +124,6 @@
   :config
     (projectile-rails-global-mode t))
 
-(use-package clojure-mode
-  :ensure t
-  :mode "\\.clj%")
-
-(use-package cider
-  :ensure t
-  :init
-    (add-hook 'clojure-mode-hook 'cider-mode))
-
 (use-package rust-mode
   :ensure t
   :mode "//.rs%")
@@ -129,13 +138,6 @@
     (add-hook 'racer-mode-hook #'company-mode)
   :bind (:map rust-mode-map
           ([?\t] . company-indent-or-complete-common)))
-
-(use-package slime
-  :mode "\\.lisp%"
-  :init
-    (add-hook 'lisp-mode-hook 'slime-mode)
-    (progn
-      (setq slime-contribs '(slime-fancy))))
 
 (use-package markdown-mode
   :mode "\\.md%")
@@ -199,6 +201,22 @@
     (setq whitespace-style '(trailing tabs tab-mark face))
     (global-whitespace-mode)))
 
+(use-package neotree
+  :diminish
+  :ensure t
+  :bind (("C-c f t" . neotree-toggle))
+  :config (setq neo-window-width 32
+                neo-create-file-auto-open t
+                neo-banner-message nil
+                neo-show-updir-line nil
+                neo-mode-line-type 'neotree
+                neo-smart-open t
+                neo-dont-be-alone t
+                neo-persist-show nil
+                neo-show-hidden-files t
+                neo-auto-indent-point t
+                neo-theme (if (display-graphic-p) 'icons 'arrow)))
+
 (use-package ox-reveal)
 
 (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.6.0/")
@@ -229,6 +247,10 @@
   :init
     (global-linum-mode 1)
 (setq linum-format "%4d "))
+
+(use-package zerodark-theme
+  :init
+    (load-theme 'zerodark t))
 
 (use-package powerline
     :ensure t

@@ -62,11 +62,12 @@
           ("M-p" . nil)
           ("C-n" . company-select-next)
           ("C-p" . company-select-previous))
+  :config
+    (global-company-mode)
   :init
-    (progn
-      (eval-after-load 'company
-        '(push 'company-robe company-backends))
-        (add-hook 'after-init-hook 'global-company-mode)))
+    (eval-after-load "company"
+      '(progn
+         (add-to-list 'company-backends 'company-robe))))
 #+END_SRC
 - [[https://github.com/fxbois/web-mode/tree/master][Web-Mode]]
 #+BEGIN_SRC emacs-lisp
@@ -93,7 +94,32 @@
     ("M-%" . anzu-query-replace)
     ("C-M-%" . anzu-query-replace-regexp)))
 #+END_SRC
-** Ruby <3
+** Common Lisp
+- Slime
+#+BEGIN_SRC emacs-lisp
+(use-package slime
+  :mode "\\.lisp%"
+  :init
+    (add-hook 'lisp-mode-hook 'slime-mode)
+    (progn
+      (setq inferior-lisp-program "/usr/local/bin/sbcl")
+      (setq slime-contribs '(slime-fancy))))
+#+END_SRC
+** Clojure
+- [[https://github.com/clojure-emacs/clojure-mode/tree/master][Clojure-mode]]
+#+BEGIN_SRC emacs-lisp
+(use-package clojure-mode
+  :ensure t
+  :mode "\\.clj%")
+#+END_SRC
+- [[https://github.com/clojure-emacs/cider/tree/master][Cider]]
+#+BEGIN_SRC emacs-lisp
+(use-package cider
+  :ensure t
+  :init
+    (add-hook 'clojure-mode-hook 'cider-mode))
+#+END_SRC
+** Ruby
 - [[https://github.com/senny/rbenv.el/tree/master][Rbenv]]
 #+BEGIN_SRC emacs-lisp
 (use-package rbenv
@@ -127,21 +153,6 @@
   :config
     (projectile-rails-global-mode t))
 #+END_SRC
-
-** Clojure
-- [[https://github.com/clojure-emacs/clojure-mode/tree/master][Clojure-mode]]
-#+BEGIN_SRC emacs-lisp
-(use-package clojure-mode
-  :ensure t
-  :mode "\\.clj%")
-#+END_SRC
-- [[https://github.com/clojure-emacs/cider/tree/master][Cider]]
-#+BEGIN_SRC emacs-lisp
-(use-package cider
-  :ensure t
-  :init
-    (add-hook 'clojure-mode-hook 'cider-mode))
-#+END_SRC
 ** Rust
 - [[][Rust-mode]]
 #+BEGIN_SRC emacs-lisp
@@ -161,16 +172,6 @@
     (add-hook 'racer-mode-hook #'company-mode)
   :bind (:map rust-mode-map
           ([?\t] . company-indent-or-complete-common)))
-#+END_SRC
-** Common Lisp
-- Slime
-#+BEGIN_SRC emacs-lisp
-(use-package slime
-  :mode "\\.lisp%"
-  :init
-    (add-hook 'lisp-mode-hook 'slime-mode)
-    (progn
-      (setq slime-contribs '(slime-fancy))))
 #+END_SRC
 ** Markdown
 - [[https://github.com/jrblevin/markdown-mode][Markdown-mode]]
@@ -258,42 +259,24 @@
     (setq whitespace-style '(trailing tabs tab-mark face))
     (global-whitespace-mode)))
 #+END_SRC
-#+BEGIN_COMMENT
-- [[][Evil-mode]]
+- [][Neo-tree]
 #+BEGIN_SRC emacs-lisp
-(use-package evil
+(use-package neotree
+  :diminish
   :ensure t
-  :init
-    (progn
-    (setq evil-default-cursor t))
-  :config
-    (evil-mode 1))
-
-(use-package evil-leader
-  :ensure t
-  :init
-    (global-evil-leader-mode)
-  (progn
-    (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key
-      "g" 'magit-status )))
-
-(use-package evil-surround
-  :ensure t
-  :config
-    (global-evil-surround-mode))
-
-(use-package evil-escape
-  :ensure t
-  :init
-    (setq-default evil-escape-key-sequence "jk")
-  :config
-    (evil-escape-mode))
-
-(use-package evil-indent-textobject
-  :ensure t)
-#+END_SRC
-#+END_COMMENT
+  :bind (("C-c f t" . neotree-toggle))
+  :config (setq neo-window-width 32
+                neo-create-file-auto-open t
+                neo-banner-message nil
+                neo-show-updir-line nil
+                neo-mode-line-type 'neotree
+                neo-smart-open t
+                neo-dont-be-alone t
+                neo-persist-show nil
+                neo-show-hidden-files t
+                neo-auto-indent-point t
+                neo-theme (if (display-graphic-p) 'icons 'arrow)))
+  #+END_SRC
 ** Emacs for everything
 - [[https://github.com/yjwen/org-reveal][Org-Reveal]]
 #+BEGIN_SRC emacs-lisp
@@ -342,24 +325,26 @@
 #+END_SRC
 *** GUI
 - Theme
-#+BEGIN_COMMENT
+
 #+BEGIN_SRC emacs-lisp
 (use-package zerodark-theme
   :init
     (load-theme 'zerodark t))
 #+END_SRC
+#+BEGIN_COMMENT
 #+BEGIN_SRC emacs-lisp
 (use-package seoul256-theme
   :init
     (progn
       (setq seoul256-background 234)
       (load-theme 'seoul256 t)))
-#+END_COMMENT
+
 #+BEGIN_SRC emacs-lisp
 (use-package eclipse-theme
   :init
     (load-theme 'eclipse t))
 #+END_SRC
+#+END_COMMENT
 - Powerline
 #+BEGIN_SRC emacs-lisp
 (use-package powerline

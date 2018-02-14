@@ -1,0 +1,6 @@
+setxkbmap -layout "us,ru"
+setxkbmap -option "grp:alt_space_toggle,ctrl:nocaps"
+
+xsetroot -cursor_name left_ptr &
+
+exec xmonad

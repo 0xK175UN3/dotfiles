@@ -11,7 +11,6 @@
   scroll-error-top-bottom t
   show-paren-delay 0.1
   tabs-width 2
-  use-package-verbose nil
   use-package-always-ensure t
   package-enable-at-startup nil
   sentence-end-double-space nil
@@ -50,29 +49,88 @@
                     :family "Fira Code"
                     :height 140
                     :width 'normal)
+
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev
+                                         try-expand-dabbrev-all-buffers
+                                         try-expand-dabbrev-from-kill
+                                         try-complete-file-name-partially
+                                         try-complete-file-name
+                                         try-expand-all-abbrevs
+                                         try-expand-list
+                                         try-expand-line
+                                         try-complete-lisp-symbol-partially
+                                         try-complete-lisp-symbol))
+
+(global-set-key (kbd "M-/") #'hippie-expand)
+
+(global-set-key (kbd "C-x C-b") #'ibuffer)
+
+(setq tab-always-indent 'complete)
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-verbose t)
+
 #+END_SRC
 * Languages
 ** Global
-- [[https://github.com/company-mode/company-mode/tree/master][Company]]
 #+BEGIN_SRC emacs-lisp
-(use-package company
-  :diminish
-  :bind (:map company-active-map
-          ("M-n" . nil)
-          ("M-p" . nil)
-          ("C-n" . company-select-next)
-          ("C-p" . company-select-previous))
-  :config
-    (global-company-mode)
+(use-package auto-complete
+  :diminish auto-complete-mode
+  :commands auto-complete-mode
   :init
-    (eval-after-load "company"
-      '(progn
-         (add-to-list 'company-backends 'company-robe))))
+  (progn
+    (auto-complete-mode t))
+  :config
+  (progn
+    (use-package auto-complete-config)
+
+    (ac-set-trigger-key "TAB")
+    (ac-config-default)
+
+    (setq ac-delay 0.02)
+    (setq ac-use-menu-map t)
+    (setq ac-menu-height 50)
+    (setq ac-use-quick-help nil)
+    (setq ac-ignore-case nil)
+    (setq ac-fuzzy-enable t)
+
+    (use-package ac-dabbrev
+      :config
+      (progn
+        (add-to-list 'ac-sources 'ac-source-dabbrev)))
+
+    (setq ac-modes '(js3-mode
+                     emacs-lisp-mode
+                     lisp-mode
+                     lisp-interaction-mode
+                     slime-repl-mode
+                     go-mode
+                     clojure-mode
+                     clojurescript-mode
+                     scheme-mode
+                     haskell-mode
+                     python-mode
+                     ruby-mode
+                     enh-ruby-mode
+                     ecmascript-mode
+                     javascript-mode
+                     js-mode
+                     js2-mode
+                     css-mode
+                     makefile-mode))))
 #+END_SRC
 - [[https://github.com/fxbois/web-mode/tree/master][Web-Mode]]
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
-  :diminish
+  :diminish web-mode
   :config
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode))
@@ -87,12 +145,33 @@
 - [[https://github.com/syohex/emacs-anzu/tree/master][Anzu]]
 #+BEGIN_SRC emacs-lisp
 (use-package anzu
-  :diminish
+  :diminish global-anzu-mode
   :config
     (global-anzu-mode)
   :bind (
     ("M-%" . anzu-query-replace)
     ("C-M-%" . anzu-query-replace-regexp)))
+#+END_SRC
+- [[][Parinfer]]
+#+BEGIN_SRC emacs-lisp
+(use-package parinfer
+  :diminish parinfer-mode
+  :ensure t
+  :bind
+  (("C-," . parinfer-toggle-mode))
+  :init
+  (progn
+    (setq parinfer-extensions
+          '(defaults       ; should be included.
+            pretty-parens  ; different paren styles for different modes.
+            paredit        ; Introduce some paredit commands.
+            smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+            smart-yank))   ; Yank behavior depend on mode.
+    (add-hook 'clojure-mode-hook #'parinfer-mode)
+    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'scheme-mode-hook #'parinfer-mode)
+    (add-hook 'lisp-mode-hook #'parinfer-mode)))
 #+END_SRC
 ** Common Lisp
 - Slime
@@ -126,12 +205,6 @@
   :init
     (global-rbenv-mode))
 #+END_SRC
-- [[https://github.com/dgutov/robe][Robe]]
-#+BEGIN_SRC emacs-lisp
-(use-package robe
-  :init
-    (add-hook 'ruby-mode-hook 'robe-mode t))
-#+END_SRC
 - [[https://github.com/rejeep/ruby-end.el][Ruby-End]]
 #+BEGIN_SRC emacs-lisp
 (use-package ruby-end
@@ -152,6 +225,17 @@
   :diminish
   :config
     (projectile-rails-global-mode t))
+#+END_SRC
+** Python
+- [[https://github.com/proofit404/anaconda-mode][Anaconda]]
+#+BEGIN_SRC emacs-lisp
+(use-package anaconda-mode
+  :ensure t
+  :mode "//.py%"
+  :init
+    (progn
+      (add-hook 'python-mode-hook 'anaconda-mode)
+      (add-hook 'python-mode-hook 'anaconda-eldoc-mode)))
 #+END_SRC
 ** Rust
 - [[][Rust-mode]]
@@ -190,10 +274,10 @@
 - [[https://github.com/abo-abo/swiper][Swiper / Ivy / Counsel]]
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
-  :diminish)
+  :diminish counsel-mode)
 
 (use-package ivy
-  :diminish
+  :diminish ivy-mode
   :bind (("C-x b" . ivy-switch-buffer))
   :config
     (setq ivy-use-virtual-buffers t)
@@ -201,7 +285,7 @@
     (setq ivy-display-style 'fancy))
 
 (use-package swiper
-  :diminish
+  :diminish ivy-mode
   :bind (("\C-s" . swiper)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
@@ -215,13 +299,13 @@
 - [[https://github.com/abo-abo/avy][Avy]]
 #+BEGIN_SRC emacs-lisp
 (use-package avy
-  :diminish
+  :diminish avy-mode
   :bind (("C-;" . avy-goto-char)))
 #+END_SRC
 - [[https://github.com/abo-abo/ace-window][Ace-window]]
 #+BEGIN_SRC emacs-lisp
 (use-package ace-window
-  :diminish
+  :diminish ace-window-mode
   :bind (("M-o" . ace-window)
          ("M-p" . ace-delete-window))
   :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
@@ -236,6 +320,7 @@
 - [[][Which-mode]]
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
+  :diminish which-key-mode
   :init
     (which-key-mode))
 #+END_SRC
@@ -253,7 +338,7 @@
 - [[https://www.emacswiki.org/emacs/WhiteSpace][Whitespace]]
 #+BEGIN_SRC emacs-lisp
 (use-package whitespace
-  :diminish
+  :diminish global-whitespace-mode
   :config
   (progn
     (setq whitespace-style '(trailing tabs tab-mark face))
@@ -296,14 +381,14 @@
 - [[https://github.com/syohex/emacs-git-gutter][Git-Gutter]]
 #+BEGIN_SRC emacs-lisp
 (use-package git-gutter
-  :diminish
+  :diminish git-gutter-mode
   :config
     (global-git-gutter-mode))
 #+END_SRC
 - [[https://github.com/bbatsov/projectile][Projectile]]
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
-  :diminish
+  :diminish projectile-mode
   :init
     (progn
       (projectile-global-mode)
@@ -313,6 +398,7 @@
 - [[https://github.com/zk-phi/indent-guide][Indent-Guide]]
 #+BEGIN_SRC emacs-lisp
 (use-package indent-guide
+  :diminish indent-guide-mode
   :init
   (indent-guide-global-mode))
 #+END_SRC
@@ -325,27 +411,30 @@
 #+END_SRC
 *** GUI
 - Theme
-
+#+BEGIN_SRC emacs-lisp
+(use-package doom-themes
+  :init
+    (load-theme 'doom-one t))
+#+END_SRC
+#+BEGIN_COMMENT
 #+BEGIN_SRC emacs-lisp
 (use-package zerodark-theme
   :init
     (load-theme 'zerodark t))
-#+END_SRC
-#+BEGIN_COMMENT
-#+BEGIN_SRC emacs-lisp
+
 (use-package seoul256-theme
   :init
     (progn
       (setq seoul256-background 234)
       (load-theme 'seoul256 t)))
 
-#+BEGIN_SRC emacs-lisp
 (use-package eclipse-theme
   :init
     (load-theme 'eclipse t))
 #+END_SRC
 #+END_COMMENT
 - Powerline
+#+BEGIN_COMMENT
 #+BEGIN_SRC emacs-lisp
 (use-package powerline
     :ensure t
@@ -369,7 +458,7 @@
     (defface mode-line-count-face nil
       "Face for anzu/evil-substitute/evil-search number-of-matches display.")
 
-    ;; Git/VCS segment faces
+      ;; Git/VCS segment faces
     (defface mode-line-vcs-info '((t (:inherit warning)))
       "")
     (defface mode-line-vcs-warning '((t (:inherit warning)))
@@ -566,3 +655,4 @@
     (setq-default mode-line-format (my-mode-line)))
 (use-package all-the-icons)
 #+END_SRC
+#+END_COMMENT

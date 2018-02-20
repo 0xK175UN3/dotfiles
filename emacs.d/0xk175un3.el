@@ -77,6 +77,7 @@
 (setq use-package-verbose t)
 
 (use-package auto-complete
+  :diminish auto-complete-mode
   :commands auto-complete-mode
   :init
   (progn
@@ -100,28 +101,27 @@
       (progn
         (add-to-list 'ac-sources 'ac-source-dabbrev)))
 
-    (setq ac-modes '(js3-mode
-                     emacs-lisp-mode
+    (setq ac-modes '(emacs-lisp-mode
                      lisp-mode
                      lisp-interaction-mode
                      slime-repl-mode
-                     go-mode
                      clojure-mode
                      clojurescript-mode
                      scheme-mode
                      haskell-mode
-                     python-mode
+                     elm-mode
                      ruby-mode
                      enh-ruby-mode
                      ecmascript-mode
                      javascript-mode
                      js-mode
                      js2-mode
+                     js3-mode
                      css-mode
                      makefile-mode))))
 
 (use-package web-mode
-  :diminish
+  :diminish web-mode
   :config
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.erb?\\'" . web-mode))
@@ -134,47 +134,26 @@
       (setq web-mode-code-indent-offset 2)))
 
 (use-package anzu
-  :diminish
+  :diminish global-anzu-mode
   :config
     (global-anzu-mode)
   :bind (
     ("M-%" . anzu-query-replace)
     ("C-M-%" . anzu-query-replace-regexp)))
 
-(use-package parinfer
-  :ensure t
-  :bind
-  (("C-," . parinfer-toggle-mode))
+(use-package aggressive-indent
   :init
-  (progn
-    (setq parinfer-extensions
-          '(defaults       ; should be included.
-            pretty-parens  ; different paren styles for different modes.
-            paredit        ; Introduce some paredit commands.
-            smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-            smart-yank))   ; Yank behavior depend on mode.
-    (add-hook 'clojure-mode-hook #'parinfer-mode)
-    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
-    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
-    (add-hook 'scheme-mode-hook #'parinfer-mode)
-    (add-hook 'lisp-mode-hook #'parinfer-mode)))
-
-(use-package slime
-  :mode "\\.lisp%"
-  :init
-    (add-hook 'lisp-mode-hook 'slime-mode)
     (progn
-      (setq inferior-lisp-program "/usr/local/bin/sbcl")
-      (setq slime-contribs '(slime-fancy))))
+      (add-hook 'ruby-mode-hook       #'aggressive-indent-mode)
+      (add-hook 'haskell-mode-hook    #'aggressive-indent-mode)
+      (add-hook 'elm-mode-hook        #'aggressive-indent-mode)
+      (add-hook 'clojure-mode-hook    #'aggressive-indent-mode)
+      (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+      (add-hook 'css-mode-hook        #'aggressive-indent-mode)))
 
-(use-package clojure-mode
-  :ensure t
-  :mode "\\.clj%")
-
-(use-package cider
-  :ensure t
-  :init
-    (add-hook 'clojure-mode-hook 'cider-mode))
+(use-package ruby-mode
+  :config
+    (setq ruby-insert-encoding-magic-comment nil))
 
 (use-package rbenv
   :init
@@ -195,28 +174,32 @@
   :config
     (projectile-rails-global-mode t))
 
-(use-package anaconda-mode
-  :ensure t
-  :mode "//.py%"
+(use-package haskell-mode
+  :mode "\\.hs%")
+
+(use-package intero
   :init
+  (add-hook 'haskell-mode-hook 'intero-mode))
+
+(use-package elm-mode
+  :mode "\\.elm%")
+
+(use-package slime
+  :mode "\\.lisp%"
+  :init
+    (add-hook 'lisp-mode-hook 'slime-mode)
     (progn
-      (add-hook 'python-mode-hook 'anaconda-mode)
-      (add-hook 'python-mode-hook 'anaconda-eldoc-mode)))
+      (setq inferior-lisp-program "/usr/local/bin/sbcl")
+      (setq slime-contribs '(slime-fancy))))
 
-(use-package rust-mode
+(use-package clojure-mode
   :ensure t
-  :mode "//.rs%")
+  :mode "\\.clj%")
 
-(use-package racer
+(use-package cider
   :ensure t
-  :config
-    (setq racer-rust-src-path "/Users/0xk175un3/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src")
   :init
-    (add-hook 'rust-mode-hood 'racer-mode)
-    (add-hook 'racer-mode-hook #'eldoc-mode)
-    (add-hook 'racer-mode-hook #'company-mode)
-  :bind (:map rust-mode-map
-          ([?\t] . company-indent-or-complete-common)))
+    (add-hook 'clojure-mode-hook 'cider-mode))
 
 (use-package markdown-mode
   :mode "\\.md%")
@@ -224,11 +207,14 @@
 (use-package yaml-mode
   :mode "\\.yml%")
 
+(use-package slim-mode
+  :mode "\\.slim%")
+
 (use-package counsel
-  :diminish)
+  :diminish counsel-mode)
 
 (use-package ivy
-  :diminish
+  :diminish ivy-mode
   :bind (("C-x b" . ivy-switch-buffer))
   :config
     (setq ivy-use-virtual-buffers t)
@@ -236,7 +222,7 @@
     (setq ivy-display-style 'fancy))
 
 (use-package swiper
-  :diminish
+  :diminish ivy-mode
   :bind (("\C-s" . swiper)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
@@ -248,11 +234,11 @@
       (setq ivy-display-style 'fancy)))
 
 (use-package avy
-  :diminish
+  :diminish avy-mode
   :bind (("C-;" . avy-goto-char)))
 
 (use-package ace-window
-  :diminish
+  :diminish ace-window-mode
   :bind (("M-o" . ace-window)
          ("M-p" . ace-delete-window))
   :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
@@ -263,18 +249,27 @@
   :bind ("C-c i" . er/expand-region))
 
 (use-package which-key
+  :diminish which-key-mode
   :init
     (which-key-mode))
 
-(use-package dired+
-  :config
-    (require 'dired+))
+(use-package dash
+  :ensure t)
+
+(use-package let-alist
+  :ensure t)
+
+(use-package f
+  :ensure t)
+
+(use-package s
+  :ensure t)
 
 (use-package diminish
   :ensure t)
 
 (use-package whitespace
-  :diminish
+  :diminish global-whitespace-mode
   :config
   (progn
     (setq whitespace-style '(trailing tabs tab-mark face))
@@ -307,18 +302,19 @@
   :bind (("C-x g" . magit-status)))
 
 (use-package git-gutter
-  :diminish
+  :diminish git-gutter-mode
   :config
     (global-git-gutter-mode))
 
 (use-package projectile
-  :diminish
+  :diminish projectile-mode
   :init
     (progn
       (projectile-global-mode)
       (setq projectile-completion-system 'ivy)))
 
 (use-package indent-guide
+  :diminish indent-guide-mode
   :init
   (indent-guide-global-mode))
 

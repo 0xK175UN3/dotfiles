@@ -76,6 +76,13 @@
 (require 'use-package)
 (setq use-package-verbose t)
 
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config
+  (setq exec-path-from-shell-variables '("PATH" "NVM_DIR"))
+  (exec-path-from-shell-initialize))
+
 (use-package auto-complete
   :diminish auto-complete-mode
   :commands auto-complete-mode
@@ -182,7 +189,12 @@
   (add-hook 'haskell-mode-hook 'intero-mode))
 
 (use-package elm-mode
-  :mode "\\.elm%")
+  :mode "\\.elm%"
+  :init
+  (add-hook 'elm-mode-hook
+    (lambda ()
+      (set (make-local-variable 'eldoc-documentation-function)
+        'elm-oracle-type-at-point))))
 
 (use-package slime
   :mode "\\.lisp%"

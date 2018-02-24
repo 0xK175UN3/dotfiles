@@ -78,6 +78,13 @@
 (require 'use-package)
 (setq use-package-verbose t)
 
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config
+  (setq exec-path-from-shell-variables '("PATH" "NVM_DIR"))
+  (exec-path-from-shell-initialize))
+
 #+END_SRC
 * Languages
 ** Global
@@ -213,7 +220,12 @@
 - Elm mode
 #+BEGIN_SRC emacs-lisp
 (use-package elm-mode
-  :mode "\\.elm%")
+  :mode "\\.elm%"
+  :init
+  (add-hook 'elm-mode-hook
+    (lambda ()
+      (set (make-local-variable 'eldoc-documentation-function)
+        'elm-oracle-type-at-point))))
 #+END_SRC
 ** Common Lisp
 - Slime
@@ -252,7 +264,7 @@
 (use-package yaml-mode
   :mode "\\.yml%")
 #+END_SRC
-** Slim-mode
+** Slim
 #+BEGIN_SRC emacs-lisp
 (use-package slim-mode
   :mode "\\.slim%")

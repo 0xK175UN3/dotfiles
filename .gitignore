@@ -1,0 +1,10 @@
+emacs.d/elpa*
+emacs.d/.DS_store
+emacs.d/auto-save-list*
+emacs.d/eshell*
+emacs.d/ac-comphist.dat
+emacs.d/network-security.data
+emacs.d/projectile-bookmarks.eld
+emacs.d/recentf
+nvim/plugged*
+.DS_store

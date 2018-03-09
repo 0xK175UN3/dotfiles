@@ -9,7 +9,6 @@
   scroll-error-top-bottom t
   show-paren-delay 0.1
   tabs-width 2
-  use-package-always-ensure t
   package-enable-at-startup nil
   sentence-end-double-space nil
   split-width-threshold nil
@@ -45,7 +44,7 @@
 (scroll-bar-mode 0)
 (set-face-attribute 'default nil
                     :family "Fira Code"
-                    :height 140
+                    :height 150
                     :width 'normal)
 
 (prefer-coding-system 'utf-8)
@@ -83,51 +82,8 @@
   (setq exec-path-from-shell-variables '("PATH" "NVM_DIR"))
   (exec-path-from-shell-initialize))
 
-(use-package auto-complete
-  :diminish auto-complete-mode
-  :commands auto-complete-mode
-  :init
-  (progn
-    (auto-complete-mode t))
-  :config
-  (progn
-    (use-package auto-complete-config)
-
-    (ac-set-trigger-key "TAB")
-    (ac-config-default)
-
-    (setq ac-delay 0.02)
-    (setq ac-use-menu-map t)
-    (setq ac-menu-height 50)
-    (setq ac-use-quick-help nil)
-    (setq ac-ignore-case nil)
-    (setq ac-fuzzy-enable t)
-
-    (use-package ac-dabbrev
-      :config
-      (progn
-        (add-to-list 'ac-sources 'ac-source-dabbrev)))
-
-    (setq ac-modes '(emacs-lisp-mode
-                     lisp-mode
-                     lisp-interaction-mode
-                     slime-repl-mode
-                     clojure-mode
-                     clojurescript-mode
-                     scheme-mode
-                     haskell-mode
-                     elm-mode
-                     ruby-mode
-                     enh-ruby-mode
-                     ecmascript-mode
-                     javascript-mode
-                     js-mode
-                     js2-mode
-                     js3-mode
-                     css-mode
-                     makefile-mode))))
-
 (use-package web-mode
+  :ensure t
   :diminish web-mode
   :config
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -141,6 +97,7 @@
       (setq web-mode-code-indent-offset 2)))
 
 (use-package anzu
+  :ensure t
   :diminish global-anzu-mode
   :config
     (global-anzu-mode)
@@ -148,84 +105,79 @@
     ("M-%" . anzu-query-replace)
     ("C-M-%" . anzu-query-replace-regexp)))
 
-(use-package aggressive-indent
-  :init
-    (progn
-      (add-hook 'ruby-mode-hook       #'aggressive-indent-mode)
-      (add-hook 'haskell-mode-hook    #'aggressive-indent-mode)
-      (add-hook 'elm-mode-hook        #'aggressive-indent-mode)
-      (add-hook 'clojure-mode-hook    #'aggressive-indent-mode)
-      (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-      (add-hook 'css-mode-hook        #'aggressive-indent-mode)))
+(use-package flycheck
+  :ensure t
+  :diminish flycheck-mode
+  :config
+    (add-hook 'after-init-hook #'global-flycheck-mode))
+
+(use-package company
+  :ensure t
+  :diminish company-mode
+  :config
+    (global-company-mode))
 
 (use-package ruby-mode
+  :ensure t
   :config
     (setq ruby-insert-encoding-magic-comment nil))
 
+(use-package rubocop
+  :ensure t
+  :init
+    (add-hook 'ruby-mode-hook #'rubocop-mode)
+    (add-hook 'ruby-mode-hook
+      (lambda ()
+        (add-hook 'before-save-hook 'rubocop-check-current-file))))
+
 (use-package rbenv
+  :ensure t
   :init
     (global-rbenv-mode))
 
 (use-package ruby-end
+  :ensure t
   :diminish
   :init
     (add-hook 'ruby-mode-hook 'ruby-end-mode t))
 
 (use-package inf-ruby
+  :ensure t
   :diminish
   :init
     (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 
 (use-package projectile-rails
+  :ensure t
   :diminish
   :config
     (projectile-rails-global-mode t))
 
-(use-package haskell-mode
-  :mode "\\.hs%")
-
-(use-package intero
+(use-package coffee-mode
+  :ensure t
+  :diminish
   :init
-  (add-hook 'haskell-mode-hook 'intero-mode))
-
-(use-package elm-mode
-  :mode "\\.elm%"
-  :init
-  (add-hook 'elm-mode-hook
-    (lambda ()
-      (set (make-local-variable 'eldoc-documentation-function)
-        'elm-oracle-type-at-point))))
-
-(use-package slime
-  :mode "\\.lisp%"
-  :init
-    (add-hook 'lisp-mode-hook 'slime-mode)
     (progn
-      (setq inferior-lisp-program "/usr/local/bin/sbcl")
-      (setq slime-contribs '(slime-fancy))))
-
-(use-package clojure-mode
-  :ensure t
-  :mode "\\.clj%")
-
-(use-package cider
-  :ensure t
-  :init
-    (add-hook 'clojure-mode-hook 'cider-mode))
+      (setq coffee-tabs-width 2)))
 
 (use-package markdown-mode
+  :ensure t
   :mode "\\.md%")
 
 (use-package yaml-mode
+  :ensure t
   :mode "\\.yml%")
 
 (use-package slim-mode
+  :ensure t
   :mode "\\.slim%")
 
 (use-package counsel
+  :ensure t
   :diminish counsel-mode)
 
 (use-package ivy
+  :ensure t
   :diminish ivy-mode
   :bind (("C-x b" . ivy-switch-buffer))
   :config
@@ -234,6 +186,7 @@
     (setq ivy-display-style 'fancy))
 
 (use-package swiper
+  :ensure t
   :diminish ivy-mode
   :bind (("\C-s" . swiper)
          ("C-c C-r" . ivy-resume)
@@ -246,21 +199,25 @@
       (setq ivy-display-style 'fancy)))
 
 (use-package avy
+  :ensure t
   :diminish avy-mode
   :bind (("C-;" . avy-goto-char)))
 
 (use-package ace-window
+  :ensure t
   :diminish ace-window-mode
   :bind (("M-o" . ace-window)
          ("M-p" . ace-delete-window))
   :init (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 (use-package expand-region
+  :ensure t
   :diminish
   :commands er/expand-region
   :bind ("C-c i" . er/expand-region))
 
 (use-package which-key
+  :ensure t
   :diminish which-key-mode
   :init
     (which-key-mode))
@@ -281,6 +238,7 @@
   :ensure t)
 
 (use-package whitespace
+  :ensure t
   :diminish global-whitespace-mode
   :config
   (progn
@@ -288,8 +246,8 @@
     (global-whitespace-mode)))
 
 (use-package neotree
-  :diminish
   :ensure t
+  :diminish
   :bind (("C-c f t" . neotree-toggle))
   :config (setq neo-window-width 32
                 neo-create-file-auto-open t
@@ -303,22 +261,27 @@
                 neo-auto-indent-point t
                 neo-theme (if (display-graphic-p) 'icons 'arrow)))
 
-(use-package ox-reveal)
+(use-package ox-reveal
+  :ensure t)
 
 (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.6.0/")
 (setq org-reveal-mathjax t)
 
-(use-package htmlize)
+(use-package htmlize
+  :ensure t)
 
 (use-package magit
+  :ensure t
   :bind (("C-x g" . magit-status)))
 
 (use-package git-gutter
+  :ensure t
   :diminish git-gutter-mode
   :config
     (global-git-gutter-mode))
 
 (use-package projectile
+  :ensure t
   :diminish projectile-mode
   :init
     (progn
@@ -326,11 +289,13 @@
       (setq projectile-completion-system 'ivy)))
 
 (use-package indent-guide
+  :ensure t
   :diminish indent-guide-mode
   :init
   (indent-guide-global-mode))
 
 (use-package linum
+  :ensure t
   :init
     (global-linum-mode 1)
 (setq linum-format "%4d "))

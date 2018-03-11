@@ -107,15 +107,16 @@
 
 (use-package flycheck
   :ensure t
-  :diminish flycheck-mode
-  :config
-    (add-hook 'after-init-hook #'global-flycheck-mode))
+  :diminish flycheck-mode)
 
 (use-package company
   :ensure t
   :diminish company-mode
   :config
     (global-company-mode))
+
+(use-package ag
+  :ensure t)
 
 (use-package ruby-mode
   :ensure t

@@ -118,9 +118,7 @@
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
   :ensure t
-  :diminish flycheck-mode
-  :config
-    (add-hook 'after-init-hook #'global-flycheck-mode))
+  :diminish flycheck-mode)
 #+END_SRC
 - [[https://github.com/company-mode/company-mode][Company-mode]]
 #+BEGIN_SRC emacs-lisp
@@ -129,6 +127,11 @@
   :diminish company-mode
   :config
     (global-company-mode))
+#+END_SRC
+- [[https://github.com/Wilfred/ag.el][Ag]]
+#+BEGIN_SRC emacs-lisp
+(use-package ag
+  :ensure t)
 #+END_SRC
 ** Ruby <3
 - Ruby-mode

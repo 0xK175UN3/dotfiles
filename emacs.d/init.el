@@ -20,7 +20,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ag rubocop doom-themes neotree anzu diminish markdown-mode yaml-mode dired+ web-mode slime ace-window avy counsel swiper use-package))))
+    (hindent yaml-mode which-key web-mode use-package slim-mode ruby-end rubocop rbenv projectile-rails markdown-mode magit intero indent-guide git-gutter expand-region exec-path-from-shell doom-themes diminish counsel coffee-mode anzu ag ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

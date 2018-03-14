@@ -1,3 +1,4 @@
+
 (setq
   split-width-threshold nil
   inhibit-startup-screen t
@@ -117,6 +118,19 @@
 
 (use-package ag
   :ensure t)
+
+(use-package haskell-mode
+  :ensure t)
+
+(use-package hindent
+  :ensure t
+  :init
+    (add-hook 'haskell-mode-hook #'hindent-mode))
+
+(use-package intero
+  :ensure t
+  :init
+    (add-hook 'haskell-mode-hook #'intero-mode))
 
 (use-package ruby-mode
   :ensure t
@@ -246,31 +260,6 @@
     (setq whitespace-style '(trailing tabs tab-mark face))
     (global-whitespace-mode)))
 
-(use-package neotree
-  :ensure t
-  :diminish
-  :bind (("C-c f t" . neotree-toggle))
-  :config (setq neo-window-width 32
-                neo-create-file-auto-open t
-                neo-banner-message nil
-                neo-show-updir-line nil
-                neo-mode-line-type 'neotree
-                neo-smart-open t
-                neo-dont-be-alone t
-                neo-persist-show nil
-                neo-show-hidden-files t
-                neo-auto-indent-point t
-                neo-theme (if (display-graphic-p) 'icons 'arrow)))
-
-(use-package ox-reveal
-  :ensure t)
-
-(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.6.0/")
-(setq org-reveal-mathjax t)
-
-(use-package htmlize
-  :ensure t)
-
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status)))
@@ -286,7 +275,7 @@
   :diminish projectile-mode
   :init
     (progn
-      (projectile-global-mode)
+      (projectile-mode)
       (setq projectile-completion-system 'ivy)))
 
 (use-package indent-guide
@@ -302,5 +291,6 @@
 (setq linum-format "%4d "))
 
 (use-package doom-themes
+  :ensure t
   :init
     (load-theme 'doom-one t))

@@ -133,6 +133,26 @@
 (use-package ag
   :ensure t)
 #+END_SRC
+** Haskell
+- Haskell-mode
+#+BEGIN_SRC emacs-lisp
+(use-package haskell-mode
+  :ensure t)
+#+END_SRC
+- Hindent
+#+BEGIN_SRC emacs-lisp
+(use-package hindent
+  :ensure t
+  :init
+    (add-hook 'haskell-mode-hook #'hindent-mode))
+#+END_SRC
+- Intero
+#+BEGIN_SRC emacs-lisp
+(use-package intero
+  :ensure t
+  :init
+    (add-hook 'haskell-mode-hook #'intero-mode))
+#+END_SRC
 ** Ruby <3
 - Ruby-mode
 #+BEGIN_SRC emacs-lisp
@@ -213,7 +233,7 @@
   :mode "\\.slim%")
 #+END_SRC
 * Other
-** Soe
+** Searching and windows managment
 - [[https://github.com/abo-abo/swiper][Swiper / Ivy / Counsel]]
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
@@ -309,36 +329,6 @@
     (setq whitespace-style '(trailing tabs tab-mark face))
     (global-whitespace-mode)))
 #+END_SRC
-- [][Neo-tree]
-#+BEGIN_SRC emacs-lisp
-(use-package neotree
-  :ensure t
-  :diminish
-  :bind (("C-c f t" . neotree-toggle))
-  :config (setq neo-window-width 32
-                neo-create-file-auto-open t
-                neo-banner-message nil
-                neo-show-updir-line nil
-                neo-mode-line-type 'neotree
-                neo-smart-open t
-                neo-dont-be-alone t
-                neo-persist-show nil
-                neo-show-hidden-files t
-                neo-auto-indent-point t
-                neo-theme (if (display-graphic-p) 'icons 'arrow)))
-  #+END_SRC
-** Emacs for everything
-- [[https://github.com/yjwen/org-reveal][Org-Reveal]]
-#+BEGIN_SRC emacs-lisp
-(use-package ox-reveal
-  :ensure t)
-
-(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.6.0/")
-(setq org-reveal-mathjax t)
-
-(use-package htmlize
-  :ensure t)
-#+END_SRC
 ** Project managment and version control
 - [[https://github.com/magit/magit][Magit]]
 #+BEGIN_SRC emacs-lisp
@@ -361,7 +351,7 @@
   :diminish projectile-mode
   :init
     (progn
-      (projectile-global-mode)
+      (projectile-mode)
       (setq projectile-completion-system 'ivy)))
 #+END_SRC
 ** Visual Goodies
@@ -385,6 +375,7 @@
 - Theme
 #+BEGIN_SRC emacs-lisp
 (use-package doom-themes
+  :ensure t
   :init
     (load-theme 'doom-one t))
 #+END_SRC

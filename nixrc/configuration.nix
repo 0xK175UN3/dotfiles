@@ -18,7 +18,7 @@
   # some software such as database servers. You should
   # change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "18.03";
+  system.stateVersion = "18.09";
 
   ##########################################################
   # Boot
@@ -66,6 +66,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    alacritty
     alsaLib
     alsaOss
     alsaPlugins
@@ -79,6 +80,7 @@
     bash
     binutils
     bzip2
+    cargo
     cool-retro-term
     coreutils
     cups
@@ -100,7 +102,7 @@
     gnused
     gnutar
     gnutls
-    google-chrome-dev
+    google-chrome
     groff
     htop
     inetutils
@@ -123,6 +125,7 @@
     pulseaudioFull
     python3Full
     ruby
+    rustc
     sudo
     texlive.combined.scheme-full
     tor
@@ -131,7 +134,6 @@
     wget
     which
     zip
-    zsh
   ];
 
   ##########################################################
@@ -158,8 +160,12 @@
       coq
       flac
       gimp
-      ghc
-      hlint
+      haskellPackages.brittany
+      haskellPackages.hasktags
+      haskellPackages.hlint
+      haskellPackages.xmobar
+      haskellPackages.xmonad
+      haskellPackages.xmonad-contrib
       inkscape
       kid3
       lame
@@ -168,6 +174,7 @@
       qbittorrent
       qiv
       stack
+      slack
       tdesktop
       vlc
     ];

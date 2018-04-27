@@ -11,7 +11,6 @@
   scroll-error-top-bottom t
   show-paren-delay 0.1
   tabs-width 2
-  use-package-always-ensure t
   package-enable-at-startup nil
   sentence-end-double-space nil
   split-width-threshold nil
@@ -47,7 +46,7 @@
 (scroll-bar-mode 0)
 (set-face-attribute 'default nil
                     :family "Fira Code"
-                    :height 140
+                    :height 150
                     :width 'normal)
 
 (prefer-coding-system 'utf-8)
@@ -88,54 +87,10 @@
 #+END_SRC
 * Languages
 ** Global
-#+BEGIN_SRC emacs-lisp
-(use-package auto-complete
-  :diminish auto-complete-mode
-  :commands auto-complete-mode
-  :init
-  (progn
-    (auto-complete-mode t))
-  :config
-  (progn
-    (use-package auto-complete-config)
-
-    (ac-set-trigger-key "TAB")
-    (ac-config-default)
-
-    (setq ac-delay 0.02)
-    (setq ac-use-menu-map t)
-    (setq ac-menu-height 50)
-    (setq ac-use-quick-help nil)
-    (setq ac-ignore-case nil)
-    (setq ac-fuzzy-enable t)
-
-    (use-package ac-dabbrev
-      :config
-      (progn
-        (add-to-list 'ac-sources 'ac-source-dabbrev)))
-
-    (setq ac-modes '(emacs-lisp-mode
-                     lisp-mode
-                     lisp-interaction-mode
-                     slime-repl-mode
-                     clojure-mode
-                     clojurescript-mode
-                     scheme-mode
-                     haskell-mode
-                     elm-mode
-                     ruby-mode
-                     enh-ruby-mode
-                     ecmascript-mode
-                     javascript-mode
-                     js-mode
-                     js2-mode
-                     js3-mode
-                     css-mode
-                     makefile-mode))))
-#+END_SRC
 - [[https://github.com/fxbois/web-mode/tree/master][Web-Mode]]
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
+  :ensure t
   :diminish web-mode
   :config
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -151,6 +106,7 @@
 - [[https://github.com/syohex/emacs-anzu/tree/master][Anzu]]
 #+BEGIN_SRC emacs-lisp
 (use-package anzu
+  :ensure t
   :diminish global-anzu-mode
   :config
     (global-anzu-mode)
@@ -158,34 +114,54 @@
     ("M-%" . anzu-query-replace)
     ("C-M-%" . anzu-query-replace-regexp)))
 #+END_SRC
-- [[https://github.com/Malabarba/aggressive-indent-mode][Agressive-indent]]
+- [[https://github.com/flycheck/flycheck][Flycheck]]
 #+BEGIN_SRC emacs-lisp
-(use-package aggressive-indent
-  :init
-    (progn
-      (add-hook 'ruby-mode-hook       #'aggressive-indent-mode)
-      (add-hook 'haskell-mode-hook    #'aggressive-indent-mode)
-      (add-hook 'elm-mode-hook        #'aggressive-indent-mode)
-      (add-hook 'clojure-mode-hook    #'aggressive-indent-mode)
-      (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-      (add-hook 'css-mode-hook        #'aggressive-indent-mode)))
+(use-package flycheck
+  :ensure t
+  :diminish flycheck-mode)
 #+END_SRC
-** Ruby
+- [[https://github.com/company-mode/company-mode][Company-mode]]
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :ensure t
+  :diminish company-mode
+  :config
+    (global-company-mode))
+#+END_SRC
+- [[https://github.com/Wilfred/ag.el][Ag]]
+#+BEGIN_SRC emacs-lisp
+(use-package ag
+  :ensure t)
+#+END_SRC
+** Ruby <3
 - Ruby-mode
 #+BEGIN_SRC emacs-lisp
 (use-package ruby-mode
+  :ensure t
   :config
     (setq ruby-insert-encoding-magic-comment nil))
+#+END_SRC
+- [[https://github.com/bbatsov/rubocop-emacs][Rubocop]]
+#+BEGIN_SRC emacs-lisp
+(use-package rubocop
+  :ensure t
+  :init
+    (add-hook 'ruby-mode-hook #'rubocop-mode)
+    (add-hook 'ruby-mode-hook
+      (lambda ()
+        (add-hook 'before-save-hook 'rubocop-check-current-file))))
 #+END_SRC
 - [[https://github.com/senny/rbenv.el/tree/master][Rbenv]]
 #+BEGIN_SRC emacs-lisp
 (use-package rbenv
+  :ensure t
   :init
     (global-rbenv-mode))
 #+END_SRC
 - [[https://github.com/rejeep/ruby-end.el][Ruby-End]]
 #+BEGIN_SRC emacs-lisp
 (use-package ruby-end
+  :ensure t
   :diminish
   :init
     (add-hook 'ruby-mode-hook 'ruby-end-mode t))
@@ -193,6 +169,7 @@
 - [[https://github.com/nonsequitur/inf-ruby][Inf-Ruby]]
 #+BEGIN_SRC emacs-lisp
 (use-package inf-ruby
+  :ensure t
   :diminish
   :init
     (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
@@ -200,73 +177,39 @@
 - [[https://github.com/asok/projectile-rails][Projectile-Rails]]
 #+BEGIN_SRC emacs-lisp
 (use-package projectile-rails
+  :ensure t
   :diminish
   :config
     (projectile-rails-global-mode t))
 #+END_SRC
-** Haskell
-- [[https://github.com/haskell/haskell-mode][Haskell mode]]
+** Coffee
+- [[][Coffee-mode]]
 #+BEGIN_SRC emacs-lisp
-(use-package haskell-mode
-  :mode "\\.hs%")
-#+END_SRC
-- [[https://github.com/commercialhaskell/intero][Intero]]
-#+BEGIN_SRC emacs-lisp
-(use-package intero
+(use-package coffee-mode
+  :ensure t
+  :diminish
   :init
-  (add-hook 'haskell-mode-hook 'intero-mode))
-#+END_SRC
-** Elm
-- Elm mode
-#+BEGIN_SRC emacs-lisp
-(use-package elm-mode
-  :mode "\\.elm%"
-  :init
-  (add-hook 'elm-mode-hook
-    (lambda ()
-      (set (make-local-variable 'eldoc-documentation-function)
-        'elm-oracle-type-at-point))))
-#+END_SRC
-** Common Lisp
-- Slime
-#+BEGIN_SRC emacs-lisp
-(use-package slime
-  :mode "\\.lisp%"
-  :init
-    (add-hook 'lisp-mode-hook 'slime-mode)
     (progn
-      (setq inferior-lisp-program "/usr/local/bin/sbcl")
-      (setq slime-contribs '(slime-fancy))))
-#+END_SRC
-** Clojure
-- [[https://github.com/clojure-emacs/clojure-mode/tree/master][Clojure-mode]]
-#+BEGIN_SRC emacs-lisp
-(use-package clojure-mode
-  :ensure t
-  :mode "\\.clj%")
-#+END_SRC
-- [[https://github.com/clojure-emacs/cider/tree/master][Cider]]
-#+BEGIN_SRC emacs-lisp
-(use-package cider
-  :ensure t
-  :init
-    (add-hook 'clojure-mode-hook 'cider-mode))
+      (setq coffee-tabs-width 2)))
 #+END_SRC
 ** Markdown
 - [[https://github.com/jrblevin/markdown-mode][Markdown-mode]]
 #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode
+  :ensure t
   :mode "\\.md%")
 #+END_SRC
 ** Yaml
 - [[https://github.com/yoshiki/yaml-mode][Yaml-mode]]
 #+BEGIN_SRC emacs-lisp
 (use-package yaml-mode
+  :ensure t
   :mode "\\.yml%")
 #+END_SRC
 ** Slim
 #+BEGIN_SRC emacs-lisp
 (use-package slim-mode
+  :ensure t
   :mode "\\.slim%")
 #+END_SRC
 * Other
@@ -274,9 +217,11 @@
 - [[https://github.com/abo-abo/swiper][Swiper / Ivy / Counsel]]
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
+  :ensure t
   :diminish counsel-mode)
 
 (use-package ivy
+  :ensure t
   :diminish ivy-mode
   :bind (("C-x b" . ivy-switch-buffer))
   :config
@@ -285,6 +230,7 @@
     (setq ivy-display-style 'fancy))
 
 (use-package swiper
+  :ensure t
   :diminish ivy-mode
   :bind (("\C-s" . swiper)
          ("C-c C-r" . ivy-resume)
@@ -299,12 +245,14 @@
 - [[https://github.com/abo-abo/avy][Avy]]
 #+BEGIN_SRC emacs-lisp
 (use-package avy
+  :ensure t
   :diminish avy-mode
   :bind (("C-;" . avy-goto-char)))
 #+END_SRC
 - [[https://github.com/abo-abo/ace-window][Ace-window]]
 #+BEGIN_SRC emacs-lisp
 (use-package ace-window
+  :ensure t
   :diminish ace-window-mode
   :bind (("M-o" . ace-window)
          ("M-p" . ace-delete-window))
@@ -313,6 +261,7 @@
 - [[https://github.com/magnars/expand-region.el][Expand-region]]
 #+BEGIN_SRC emacs-lisp
 (use-package expand-region
+  :ensure t
   :diminish
   :commands er/expand-region
   :bind ("C-c i" . er/expand-region))
@@ -320,6 +269,7 @@
 - [[][Which-mode]]
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
+  :ensure t
   :diminish which-key-mode
   :init
     (which-key-mode))
@@ -352,6 +302,7 @@
 - [[https://www.emacswiki.org/emacs/WhiteSpace][Whitespace]]
 #+BEGIN_SRC emacs-lisp
 (use-package whitespace
+  :ensure t
   :diminish global-whitespace-mode
   :config
   (progn
@@ -361,8 +312,8 @@
 - [][Neo-tree]
 #+BEGIN_SRC emacs-lisp
 (use-package neotree
-  :diminish
   :ensure t
+  :diminish
   :bind (("C-c f t" . neotree-toggle))
   :config (setq neo-window-width 32
                 neo-create-file-auto-open t
@@ -379,22 +330,26 @@
 ** Emacs for everything
 - [[https://github.com/yjwen/org-reveal][Org-Reveal]]
 #+BEGIN_SRC emacs-lisp
-(use-package ox-reveal)
+(use-package ox-reveal
+  :ensure t)
 
 (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.6.0/")
 (setq org-reveal-mathjax t)
 
-(use-package htmlize)
+(use-package htmlize
+  :ensure t)
 #+END_SRC
 ** Project managment and version control
 - [[https://github.com/magit/magit][Magit]]
 #+BEGIN_SRC emacs-lisp
 (use-package magit
+  :ensure t
   :bind (("C-x g" . magit-status)))
 #+END_SRC
 - [[https://github.com/syohex/emacs-git-gutter][Git-Gutter]]
 #+BEGIN_SRC emacs-lisp
 (use-package git-gutter
+  :ensure t
   :diminish git-gutter-mode
   :config
     (global-git-gutter-mode))
@@ -402,6 +357,7 @@
 - [[https://github.com/bbatsov/projectile][Projectile]]
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
+  :ensure t
   :diminish projectile-mode
   :init
     (progn
@@ -412,6 +368,7 @@
 - [[https://github.com/zk-phi/indent-guide][Indent-Guide]]
 #+BEGIN_SRC emacs-lisp
 (use-package indent-guide
+  :ensure t
   :diminish indent-guide-mode
   :init
   (indent-guide-global-mode))
@@ -419,6 +376,7 @@
 - [[][Linum]]
 #+BEGIN_SRC emacs-lisp
 (use-package linum
+  :ensure t
   :init
     (global-linum-mode 1)
 (setq linum-format "%4d "))

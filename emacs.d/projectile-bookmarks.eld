@@ -1,1 +1,0 @@
-("~/Documents/code/Arisu/" "~/dotfiles/" "~/Documents/code/kitsune-blog/")

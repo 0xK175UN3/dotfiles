@@ -1,98 +1,229 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+#
+# Artemiy Stepanov's NixOS configuration
+#
 
 { config, pkgs, ... }:
 
 {
+  ##########################################################
+  # General
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./packages.nix
     ];
 
-  hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.enable = true;
+  # This value determines the NixOS release with which your
+  # system is to be compatible, in order to avoid breaking
+  # some software such as database servers. You should
+  # change this only after NixOS release notes say you
+  # should.
+  system.stateVersion = "18.03";
+
+  ##########################################################
+  # Boot
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+  boot.loader.grub.device = "/dev/sda";
+  boot.earlyVconsoleSetup = true;
 
-  networking.hostName = "navi"; 
+  ##########################################################
+  # Extra file systems and swap
 
-  # Select internationalisation properties.
+  fileSystems = {
+    "/home/k175un3/store" = {
+      device = "/dev/sda1";
+      fsType = "ext4";
+    };
+  };
+
+  swapDevices = [
+    { device = "/dev/sda2"; }
+  ];
+
+  ##########################################################
+  # Packages
+
+  nixpkgs = {
+    system = "x86_64-linux";
+    config = {
+      pulseaudio = true;
+      allowUnfree = true;
+    };
+  };
+
+  nix = {
+    package = pkgs.nixUnstable;
+    trustedBinaryCaches = [
+      "https://cache.nixos.org"
+    ];
+    binaryCaches = [
+      "https://cache.nixos.org"
+    ];
+    gc.automatic = false;
+    maxJobs = pkgs.stdenv.lib.mkForce 6;
+  };
+
+  environment.systemPackages = with pkgs; [
+    alsaLib
+    alsaOss
+    alsaPlugins
+    alsaTools
+    alsaUtils
+    aspell
+    aspellDicts.en
+    aspellDicts.ru
+    autoconf
+    automake
+    bash
+    binutils
+    bzip2
+    cool-retro-term
+    coreutils
+    cups
+    diffutils
+    docker
+    dosfstools
+    e2fsprogs
+    eject
+    emacs
+    file
+    findutils
+    gcc
+    gdb
+    git
+    glibc
+    gnugrep
+    gnumake
+    gnupg
+    gnused
+    gnutar
+    gnutls
+    google-chrome-dev
+    groff
+    htop
+    inetutils
+    less
+    libtool
+    man
+    man-pages
+    mupdf
+    nano
+    networkmanager
+    nginxMainline
+    ntfs3g
+    ntp
+    openssl
+    openvpn
+    p7zip
+    patch
+    pavucontrol
+    postgresql
+    pulseaudioFull
+    python3Full
+    ruby
+    sudo
+    texlive.combined.scheme-full
+    tor
+    unzip
+    vim
+    wget
+    which
+    zip
+    zsh
+  ];
+
+  ##########################################################
+  # Users
+
+  security.sudo.enable = true;
+  users.mutableUsers = false;
+  users.defaultUserShell = pkgs.bash;
+
+  users.users.k175un3 = {
+    isNormalUser = true;
+    createHome = true;
+    description = "0xk175un3";
+    extraGroups = [
+      "audio"
+      "docker"
+      "networkmanager"
+      "video"
+      "wheel"
+    ];
+    hashedPassword = "";
+    packages = with pkgs; [
+      cabal-install
+      coq
+      flac
+      gimp
+      ghc
+      hlint
+      inkscape
+      kid3
+      lame
+      networkmanagerapplet
+      pwsafe
+      qbittorrent
+      qiv
+      stack
+      tdesktop
+      vlc
+    ];
+
+  };
+
+  ##########################################################
+  # Networking
+
+  networking = {
+    hostName = "navi";
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [];
+      allowedUDPPorts = [];
+    };
+    networkmanager.enable = true;
+  };
+
+  ##########################################################
+  # Misc services
+
+  # services.openssh.enable = true;
+  services.printing.enable = true;
+  services.tor.enable = true;
+
+  ##########################################################
+  # GNUPG
+
+  programs.gnupg.agent.enable = true;
+
+  ##########################################################
+  # Time
+
+  time.timeZone = "Europe/Moscow";
+  services.ntp.enable = true;
+
+  ##########################################################
+  # Locale
+
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
   };
 
-  time.timeZone = "Europe/Moskow";
+  ##########################################################
+  # Fonts
 
-  # List services that you want to enable:
-
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  services = {
-    openssh = {
-      enable = true;
-    };
-    xserver = {
-      enable = true;
-      layout = "us";
-      videoDrivers = [
-        "nvidia"
-      ];
-      displayManager = {
-        lightdm = {
-          enable = true;
-        };
-      };
-      desktopManager = {
-        gnome3 = {
-          enable = true;
-        };
-      };
-     # windowManager = {
-     #   xmonad = {
-     #     enable = true;
-     #     enableContribAndExtras = true;
-     #   };
-     #   default = "xmonad";
-     # };
-    };
-  };
-
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.lainkits = {
-    createHome = true;
-    home = "/home/lainkits";
-    shell = "/run/current-system/sw/bin/fish";
-    name = "lainkits";
-    extraGroups = [
-      "audio"
-      "video"
-      "wheel"
-      "users"
-      "networkmanager"
-    ];
-    uid = 1000;
-  };
-  
   fonts = {
+    fontconfig.enable = true;
     enableFontDir = true;
     enableGhostscriptFonts = true;
     fonts = with pkgs; [
       corefonts
+      google-fonts
       inconsolata
       ubuntu_font_family
       ipafont
@@ -101,9 +232,57 @@
     ];
   };
 
-  environment.pathsToLink = [ "/etc/gconf" ];
+  ##########################################################
+  # Audio
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.03";
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+  };
+
+  ##########################################################
+  # X server and WM
+
+  services.xserver = {
+    enable = true;
+    layout = "us";
+    libinput.enable = true;
+    videoDrivers = ["intel"];
+
+    desktopManager = {
+      xfce.enable = true;
+      default = "xfce";
+    };
+
+     windowManager = {
+       xmonad = {
+         enable = true;
+         enableContribAndExtras = true;
+       };
+       default = "xmonad";
+     };
+
+    displayManager.lightdm = {
+      enable = true;
+      extraSeatDefaults = ''
+        greeter-show-manual-login=true
+        greeter-hide-users=true
+        allow-guest=false
+      '';
+    };
+  };
+
+  services.redshift = {
+    enable = true;
+    latitude = "45";
+    longitude = "41";
+    temperature.day = 5500;
+    temperature.night = 3700;
+  };
+
+  ##########################################################
+  # Virtualization
+
+  virtualisation.docker.enable = true;
 
 }

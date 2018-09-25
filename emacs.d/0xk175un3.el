@@ -1,4 +1,3 @@
-
 (setq
   split-width-threshold nil
   inhibit-startup-screen t
@@ -108,7 +107,9 @@
 
 (use-package flycheck
   :ensure t
-  :diminish flycheck-mode)
+  :diminish flycheck-mode
+  :init
+  (setq flycheck-disabled-checkers '(ruby-reek)))
 
 (use-package company
   :ensure t
@@ -119,36 +120,29 @@
 (use-package ag
   :ensure t)
 
-(use-package haskell-mode
-  :ensure t)
-
-(use-package hindent
-  :ensure t
-  :init
-    (add-hook 'haskell-mode-hook #'hindent-mode))
-
-(use-package intero
-  :ensure t
-  :init
-    (add-hook 'haskell-mode-hook #'intero-mode))
-
 (use-package ruby-mode
   :ensure t
+  :interpreter "ruby"
+  :mode "\\.rb$"
+  :mode "\\.rake$"
+  :mode "\\.gemspec$"
+  :mode "\\.\\(pry\\|irb\\)rc$"
+  :mode "/\\(Gem\\|Cap\\|Vagrant\\|Rake\\|Pod\\|Puppet\\|Berks\\)file$"
   :config
-    (setq ruby-insert-encoding-magic-comment nil))
-
-(use-package rubocop
-  :ensure t
+    (setq ruby-insert-encoding-magic-comment nil)
+    (setq ruby-deep-indent-paren t)
+    (add-to-list 'company-backends 'ruby-mode '(company-dabbrev-code))
   :init
-    (add-hook 'ruby-mode-hook #'rubocop-mode)
-    (add-hook 'ruby-mode-hook
-      (lambda ()
-        (add-hook 'before-save-hook 'rubocop-check-current-file))))
+    (add-hook 'ruby-mode-hook #'flycheck-mode))
 
 (use-package rbenv
   :ensure t
   :init
     (global-rbenv-mode))
+
+(use-package rspec-mode
+  :ensure t
+  :diminish)
 
 (use-package ruby-end
   :ensure t
@@ -168,6 +162,26 @@
   :config
     (projectile-rails-global-mode t))
 
+(use-package go-mode
+  :ensure t
+  :interpreter "go"
+  :mode "\\.go$"
+  :config
+    (add-hook 'before-save-hook #'gofmt-before-save)
+    (setq go-packages-function 'go-packages-go-list)
+  :init
+    (add-hook 'go-mode-hook 'flycheck-mode))
+
+(use-package go-gopath
+  :ensure t)
+
+(use-package company-go
+  :ensure t
+  :diminish
+  :config
+    (add-hook 'go-mode-hook 'company-mode)
+    (add-to-list 'company-backends 'company-go))
+
 (use-package coffee-mode
   :ensure t
   :diminish
@@ -186,6 +200,10 @@
 (use-package slim-mode
   :ensure t
   :mode "\\.slim%")
+
+(use-package ssass-mode
+  :ensure t
+  :mode "\\.sass%")
 
 (use-package counsel
   :ensure t
@@ -290,7 +308,7 @@
     (global-linum-mode 1)
 (setq linum-format "%4d "))
 
-(use-package doom-themes
+(use-package railscasts-reloaded-theme
   :ensure t
   :init
-    (load-theme 'doom-one t))
+    (load-theme 'railscasts-reloaded t))

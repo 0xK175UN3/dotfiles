@@ -118,7 +118,9 @@
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
   :ensure t
-  :diminish flycheck-mode)
+  :diminish flycheck-mode
+  :init
+  (setq flycheck-disabled-checkers '(ruby-reek)))
 #+END_SRC
 - [[https://github.com/company-mode/company-mode][Company-mode]]
 #+BEGIN_SRC emacs-lisp
@@ -133,43 +135,23 @@
 (use-package ag
   :ensure t)
 #+END_SRC
-** Haskell
-- Haskell-mode
-#+BEGIN_SRC emacs-lisp
-(use-package haskell-mode
-  :ensure t)
-#+END_SRC
-- Hindent
-#+BEGIN_SRC emacs-lisp
-(use-package hindent
-  :ensure t
-  :init
-    (add-hook 'haskell-mode-hook #'hindent-mode))
-#+END_SRC
-- Intero
-#+BEGIN_SRC emacs-lisp
-(use-package intero
-  :ensure t
-  :init
-    (add-hook 'haskell-mode-hook #'intero-mode))
-#+END_SRC
 ** Ruby <3
 - Ruby-mode
 #+BEGIN_SRC emacs-lisp
 (use-package ruby-mode
   :ensure t
+  :interpreter "ruby"
+  :mode "\\.rb$"
+  :mode "\\.rake$"
+  :mode "\\.gemspec$"
+  :mode "\\.\\(pry\\|irb\\)rc$"
+  :mode "/\\(Gem\\|Cap\\|Vagrant\\|Rake\\|Pod\\|Puppet\\|Berks\\)file$"
   :config
-    (setq ruby-insert-encoding-magic-comment nil))
-#+END_SRC
-- [[https://github.com/bbatsov/rubocop-emacs][Rubocop]]
-#+BEGIN_SRC emacs-lisp
-(use-package rubocop
-  :ensure t
+    (setq ruby-insert-encoding-magic-comment nil)
+    (setq ruby-deep-indent-paren t)
+    (add-to-list 'company-backends 'ruby-mode '(company-dabbrev-code))
   :init
-    (add-hook 'ruby-mode-hook #'rubocop-mode)
-    (add-hook 'ruby-mode-hook
-      (lambda ()
-        (add-hook 'before-save-hook 'rubocop-check-current-file))))
+    (add-hook 'ruby-mode-hook #'flycheck-mode))
 #+END_SRC
 - [[https://github.com/senny/rbenv.el/tree/master][Rbenv]]
 #+BEGIN_SRC emacs-lisp
@@ -177,6 +159,12 @@
   :ensure t
   :init
     (global-rbenv-mode))
+#+END_SRC
+- [[https://github.com/pezra/rspec-mode][Rspec-mode]]
+#+BEGIN_SRC emacs-lisp
+(use-package rspec-mode
+  :ensure t
+  :diminish)
 #+END_SRC
 - [[https://github.com/rejeep/ruby-end.el][Ruby-End]]
 #+BEGIN_SRC emacs-lisp
@@ -201,6 +189,33 @@
   :diminish
   :config
     (projectile-rails-global-mode t))
+#+END_SRC
+** Golang
+- Go mode
+#+BEGIN_SRC emacs-lisp
+(use-package go-mode
+  :ensure t
+  :interpreter "go"
+  :mode "\\.go$"
+  :config
+    (add-hook 'before-save-hook #'gofmt-before-save)
+    (setq go-packages-function 'go-packages-go-list)
+  :init
+    (add-hook 'go-mode-hook 'flycheck-mode))
+#+END_SRC
+- Go-path
+#+BEGIN_SRC emacs-lisp
+(use-package go-gopath
+  :ensure t)
+#+END_SRC
+- Go-company
+#+BEGIN_SRC emacs-lisp
+(use-package company-go
+  :ensure t
+  :diminish
+  :config
+    (add-hook 'go-mode-hook 'company-mode)
+    (add-to-list 'company-backends 'company-go))
 #+END_SRC
 ** Coffee
 - [[][Coffee-mode]]
@@ -231,6 +246,12 @@
 (use-package slim-mode
   :ensure t
   :mode "\\.slim%")
+#+END_SRC
+** Sass
+#+BEGIN_SRC emacs-lisp
+(use-package ssass-mode
+  :ensure t
+  :mode "\\.sass%")
 #+END_SRC
 * Other
 ** Searching and windows managment
@@ -374,13 +395,23 @@
 *** GUI
 - Theme
 #+BEGIN_SRC emacs-lisp
+(use-package railscasts-reloaded-theme
+  :ensure t
+  :init
+    (load-theme 'railscasts-reloaded t))
+#+END_SRC
+#+BEGIN_COMMENT
+#+BEGIN_SRC emacs-lisp
+(use-package zenburn-theme
+  :ensure t
+  :config
+    (load-theme 'zenburn t))
+
 (use-package doom-themes
   :ensure t
   :init
     (load-theme 'doom-one t))
-#+END_SRC
-#+BEGIN_COMMENT
-#+BEGIN_SRC emacs-lisp
+
 (use-package zerodark-theme
   :init
     (load-theme 'zerodark t))

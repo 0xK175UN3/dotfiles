@@ -141,6 +141,10 @@
            (comint-mode . company-mode)))
 #+END_SRC
 *** Refactoring tools
+- Custom hooks
+#+BEGIN_SRC emacs-lisp
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
 - Ag
 #+BEGIN_SRC emacs-lisp
 (use-package ag
@@ -273,6 +277,21 @@
   :diminish
   :config
     (projectile-rails-global-mode t))
+#+END_SRC
+**** Clojure
+- Clojure-mode
+#+BEGIN_SRC emacs-lisp
+(use-package clojure-mode
+  :ensure t
+  :mode "\\.clj%")
+#+END_SRC
+
+- Cider
+#+BEGIN_SRC emacs-lisp
+(use-package cider
+  :ensure t
+  :init
+    (add-hook 'clojure-mode-hook 'cider-mode))
 #+END_SRC
 **** Web tech
 - Web Mode

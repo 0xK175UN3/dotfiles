@@ -118,6 +118,8 @@
   :hook ((prog-mode . company-mode)
          (comint-mode . company-mode)))
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 (use-package ag
   :ensure t)
 
@@ -223,6 +225,15 @@
   :diminish
   :config
     (projectile-rails-global-mode t))
+
+(use-package clojure-mode
+  :ensure t
+  :mode "\\.clj%")
+
+(use-package cider
+  :ensure t
+  :init
+    (add-hook 'clojure-mode-hook 'cider-mode))
 
 (use-package web-mode
   :ensure t

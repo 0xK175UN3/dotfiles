@@ -107,49 +107,45 @@
 #+BEGIN_SRC emacs-lisp
 (use-package lsp-mode
   :ensure t)
- (use-package lsp-ui
-  :ensure t
-  :after lsp-mode
-  :init (setq lsp-ui-peek-always-show t
-              lsp-ui-sideline-enable nil
-              lsp-ui-doc-enable nil)
-  :config
-  (define-key lsp-ui-mode-map
-    [remap xref-find-references]
-    #'lsp-ui-peek-find-references))
+#+END_SRC
+- Company-lsp
+#+BEGIN_SRC emacs-lisp
 (use-package company-lsp
   :ensure t
   :commands (company-lsp))
 #+END_SRC
+- Eglog
+#+BEGIN_SRC emacs-lisp
+(use-package eglot
+  :ensure t)
+#+END_SRC
 - Company-mode
 #+BEGIN_SRC emacs-lisp
-(use-package company
-  :ensure t
-  :custom
-    (company-require-match nil)
-    (company-minimum-prefix-length 1)
-    (company-idle-delay 0.2)
-    (company-tooltip-align-annotation t)
-    (company-frontends '(company-pseudo-tooltip-frontend
-		               company-echo-metadata-frontend))
-  :commands (company-mode global-company-mode company-complete
-                          company-complete-common company-manual-begin
-                          company-grab-line)
-  :bind (
-         :map company-active-map
-         ("C-n" . company-select-next)
-         ("C-p" . company-select-previous))
-  :hook ((prog-mode . company-mode)
-         (comint-mode . company-mode)))
-
-(use-package company-quickhelp
-  :ensure t
-  :after company
-  :commands (company-quickhelp-mode)
-  :init
-    (company-quickhelp-mode 1))
+  (use-package company
+    :ensure t
+    :custom
+      (company-require-match nil)
+      (company-minimum-prefix-length 1)
+      (company-idle-delay 0.2)
+      (company-tooltip-align-annotation t)
+      (company-frontends '(company-pseudo-tooltip-frontend
+                                 company-echo-metadata-frontend))
+    :commands (company-mode global-company-mode company-complete
+                            company-complete-common company-manual-begin
+                            company-grab-line)
+    :bind (
+           :map company-active-map
+           ("C-n" . company-select-next)
+           ("C-p" . company-select-previous))
+    :hook ((prog-mode . company-mode)
+           (comint-mode . company-mode)))
 #+END_SRC
 *** Refactoring tools
+- Ag
+#+BEGIN_SRC emacs-lisp
+(use-package ag
+  :ensure t)
+#+END_SRC
 - Anzu
 #+BEGIN_SRC emacs-lisp
 (use-package anzu
@@ -245,7 +241,7 @@
     (setq ruby-deep-indent-paren t)
   :init
     (add-hook 'ruby-mode-hook #'flycheck-mode)
-    (add-hook 'ruby-mode-hook #'lsp))
+    (add-hook 'ruby-mode-hook 'eglot-ensure))
 #+END_SRC
 - Rbenv
 #+BEGIN_SRC emacs-lisp

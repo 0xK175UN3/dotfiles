@@ -25,7 +25,9 @@
  '(company-minimum-prefix-length 1 t)
  '(company-require-match nil t)
  '(company-tooltip-align-annotation t t)
- '(package-selected-packages (quote (lsp-ui lsp-mode exec-path-from-shell use-package))))
+ '(package-selected-packages
+   (quote
+    (ag lsp-ui lsp-mode exec-path-from-shell use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

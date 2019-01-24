@@ -91,19 +91,13 @@
 
 (use-package lsp-mode
   :ensure t)
- (use-package lsp-ui
-  :ensure t
-  :after lsp-mode
-  :init (setq lsp-ui-peek-always-show t
-              lsp-ui-sideline-enable nil
-              lsp-ui-doc-enable nil)
-  :config
-  (define-key lsp-ui-mode-map
-    [remap xref-find-references]
-    #'lsp-ui-peek-find-references))
+
 (use-package company-lsp
   :ensure t
   :commands (company-lsp))
+
+(use-package eglot
+  :ensure t)
 
 (use-package company
   :ensure t
@@ -113,7 +107,7 @@
     (company-idle-delay 0.2)
     (company-tooltip-align-annotation t)
     (company-frontends '(company-pseudo-tooltip-frontend
-		               company-echo-metadata-frontend))
+                               company-echo-metadata-frontend))
   :commands (company-mode global-company-mode company-complete
                           company-complete-common company-manual-begin
                           company-grab-line)
@@ -124,12 +118,8 @@
   :hook ((prog-mode . company-mode)
          (comint-mode . company-mode)))
 
-(use-package company-quickhelp
-  :ensure t
-  :after company
-  :commands (company-quickhelp-mode)
-  :init
-    (company-quickhelp-mode 1))
+(use-package ag
+  :ensure t)
 
 (use-package anzu
   :ensure t
@@ -209,7 +199,7 @@
     (setq ruby-deep-indent-paren t)
   :init
     (add-hook 'ruby-mode-hook #'flycheck-mode)
-    (add-hook 'ruby-mode-hook #'lsp))
+    (add-hook 'ruby-mode-hook 'eglot-ensure))
 
 (use-package rbenv
   :ensure t
@@ -225,6 +215,8 @@
   :diminish
   :init
     (add-hook 'ruby-mode-hook 'ruby-end-mode t))
+
+
 
 (use-package projectile-rails
   :ensure t

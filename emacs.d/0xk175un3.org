@@ -39,20 +39,23 @@
   indent-tabs-mode nil
   truncate-lines t
   require-final-newline t
+  eldoc-documentation-function #'ignore
   fringe-mode '(4 . 2))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (blink-cursor-mode 0)
-(global-hl-line-mode t)
+(global-hl-line-mode 0)
 (show-paren-mode t)
 (delete-selection-mode t)
+(global-eldoc-mode -1)
 (cua-mode t)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (set-face-attribute 'default nil
-                    :family "Menlo"
-                    :height 150
+                    :family "Hasklig"
+                    :weight 'light
+                    :height 145
                     :width 'normal)
 
 (prefer-coding-system 'utf-8)
@@ -98,7 +101,9 @@
 - LSP
 #+BEGIN_SRC emacs-lisp
 (use-package lsp-mode
-  :ensure t)
+  :ensure t
+  :init
+  (setq lsp-imenu-show-container-name nil))
 #+END_SRC
 - Company-lsp
 #+BEGIN_SRC emacs-lisp
@@ -109,7 +114,11 @@
 - Eglog
 #+BEGIN_SRC emacs-lisp
 (use-package eglot
-  :ensure t)
+  :ensure t
+  :config
+  (progn
+    (setq-default eglot-auto-display-help-buffer nil)
+    (setq-default eglot-put-doc-in-help-buffer nil)))
 #+END_SRC
 - Company-mode
 #+BEGIN_SRC emacs-lisp
@@ -266,6 +275,34 @@
   :config
     (projectile-rails-global-mode t))
 #+END_SRC
+**** Go
+- Go mode
+#+BEGIN_SRC emacs-lisp
+(use-package go-mode
+  :ensure t
+  :interpreter "go"
+  :mode "\\.go$"
+  :config
+    (setq gofmt-command "goimports")
+    (add-hook 'before-save-hook #'gofmt-before-save)
+    (setq go-packages-function 'go-packages-go-list)
+  :init
+    (add-hook 'go-mode-hook 'flycheck-mode))
+#+END_SRC
+- Go-path
+#+BEGIN_SRC emacs-lisp
+(use-package go-gopath
+  :ensure t)
+#+END_SRC
+- Go-company
+#+BEGIN_SRC
+(use-package company-go
+  :ensure t
+  :diminish
+  :config
+    (add-hook 'go-mode-hook 'company-mode)
+    (add-to-list 'company-backends 'company-go))
+#+END_SRC
 **** Racket
 - Racket-mode
 #+BEGIN_SRC emacs-lisp
@@ -345,26 +382,40 @@
 #+END_SRC
 - Theme
 #+BEGIN_SRC emacs-lisp
-(load-theme 'tsdh-light)
-  ;; (use-package doom-themes
-  ;;   :ensure t
-  ;;   :init
-  ;;     (load-theme 'doom-nord t))
+  (use-package doom-themes
+    :ensure t
+    :init
+      (load-theme 'doom-one-light t)
+      (set-background-color "white"))
+#+END_SRC
+- Tree
+#+BEGIN_SRC emacs-lisp
+(use-package neotree
+  :ensure t
+  :bind ([f8] . neotree-toggle)
+  :config
+   (setq neo-theme 'icons)
+   (setq neo-mode-line 'none))
 #+END_SRC
 - Modeline
 #+BEGIN_SRC emacs-lisp
-(use-package all-the-icons
-  :ensure t)
-(use-package doom-modeline
-  :ensure t
-  :hook (after-init . doom-modeline-mode)
-  :config
-    (setq doom-modeline-height 40)
-    (setq doom-modeline-bar-width 3)
-    (setq doom-modeline-persp-name t)
-    (setq doom-modeline-buffer-file-name-style 'file-name)
-    (setq doom-modeline-icon t)
-    (setq doom-modeline-major-mode-icon nil)
-    (setq doom-modeline-minor-modes nil)
-    (setq doom-modeline-github nil))
+  ;; (use-package all-the-icons
+  ;;   :ensure t)
+  ;; (use-package doom-modeline
+  ;;   :ensure t
+  ;;   :hook (after-init . doom-modeline-mode)
+  ;;   :config
+  ;;     (setq doom-modeline-height 25)
+  ;;     (setq doom-modeline-bar-width 2)
+  ;;     (setq doom-modeline-persp-name t)
+  ;;     (setq doom-modeline-buffer-file-name-style 'file-name)
+  ;;     (setq doom-modeline-icon nil)
+  ;;     (setq doom-modeline-major-mode-icon nil)
+  ;;     (setq doom-modeline-minor-modes nil)
+  ;;     (setq doom-modeline-github nil))
+(setq-default mode-line-format nil)
+#+END_SRC
+- Bar
+#+BEGIN_SRC emacs-lisp
+(setq-default cursor-type 'bar)
 #+END_SRC

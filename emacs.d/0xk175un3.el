@@ -12,7 +12,6 @@
   scroll-error-top-bottom t
   show-paren-delay 0.1
   tabs-width 2
-  package-enable-at-startup nil
   sentence-end-double-space nil
   split-width-threshold nil
   split-height-threshold nil
@@ -23,7 +22,6 @@
   mouse-1-click-in-non-selected-windows t
   select-enable-clipboard t
   mouse-wheel-scroll-amount '(0.01)
-  column-number-mode t
   confirm-kill-emacs (quote y-or-n-p)
   ns-use-native-fullscreen nil
   ns-pop-up-frames nil
@@ -37,20 +35,23 @@
   indent-tabs-mode nil
   truncate-lines t
   require-final-newline t
+  eldoc-documentation-function #'ignore
   fringe-mode '(4 . 2))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (blink-cursor-mode 0)
-(global-hl-line-mode t)
+(global-hl-line-mode 0)
 (show-paren-mode t)
-(delete-selection-mode 1)
-(cua-mode 1)
+(delete-selection-mode t)
+(global-eldoc-mode -1)
+(cua-mode t)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (set-face-attribute 'default nil
-                    :family "Menlo"
-                    :height 150
+                    :family "Hasklig"
+                    :weight 'light
+                    :height 145
                     :width 'normal)
 
 (prefer-coding-system 'utf-8)
@@ -60,18 +61,12 @@
 
 (setq tab-always-indent 'complete)
 
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-verbose t)
-
 (use-package exec-path-from-shell
   :ensure t
   :if (memq window-system '(mac ns x))
   :config
-  (setq exec-path-from-shell-variables '("PATH" "NVM_DIR"))
-  (exec-path-from-shell-initialize))
+    (setq exec-path-from-shell-variables '("PATH" "NVM_DIR"))
+    (exec-path-from-shell-initialize))
 
 (use-package magit
   :ensure t
@@ -90,14 +85,20 @@
   (setq flycheck-disabled-checkers '(ruby-reek)))
 
 (use-package lsp-mode
-  :ensure t)
+  :ensure t
+  :init
+  (setq lsp-imenu-show-container-name nil))
 
 (use-package company-lsp
   :ensure t
   :commands (company-lsp))
 
 (use-package eglot
-  :ensure t)
+  :ensure t
+  :config
+  (progn
+    (setq-default eglot-auto-display-help-buffer nil)
+    (setq-default eglot-put-doc-in-help-buffer nil)))
 
 (use-package company
   :ensure t
@@ -224,6 +225,20 @@
   :config
     (projectile-rails-global-mode t))
 
+(use-package go-mode
+  :ensure t
+  :interpreter "go"
+  :mode "\\.go$"
+  :config
+    (setq gofmt-command "goimports")
+    (add-hook 'before-save-hook #'gofmt-before-save)
+    (setq go-packages-function 'go-packages-go-list)
+  :init
+    (add-hook 'go-mode-hook 'flycheck-mode))
+
+(use-package go-gopath
+  :ensure t)
+
 (use-package racket-mode
   :ensure t
   :interpreter "racket"
@@ -266,8 +281,6 @@
 (use-package diminish
   :ensure t)
 
-
-
 (use-package whitespace
   :ensure t
   :diminish global-whitespace-mode
@@ -282,23 +295,33 @@
   :config
     (global-git-gutter-mode))
 
-(load-theme 'tsdh-light)
-  ;; (use-package doom-themes
-  ;;   :ensure t
-  ;;   :init
-  ;;     (load-theme 'doom-nord t))
-
-(use-package all-the-icons
-  :ensure t)
-(use-package doom-modeline
+(use-package doom-themes
   :ensure t
-  :hook (after-init . doom-modeline-mode)
+  :init
+    (load-theme 'doom-one-light t)
+    (set-background-color "white"))
+
+(use-package neotree
+  :ensure t
+  :bind ([f8] . neotree-toggle)
   :config
-    (setq doom-modeline-height 40)
-    (setq doom-modeline-bar-width 3)
-    (setq doom-modeline-persp-name t)
-    (setq doom-modeline-buffer-file-name-style 'file-name)
-    (setq doom-modeline-icon t)
-    (setq doom-modeline-major-mode-icon nil)
-    (setq doom-modeline-minor-modes nil)
-    (setq doom-modeline-github nil))
+   (setq neo-theme 'icons)
+   (setq neo-mode-line 'none))
+
+;; (use-package all-the-icons
+  ;;   :ensure t)
+  ;; (use-package doom-modeline
+  ;;   :ensure t
+  ;;   :hook (after-init . doom-modeline-mode)
+  ;;   :config
+  ;;     (setq doom-modeline-height 25)
+  ;;     (setq doom-modeline-bar-width 2)
+  ;;     (setq doom-modeline-persp-name t)
+  ;;     (setq doom-modeline-buffer-file-name-style 'file-name)
+  ;;     (setq doom-modeline-icon nil)
+  ;;     (setq doom-modeline-major-mode-icon nil)
+  ;;     (setq doom-modeline-minor-modes nil)
+  ;;     (setq doom-modeline-github nil))
+(setq-default mode-line-format nil)
+
+(setq-default cursor-type 'bar)

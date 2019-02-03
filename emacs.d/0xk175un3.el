@@ -218,13 +218,23 @@
   :init
     (add-hook 'ruby-mode-hook 'ruby-end-mode t))
 
-
-
 (use-package projectile-rails
   :ensure t
   :diminish
   :config
     (projectile-rails-global-mode t))
+
+(use-package racket-mode
+  :ensure t
+  :interpreter "racket"
+  :mode "\\.rkt$"
+  :mode "\\.rktl$"
+  :mode "\\.rktd$"
+  :mode "\\.scrbl$"
+  :mode "\\.plt$"
+  :mode "\\.ss$"
+  :mode "\\.scm$"
+  :diminish)
 
 (use-package clojure-mode
   :ensure t
@@ -272,10 +282,11 @@
   :config
     (global-git-gutter-mode))
 
-(use-package doom-themes
-  :ensure t
-  :init
-    (load-theme 'doom-nord t))
+(load-theme 'tsdh-light)
+  ;; (use-package doom-themes
+  ;;   :ensure t
+  ;;   :init
+  ;;     (load-theme 'doom-nord t))
 
 (use-package all-the-icons
   :ensure t)

@@ -16,7 +16,6 @@
   scroll-error-top-bottom t
   show-paren-delay 0.1
   tabs-width 2
-  package-enable-at-startup nil
   sentence-end-double-space nil
   split-width-threshold nil
   split-height-threshold nil
@@ -27,7 +26,6 @@
   mouse-1-click-in-non-selected-windows t
   select-enable-clipboard t
   mouse-wheel-scroll-amount '(0.01)
-  column-number-mode t
   confirm-kill-emacs (quote y-or-n-p)
   ns-use-native-fullscreen nil
   ns-pop-up-frames nil
@@ -47,8 +45,8 @@
 (blink-cursor-mode 0)
 (global-hl-line-mode t)
 (show-paren-mode t)
-(delete-selection-mode 1)
-(cua-mode 1)
+(delete-selection-mode t)
+(cua-mode t)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
@@ -64,18 +62,12 @@
 
 (setq tab-always-indent 'complete)
 
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-verbose t)
-
 (use-package exec-path-from-shell
   :ensure t
   :if (memq window-system '(mac ns x))
   :config
-  (setq exec-path-from-shell-variables '("PATH" "NVM_DIR"))
-  (exec-path-from-shell-initialize))
+    (setq exec-path-from-shell-variables '("PATH" "NVM_DIR"))
+    (exec-path-from-shell-initialize))
 #+END_SRC
 * Libraries
 ** Programming
@@ -266,10 +258,6 @@
   :init
     (add-hook 'ruby-mode-hook 'ruby-end-mode t))
 #+END_SRC
-- Rubocop-fix-file
-#+BEGIN_SRC emacs-lisp
-
-#+END_SRC
 - Projectile-rails
 #+BEGIN_SRC emacs-lisp
 (use-package projectile-rails
@@ -277,6 +265,21 @@
   :diminish
   :config
     (projectile-rails-global-mode t))
+#+END_SRC
+**** Racket
+- Racket-mode
+#+BEGIN_SRC emacs-lisp
+(use-package racket-mode
+  :ensure t
+  :interpreter "racket"
+  :mode "\\.rkt$"
+  :mode "\\.rktl$"
+  :mode "\\.rktd$"
+  :mode "\\.scrbl$"
+  :mode "\\.plt$"
+  :mode "\\.ss$"
+  :mode "\\.scm$"
+  :diminish)
 #+END_SRC
 **** Clojure
 - Clojure-mode
@@ -322,9 +325,6 @@
 (use-package diminish
   :ensure t)
 #+END_SRC
-- Linum
-#+BEGIN_SRC emacs-lisp
-#+END_SRC
 - Whitespaces
 #+BEGIN_SRC emacs-lisp
 (use-package whitespace
@@ -345,10 +345,11 @@
 #+END_SRC
 - Theme
 #+BEGIN_SRC emacs-lisp
-(use-package doom-themes
-  :ensure t
-  :init
-    (load-theme 'doom-nord t))
+(load-theme 'tsdh-light)
+  ;; (use-package doom-themes
+  ;;   :ensure t
+  ;;   :init
+  ;;     (load-theme 'doom-nord t))
 #+END_SRC
 - Modeline
 #+BEGIN_SRC emacs-lisp

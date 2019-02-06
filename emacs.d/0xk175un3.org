@@ -103,7 +103,7 @@
 (use-package lsp-mode
   :ensure t
   :init
-  (setq lsp-imenu-show-container-name nil))
+  (setq-default lsp-imenu-show-container-name nil))
 #+END_SRC
 - Company-lsp
 #+BEGIN_SRC emacs-lisp
@@ -303,6 +303,13 @@
     (add-hook 'go-mode-hook 'company-mode)
     (add-to-list 'company-backends 'company-go))
 #+END_SRC
+**** JavaSctipt
+- JS mode
+#+BEGIN_SRC emacs-lisp
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js$")
+#+END_SRC
 **** Racket
 - Racket-mode
 #+BEGIN_SRC emacs-lisp
@@ -352,6 +359,18 @@
 #+END_SRC
 - Sass
 #+BEGIN_SRC emacs-lisp
+(use-package ssass-mode
+  :ensure t
+  :mode "\\.sass%")
+#+END_SRC
+- Json
+#+BEGIN_SRC emacs-lisp
+(use-package json-mode
+  :ensure t
+  :mode "\\.json%")
+#+END_SRC
+- Yaml
+#+BEGIN_SRC emacs-lisp
 (use-package yaml-mode
   :ensure t
   :mode "\\.yml%")
@@ -387,15 +406,6 @@
     :init
       (load-theme 'doom-one-light t)
       (set-background-color "white"))
-#+END_SRC
-- Tree
-#+BEGIN_SRC emacs-lisp
-(use-package neotree
-  :ensure t
-  :bind ([f8] . neotree-toggle)
-  :config
-   (setq neo-theme 'icons)
-   (setq neo-mode-line 'none))
 #+END_SRC
 - Modeline
 #+BEGIN_SRC emacs-lisp

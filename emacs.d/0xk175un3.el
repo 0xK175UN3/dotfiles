@@ -301,13 +301,6 @@
     (load-theme 'doom-one-light t)
     (set-background-color "white"))
 
-(use-package neotree
-  :ensure t
-  :bind ([f8] . neotree-toggle)
-  :config
-   (setq neo-theme 'icons)
-   (setq neo-mode-line 'none))
-
 ;; (use-package all-the-icons
   ;;   :ensure t)
   ;; (use-package doom-modeline

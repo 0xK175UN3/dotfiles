@@ -12,7 +12,7 @@ module.exports = {
     fontSize: 14,
 
     // font family with optional fallbacks
-    fontFamily: 'Hasklig, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: '"Pragmata Pro", Hasklig, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',

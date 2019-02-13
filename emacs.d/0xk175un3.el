@@ -36,6 +36,7 @@
   truncate-lines t
   require-final-newline t
   eldoc-documentation-function #'ignore
+  global-eldoc-mode nil
   fringe-mode '(4 . 2))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -43,16 +44,13 @@
 (global-hl-line-mode 0)
 (show-paren-mode t)
 (delete-selection-mode t)
-(global-eldoc-mode -1)
 (cua-mode t)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (set-face-attribute 'default nil
-                    :family "Hasklig"
-                    :weight 'light
-                    :height 145
-                    :width 'normal)
+                    :family "Pragmata Pro Mono"
+                    :height 160)
 
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -87,7 +85,7 @@
 (use-package lsp-mode
   :ensure t
   :init
-  (setq lsp-imenu-show-container-name nil))
+  (setq lsp-eldoc-render-all nil))
 
 (use-package company-lsp
   :ensure t
@@ -95,10 +93,10 @@
 
 (use-package eglot
   :ensure t
-  :config
+  :init
   (progn
-    (setq-default eglot-auto-display-help-buffer nil)
-    (setq-default eglot-put-doc-in-help-buffer nil)))
+    (setq eglot-auto-display-help-buffer nil)
+    (setq eglot-put-doc-in-help-buffer nil)))
 
 (use-package company
   :ensure t
@@ -202,7 +200,8 @@
     (setq ruby-deep-indent-paren t)
   :init
     (add-hook 'ruby-mode-hook #'flycheck-mode)
-    (add-hook 'ruby-mode-hook 'eglot-ensure))
+    ;; (add-hook 'ruby-mode-hook 'eglot-ensure)
+    )
 
 (use-package rbenv
   :ensure t
@@ -239,6 +238,10 @@
 (use-package go-gopath
   :ensure t)
 
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js$")
+
 (use-package racket-mode
   :ensure t
   :interpreter "racket"
@@ -273,6 +276,14 @@
       (setq web-mode-markup-indent-offset 2)
       (setq web-mode-css-indent-offset 2)
       (setq web-mode-code-indent-offset 2)))
+
+(use-package ssass-mode
+  :ensure t
+  :mode "\\.sass%")
+
+(use-package json-mode
+  :ensure t
+  :mode "\\.json%")
 
 (use-package yaml-mode
   :ensure t

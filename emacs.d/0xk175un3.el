@@ -49,7 +49,8 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (set-face-attribute 'default nil
-                    :family "Pragmata Pro Mono"
+                    :family "PragmataPro Mono Liga"
+                    :weight 'light'
                     :height 160)
 
 (prefer-coding-system 'utf-8)
@@ -90,13 +91,6 @@
 (use-package company-lsp
   :ensure t
   :commands (company-lsp))
-
-(use-package eglot
-  :ensure t
-  :init
-  (progn
-    (setq eglot-auto-display-help-buffer nil)
-    (setq eglot-put-doc-in-help-buffer nil)))
 
 (use-package company
   :ensure t
@@ -187,6 +181,46 @@
   :commands er/expand-region
   :bind ("C-c i" . er/expand-region))
 
+(use-package haskell-mode
+  :ensure t
+  :bind
+    (:map haskell-mode-map
+      ("F8" . haskell-navigate-imports)
+      ("C-c C-l" . haskell-process-load-or-reload)
+      ("C-c C-z" . haskell-interactive-switch)
+      ("C-c C-n C-t" . haskell-process-do-type)
+      ("C-c C-n C-i" . haskell-process-do-info)
+      ("C-c C-n C-c" . haskell-process-cabal-build)
+      ("C-c C-n c" . haskell-process-cabal)
+      ("C-c C-o" . haskell-compile))
+    (:map haskell-cabal-mode-map
+      ("C-c C-z" . haskell-interactive-switch)
+      ("C-c C-k" . haskell-interactive-mode-clear)
+      ("C-c C-c" . haskell-process-cabal-build)
+      ("C-c c" . haskell-process-cabal)
+      ("C-c C-o" . haskell-compile))
+  :config
+    (progn
+      (let
+        ((my-cabal-path (expand-file-name "~/.cabal/bin")))
+        (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
+        (add-to-list 'exec-path my-cabal-path))
+      (custom-set-variables
+        '(haslell-tags-on-save t)
+        '(haskell-process-suggest-remove-import-lines t)
+        '(haskell-process-auto-import-loaded-modules t)
+        '(haskell-process-log t)
+        '(haskell-process-type 'cabal-repl)))
+  :init
+    (add-hook 'haskell-mode-hook #'hident-mode))
+
+(use-package lsp-haskell
+  :ensure t
+  :config
+  (progn
+    (setq lsp-haskell-process-path-hie "hie-wrapper")
+    (add-hook 'haskell-mode-hook #'lsp)))
+
 (use-package ruby-mode
   :ensure t
   :interpreter "ruby"
@@ -200,8 +234,7 @@
     (setq ruby-deep-indent-paren t)
   :init
     (add-hook 'ruby-mode-hook #'flycheck-mode)
-    ;; (add-hook 'ruby-mode-hook 'eglot-ensure)
-    )
+    (add-hook 'ruby-mode-hook 'lsp))
 
 (use-package rbenv
   :ensure t
@@ -229,11 +262,14 @@
   :interpreter "go"
   :mode "\\.go$"
   :config
-    (setq gofmt-command "goimports")
-    (add-hook 'before-save-hook #'gofmt-before-save)
-    (setq go-packages-function 'go-packages-go-list)
+    (progn
+      (setq gofmt-command "goimports")
+      (setq go-packages-function 'go-packages-go-list))
   :init
-    (add-hook 'go-mode-hook 'flycheck-mode))
+    (progn
+      (add-hook 'before-save-hook #'gofmt-before-save)
+      (add-hook 'go-mode-hook 'flycheck-mode)
+      (add-hook 'go-mode-hook 'lsp)))
 
 (use-package go-gopath
   :ensure t)

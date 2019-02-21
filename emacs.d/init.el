@@ -31,13 +31,18 @@
    (quote
     ("b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" default)))
  '(fci-rule-color "#383a42")
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type (quote cabal-repl))
+ '(haslell-tags-on-save t)
  '(jdee-db-active-breakpoint-face-colors (cons "#f0f0f0" "#4078f2"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#f0f0f0" "#50a14f"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#f0f0f0" "#9ca0a4"))
  '(lsp-eldoc-render-all nil)
  '(package-selected-packages
    (quote
-    (neotree tabbar tabbar-mode doom-themes racket-mode ag lsp-ui lsp-mode exec-path-from-shell use-package)))
+    (yasnippet neotree tabbar tabbar-mode doom-themes racket-mode ag lsp-ui lsp-mode exec-path-from-shell use-package)))
  '(vc-annotate-background "#fafafa")
  '(vc-annotate-color-map
    (list

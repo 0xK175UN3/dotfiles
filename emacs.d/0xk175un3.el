@@ -111,6 +111,11 @@
   :hook ((prog-mode . company-mode)
          (comint-mode . company-mode)))
 
+(use-package yasnippet
+  :ensure t
+  :init
+    (yas-global-mode 1))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (use-package ag

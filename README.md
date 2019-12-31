@@ -1,2 +1,1 @@
----
-![](./assets/emacs.png)
+Prepare for 2020

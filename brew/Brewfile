@@ -1,0 +1,45 @@
+tap "mas-cli/tap", pin: true
+brew "mas"
+
+# Dev cask tools
+cask "docker"
+cask "kitematic"
+cask "paw"
+cask "postico"
+
+# Dev tools
+brew "openssl"
+brew "wget"
+brew "readline"
+brew "ag"
+brew "fzf"
+brew "coreutils"
+brew "tmux"
+brew "neovim"
+
+# Languages
+brew "go"
+
+# Dev Apps
+cask "sublime-text"
+cask "sublime-merge"
+cask "iterm2"
+mas "Xcode", id: 497799835
+
+# General Apps
+cask "slack"
+cask "zoomus"
+cask "telegram-desktop"
+cask "firefox"
+cask "spectacle"
+cask "google-japanese-ime"
+
+mas "Things", id: 904280696
+mas "iA Writter", id: 775737590
+mas "Numbers", id: 409203825
+mas "Keynote", id: 409183694
+mas "Pages", id: 409201541
+mas "Keka", id: 470158793
+mas "Noizio", id: 928871589
+mas "Contrast", id: 1254981365
+

@@ -24,6 +24,7 @@ brew "go"
 cask "sublime-text"
 cask "sublime-merge"
 cask "iterm2"
+cask "sketch"
 mas "Xcode", id: 497799835
 
 # General Apps
